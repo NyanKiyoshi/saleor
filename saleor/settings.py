@@ -1,10 +1,18 @@
 import ast
 import os.path
+import platform
 
 import dj_database_url
 import dj_email_url
 from django.contrib.messages import constants as messages
 import django_cache_url
+
+
+# check if the python interpreter is PyPy,
+# if so, register the compatible database adapter
+if platform.python_implementation() == 'PyPy':
+    import psycopg2cffi.compat
+    psycopg2cffi.compat.register()
 
 
 def get_list(text):
