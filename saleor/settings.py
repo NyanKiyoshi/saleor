@@ -48,6 +48,7 @@ DATABASES = {
         default='postgres://saleor:saleor@localhost:5432/saleor',
         conn_max_age=600)}
 
+DEFAULT_TAX_RATE_COUNTRY = 'GB'
 
 TIME_ZONE = 'America/Chicago'
 LANGUAGE_CODE = 'en-us'

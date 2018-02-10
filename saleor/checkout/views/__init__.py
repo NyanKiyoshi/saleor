@@ -10,6 +10,7 @@ from .summary import (
 from .validators import (
     validate_cart, validate_shipping_address,
     validate_shipping_method, validate_is_shipping_required)
+from ...core.utils.billing import base_template_kwargs
 from ..core import load_checkout
 from ..forms import ShippingMethodForm
 from ...registration.forms import LoginForm
@@ -54,7 +55,8 @@ def shipping_method_view(request, checkout):
         request, 'checkout/shipping_method.html',
         context={
             'shipping_method_form': shipping_method_form,
-            'checkout': checkout})
+            'checkout': checkout,
+            **base_template_kwargs(request, checkout)})
 
 
 @load_checkout

@@ -15,6 +15,7 @@ from payments.models import BasePayment
 from prices import FixedDiscount, Price
 from satchless.item import ItemLine, ItemSet
 
+from ..core.utils.billing import get_tax_price
 from . import GroupStatus, OrderStatus, emails
 from ..core.utils import build_absolute_uri
 from ..discount.models import Voucher
@@ -180,9 +181,11 @@ class Order(models.Model, ItemSet):
         return None
 
     @total.setter
-    def total(self, price):
-        self.total_net = price
-        self.total_tax = Price(price.tax, currency=price.currency)
+    def total(self, price: Price):
+        tax = get_tax_price(None, self, price)
+
+        self.total_net = price.net
+        self.total_tax = tax.tax
 
     def get_subtotal_without_voucher(self):
         if self.get_lines():

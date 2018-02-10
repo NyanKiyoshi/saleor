@@ -1,6 +1,7 @@
 from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 
+from ...core.utils.billing import base_template_kwargs
 from ...userprofile.forms import get_address_form
 from ...userprofile.models import Address
 from ..forms import AnonymousUserShippingForm, ShippingAddressesForm
@@ -24,7 +25,8 @@ def anonymous_user_shipping_address_view(request, checkout):
     return TemplateResponse(
         request, 'checkout/shipping_address.html', context={
             'address_form': address_form, 'user_form': user_form,
-            'checkout': checkout})
+            'checkout': checkout,
+            **base_template_kwargs(request, checkout)})
 
 
 def user_shipping_address_view(request, checkout):
@@ -71,4 +73,5 @@ def user_shipping_address_view(request, checkout):
         request, 'checkout/shipping_address.html', context={
             'address_form': address_form, 'user_form': addresses_form,
             'checkout': checkout,
-            'additional_addresses': additional_addresses})
+            'additional_addresses': additional_addresses,
+            **base_template_kwargs(request, checkout)})
