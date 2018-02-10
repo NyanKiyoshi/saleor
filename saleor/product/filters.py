@@ -57,11 +57,15 @@ class ProductFilter(SortedFilterSet):
     def _get_product_attributes_filters(self):
         filters = {}
         for attribute in self.product_attributes:
+            choices = self._get_attribute_choices(attribute)
+            if not choices:
+                continue
+
             filters[attribute.slug] = MultipleChoiceFilter(
                 name='attributes__%s' % attribute.pk,
                 label=attribute.name,
                 widget=CheckboxSelectMultiple,
-                choices=self._get_attribute_choices(attribute))
+                choices=choices)
         return filters
 
     def _get_product_variants_attributes_filters(self):
@@ -75,7 +79,9 @@ class ProductFilter(SortedFilterSet):
         return filters
 
     def _get_attribute_choices(self, attribute):
-        return [(choice.pk, choice.name) for choice in attribute.values.all()]
+        return sorted([
+            (choice.pk, choice.name) for choice in attribute.values.all()
+        ], key=lambda d: d[1])
 
     def validate_sort_by(self, value):
         if value.strip('-') not in SORT_BY_FIELDS:
