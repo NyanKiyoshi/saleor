@@ -17,6 +17,7 @@ from prices import PriceRange
 from satchless.item import InsufficientStock, Item, ItemRange
 from text_unidecode import unidecode
 from versatileimagefield.fields import PPOIField, VersatileImageField
+from versatileimagefield.placeholder import OnDiscPlaceholderImage
 
 from ..discount.utils import calculate_discounted_price
 from .utils import get_attributes_display_map
@@ -32,6 +33,11 @@ class Category(MPTTModel):
 
     objects = models.Manager()
     tree = TreeManager()
+
+    image = VersatileImageField(
+        upload_to='categories',
+        placeholder_image=OnDiscPlaceholderImage('.placeholder.jpg'),
+        blank=True)
 
     class Meta:
         app_label = 'product'
@@ -396,4 +402,4 @@ class Collection(models.Model):
     def get_absolute_url(self):
         return reverse(
             'product:collection',
-            kwargs={'pk': self.id, 'slug': self.slug})
+            kwargs={'slug': self.slug, 'collection_id': self.id})
