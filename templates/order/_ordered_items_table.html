@@ -110,6 +110,21 @@
   </div>
 {% endif %}
 
+  <div class="table__row">
+    <div class="row">
+      <div class="col-8 order-details__table-footer">
+        <p>
+          {% trans "Tax" context "Order total tax price header" %}
+        </p>
+      </div>
+      <div class="col-4">
+        <p class="float-right">
+          {% gross order.total_tax html=True %}
+        </p>
+      </div>
+    </div>
+  </div>
+
 {% if order.discount_amount %}
 <div class="table__row">
   <div class="row">
