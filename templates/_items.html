@@ -10,13 +10,13 @@
     <div class="text-center">
       <div>
         <img class="img-responsive"
-             src="{% product_first_image product method="crop" size="255x255" %}"
-             srcset="{% product_first_image product method="crop" size="255x255" %} 1x, {% product_first_image product method="crop" size="510x510" %} 2x"
+             src="{% product_first_image product method="thumbnail" size="255x255" %}"
+             srcset="{% product_first_image product method="thumbnail" size="255x255" %} 1x, {% product_first_image product method="thumbnail" size="510x510" %} 2x"
              alt="">
-        <span class="product-list-item-name" title="{{ product }}">{{ product }}</span>
       </div>
 
       <div class="panel-footer">
+        <span class="product-list-item-name" title="{{ product }}">{{ product }}</span>
         {% price_range availability.price_range %}
 
         {% if availability.on_sale %}
