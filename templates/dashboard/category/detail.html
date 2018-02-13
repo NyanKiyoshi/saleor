@@ -91,6 +91,9 @@
           </div>
           {% if perms.product.edit_category %}
           <div class="card-action">
+            <a class="btn-flat waves-effect" href="{% url 'dashboard:product-list' %}?category={{ root.pk }}">
+              {% trans "View products" context "Category detail view action" %}
+            </a>
             <a class="btn-flat waves-effect" href="{% url 'dashboard:category-edit' root_pk=root.pk %}">
               {% trans "Edit category" context "Category detail view action" %}
             </a>
