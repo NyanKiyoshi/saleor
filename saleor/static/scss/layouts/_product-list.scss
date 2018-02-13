@@ -1,19 +1,32 @@
 .product-list {
   text-align: center;
   margin-bottom: $global-margin * 2;
+  a, img, .text-center, .text-center div:first-child {
+    height: 100%;
+  }
   img {
     max-width: 100%;
+    flex-grow: 1;
+    object-fit: contain;
   }
   &-item-name {
     margin: $global-margin / 2 0;
     display: block;
   }
-  .panel-footer {
+  a {
+    display: block;
+
+    .text-center {
+      position: relative;
+
+      display: flex;
+      flex-shrink: 0;
+      flex-direction: column;
+    }
+  }
+  .panel-footer .price {
     color: $skull-gray;
     text-transform: uppercase;
-  }
-  .text-center {
-    position: relative;
   }
   &__sale {
     svg {
