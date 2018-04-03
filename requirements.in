@@ -56,3 +56,4 @@ celery[redis]
 weasyprint>=0.42.2
 django-debug-toolbar
 django-debug-toolbar-request-history
+django-positions-2>=0.0.6rc0

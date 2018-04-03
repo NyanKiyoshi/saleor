@@ -10,7 +10,9 @@ MODELS_PERMISSIONS = [
     'page.manage_pages',
     'product.manage_products',
     'shipping.manage_shipping',
-    'site.manage_settings']
+    'site.manage_settings',
+    'homepage.view_blocks_config',
+    'homepage.edit_blocks_config']
 
 
 def get_permissions(permissions=None):

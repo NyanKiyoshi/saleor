@@ -6,6 +6,7 @@ from django.db import connection
 from ...utils import create_superuser
 from ...utils.random_data import (
     add_address_to_admin, create_collections_by_schema, create_menus,
+    create_homepage_blocks_by_schema,
     create_orders, create_page, create_product_sales,
     create_products_by_schema, create_shipping_methods, create_users,
     create_vouchers, set_homepage_collection)
@@ -34,6 +35,12 @@ class Command(BaseCommand):
             dest='withoutsearch',
             default=False,
             help='Don\'t update search index')
+        parser.add_argument(
+            '--withouthomepage-blocks',
+            action='store_true',
+            dest='withouthomepage_blocks',
+            default=False,
+            help='Don\'t generate homepage blocks')
 
     def make_database_faster(self):
         """Sacrifice some of the safeguards of sqlite3 for speed.
@@ -81,3 +88,7 @@ class Command(BaseCommand):
             add_address_to_admin(credentials['email'])
         if not options['withoutsearch']:
             self.populate_search_index()
+
+        if not options['withouthomepage_blocks']:
+            for msg in create_homepage_blocks_by_schema():
+                self.stdout.write(msg)
