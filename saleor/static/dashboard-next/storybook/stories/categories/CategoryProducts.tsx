@@ -48,6 +48,17 @@ const products = [
 ];
 
 storiesOf("Categories / CategoryProducts", module)
+  .add("without initial data", () => (
+    <CategoryProducts
+      hasNextPage={true}
+      hasPreviousPage={false}
+      products={[]}
+      onCreate={() => {}}
+      onFilter={() => {}}
+      onNextPage={() => {}}
+      onPreviousPage={() => {}}
+    />
+  ))
   .add("with initial data", () => (
     <CategoryProducts
       hasNextPage={true}
@@ -59,15 +70,16 @@ storiesOf("Categories / CategoryProducts", module)
       onPreviousPage={() => {}}
     />
   ))
-  .add("without initial data", () => (
+  .add("with clickable rows", () => (
     <CategoryProducts
       hasNextPage={true}
       hasPreviousPage={false}
-      products={[]}
+      products={products}
       onCreate={() => {}}
       onFilter={() => {}}
       onNextPage={() => {}}
       onPreviousPage={() => {}}
+      onRowClick={() => {}}
     />
   ))
   .add("when loading data", () => (

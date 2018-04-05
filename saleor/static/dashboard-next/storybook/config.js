@@ -22,6 +22,11 @@ function loadStories() {
   require("./stories/pages/PageDeleteDialog");
   require("./stories/pages/PageFilters");
   require("./stories/pages/PageList");
+
+  // Products
+  require("./stories/products/ProductCollections");
+  require("./stories/products/ProductDescription");
+  require("./stories/products/ProductDetailsForm");
 }
 
 configure(loadStories, module);
