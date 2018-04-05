@@ -3,8 +3,9 @@ import Input, { InputAdornment, InputLabel } from "material-ui/Input";
 import { withStyles } from "material-ui/styles";
 import * as React from "react";
 
-interface PriceFieldProps {
+interface PriceRangeFieldProps {
   currencySymbol?: string;
+  disabled?: boolean;
   error?: boolean;
   hint?: string;
   label?: string;
@@ -34,8 +35,18 @@ const decorate = withStyles(theme => ({
   }
 }));
 
-export const PriceField = decorate<PriceFieldProps>(
-  ({ error, label, hint, currencySymbol, name, classes, onChange, value }) => (
+export const PriceRangeField = decorate<PriceRangeFieldProps>(
+  ({
+    disabled,
+    error,
+    label,
+    hint,
+    currencySymbol,
+    name,
+    classes,
+    onChange,
+    value
+  }) => (
     <div className={classes.widgetContainer}>
       <div className={classes.inputContainer}>
         <FormControl error={error}>
@@ -54,6 +65,7 @@ export const PriceField = decorate<PriceFieldProps>(
             name={`${name}_min`}
             onChange={onChange}
             type="number"
+            disabled={disabled}
           />
           {hint && <FormHelperText>{hint}</FormHelperText>}
         </FormControl>
@@ -73,10 +85,58 @@ export const PriceField = decorate<PriceFieldProps>(
             name={`${name}_max`}
             onChange={onChange}
             type="number"
+            disabled={disabled}
           />
         </FormControl>
       </div>
     </div>
+  )
+);
+PriceRangeField.defaultProps = {
+  name: "price"
+};
+
+interface PriceFieldProps {
+  currencySymbol?: string;
+  disabled?: boolean;
+  error?: boolean;
+  hint?: string;
+  label?: string;
+  name?: string;
+  value?: string;
+  onChange(event: any);
+}
+
+export const PriceField = decorate<PriceFieldProps>(
+  ({
+    disabled,
+    error,
+    label,
+    hint,
+    currencySymbol,
+    name,
+    classes,
+    onChange,
+    value
+  }) => (
+    <FormControl error={error} fullWidth>
+      {label && <InputLabel htmlFor={name}>{label}</InputLabel>}
+      <Input
+        value={value || ""}
+        endAdornment={
+          currencySymbol ? (
+            <InputAdornment position="end">{currencySymbol}</InputAdornment>
+          ) : (
+            <span />
+          )
+        }
+        name={name}
+        onChange={onChange}
+        type="number"
+        disabled={disabled}
+      />
+      {hint && <FormHelperText>{hint}</FormHelperText>}
+    </FormControl>
   )
 );
 PriceField.defaultProps = {

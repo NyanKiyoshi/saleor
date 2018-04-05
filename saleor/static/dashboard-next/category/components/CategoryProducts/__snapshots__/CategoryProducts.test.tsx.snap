@@ -54,29 +54,29 @@ exports[`<CategoryProducts /> renders when loading data 1`] = `
     </div>
   </div>
   <table
-    className="MuiTable-root-81"
+    className="MuiTable-root-82"
   >
     <thead
-      className="MuiTableHead-root-82"
+      className="MuiTableHead-root-83"
     >
       <tr
-        className="MuiTableRow-root-83 MuiTableRow-head-84"
+        className="MuiTableRow-root-84 MuiTableRow-head-85"
       >
         <th
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-head-89 Component-avatarCell-80"
+          className="MuiTableCell-root-89 MuiTableCell-head-90 Component-avatarCell-80"
           scope="col"
         />
         <th
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-head-89"
+          className="MuiTableCell-root-89 MuiTableCell-head-90"
           scope="col"
         >
           Name
         </th>
         <th
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-head-89"
+          className="MuiTableCell-root-89 MuiTableCell-head-90"
           scope="col"
         >
           Type
@@ -85,22 +85,22 @@ exports[`<CategoryProducts /> renders when loading data 1`] = `
     </thead>
     <tfoot>
       <tr
-        className="MuiTableRow-root-83 MuiTableRow-footer-85"
+        className="MuiTableRow-root-84 MuiTableRow-footer-86"
       >
         <td
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-footer-91 MuiTablePagination-root-99"
+          className="MuiTableCell-root-89 MuiTableCell-footer-92 MuiTablePagination-root-100"
           colSpan={3}
           scope={undefined}
         >
           <div
-            className="MuiToolbar-root-105 MuiToolbar-gutters-106 MuiTablePagination-toolbar-104"
+            className="MuiToolbar-root-106 MuiToolbar-gutters-107 MuiTablePagination-toolbar-105"
           >
             <div
-              className="MuiTablePagination-spacer-103"
+              className="MuiTablePagination-spacer-104"
             />
             <div
-              className="MuiTablePaginationActions-root-107"
+              className="MuiTablePaginationActions-root-108"
             >
               <button
                 className="MuiButtonBase-root-64 MuiButtonBase-disabled-65 MuiIconButton-root-58 MuiIconButton-disabled-62"
@@ -177,18 +177,18 @@ exports[`<CategoryProducts /> renders when loading data 1`] = `
       </tr>
     </tfoot>
     <tbody
-      className="MuiTableBody-root-108"
+      className="MuiTableBody-root-109"
     >
       <tr
-        className="MuiTableRow-root-83"
+        className="MuiTableRow-root-84"
       >
         <td
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-body-90 Component-avatarCell-80"
+          className="MuiTableCell-root-89 MuiTableCell-body-91 Component-avatarCell-80"
           scope={undefined}
         >
           <div
-            className="MuiAvatar-root-109 MuiAvatar-colorDefault-110"
+            className="MuiAvatar-root-110 MuiAvatar-colorDefault-111"
           >
             <svg
               aria-hidden="true"
@@ -205,11 +205,11 @@ exports[`<CategoryProducts /> renders when loading data 1`] = `
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-body-90"
+          className="MuiTableCell-root-89 MuiTableCell-body-91"
           scope={undefined}
         >
           <span
-            className="Component-skeleton-112"
+            className="Component-skeleton-113"
             style={undefined}
           >
             ‌
@@ -217,11 +217,11 @@ exports[`<CategoryProducts /> renders when loading data 1`] = `
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-body-90"
+          className="MuiTableCell-root-89 MuiTableCell-body-91"
           scope={undefined}
         >
           <span
-            className="Component-skeleton-112"
+            className="Component-skeleton-113"
             style={undefined}
           >
             ‌
@@ -287,29 +287,29 @@ exports[`<CategoryProducts /> renders with initial data 1`] = `
     </div>
   </div>
   <table
-    className="MuiTable-root-81"
+    className="MuiTable-root-82"
   >
     <thead
-      className="MuiTableHead-root-82"
+      className="MuiTableHead-root-83"
     >
       <tr
-        className="MuiTableRow-root-83 MuiTableRow-head-84"
+        className="MuiTableRow-root-84 MuiTableRow-head-85"
       >
         <th
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-head-89 Component-avatarCell-80"
+          className="MuiTableCell-root-89 MuiTableCell-head-90 Component-avatarCell-80"
           scope="col"
         />
         <th
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-head-89"
+          className="MuiTableCell-root-89 MuiTableCell-head-90"
           scope="col"
         >
           Name
         </th>
         <th
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-head-89"
+          className="MuiTableCell-root-89 MuiTableCell-head-90"
           scope="col"
         >
           Type
@@ -318,22 +318,22 @@ exports[`<CategoryProducts /> renders with initial data 1`] = `
     </thead>
     <tfoot>
       <tr
-        className="MuiTableRow-root-83 MuiTableRow-footer-85"
+        className="MuiTableRow-root-84 MuiTableRow-footer-86"
       >
         <td
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-footer-91 MuiTablePagination-root-99"
+          className="MuiTableCell-root-89 MuiTableCell-footer-92 MuiTablePagination-root-100"
           colSpan={3}
           scope={undefined}
         >
           <div
-            className="MuiToolbar-root-105 MuiToolbar-gutters-106 MuiTablePagination-toolbar-104"
+            className="MuiToolbar-root-106 MuiToolbar-gutters-107 MuiTablePagination-toolbar-105"
           >
             <div
-              className="MuiTablePagination-spacer-103"
+              className="MuiTablePagination-spacer-104"
             />
             <div
-              className="MuiTablePaginationActions-root-107"
+              className="MuiTablePaginationActions-root-108"
             >
               <button
                 className="MuiButtonBase-root-64 MuiButtonBase-disabled-65 MuiIconButton-root-58 MuiIconButton-disabled-62"
@@ -410,22 +410,22 @@ exports[`<CategoryProducts /> renders with initial data 1`] = `
       </tr>
     </tfoot>
     <tbody
-      className="MuiTableBody-root-108"
+      className="MuiTableBody-root-109"
     >
       <tr
-        className="MuiTableRow-root-83"
+        className="MuiTableRow-root-84"
       >
         <td
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-body-90 Component-avatarCell-80"
+          className="MuiTableCell-root-89 MuiTableCell-body-91 Component-avatarCell-80"
           scope={undefined}
         >
           <div
-            className="MuiAvatar-root-109"
+            className="MuiAvatar-root-110"
           >
             <img
               alt={undefined}
-              className="MuiAvatar-img-111"
+              className="MuiAvatar-img-112"
               sizes={undefined}
               src="/media/__sized__/products/saleor/static/placeholders/t-shirts/6_tdo7a5D-crop-c0-5__0-5-255x255-70.jpg"
               srcSet={undefined}
@@ -434,33 +434,34 @@ exports[`<CategoryProducts /> renders with initial data 1`] = `
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-body-90"
+          className="MuiTableCell-root-89 MuiTableCell-body-91"
+          onClick={[Function]}
           scope={undefined}
         >
           Gardner, Graham and King
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-body-90"
+          className="MuiTableCell-root-89 MuiTableCell-body-91"
           scope={undefined}
         >
           T-Shirt
         </td>
       </tr>
       <tr
-        className="MuiTableRow-root-83"
+        className="MuiTableRow-root-84"
       >
         <td
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-body-90 Component-avatarCell-80"
+          className="MuiTableCell-root-89 MuiTableCell-body-91 Component-avatarCell-80"
           scope={undefined}
         >
           <div
-            className="MuiAvatar-root-109"
+            className="MuiAvatar-root-110"
           >
             <img
               alt={undefined}
-              className="MuiAvatar-img-111"
+              className="MuiAvatar-img-112"
               sizes={undefined}
               src="/media/__sized__/products/saleor/static/placeholders/t-shirts/6_tdo7a5D-crop-c0-5__0-5-255x255-70.jpg"
               srcSet={undefined}
@@ -469,33 +470,34 @@ exports[`<CategoryProducts /> renders with initial data 1`] = `
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-body-90"
+          className="MuiTableCell-root-89 MuiTableCell-body-91"
+          onClick={[Function]}
           scope={undefined}
         >
           Gardner, Graham and King
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-body-90"
+          className="MuiTableCell-root-89 MuiTableCell-body-91"
           scope={undefined}
         >
           T-Shirt
         </td>
       </tr>
       <tr
-        className="MuiTableRow-root-83"
+        className="MuiTableRow-root-84"
       >
         <td
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-body-90 Component-avatarCell-80"
+          className="MuiTableCell-root-89 MuiTableCell-body-91 Component-avatarCell-80"
           scope={undefined}
         >
           <div
-            className="MuiAvatar-root-109"
+            className="MuiAvatar-root-110"
           >
             <img
               alt={undefined}
-              className="MuiAvatar-img-111"
+              className="MuiAvatar-img-112"
               sizes={undefined}
               src="/media/__sized__/products/saleor/static/placeholders/t-shirts/6_tdo7a5D-crop-c0-5__0-5-255x255-70.jpg"
               srcSet={undefined}
@@ -504,33 +506,34 @@ exports[`<CategoryProducts /> renders with initial data 1`] = `
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-body-90"
+          className="MuiTableCell-root-89 MuiTableCell-body-91"
+          onClick={[Function]}
           scope={undefined}
         >
           Gardner, Graham and King
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-body-90"
+          className="MuiTableCell-root-89 MuiTableCell-body-91"
           scope={undefined}
         >
           T-Shirt
         </td>
       </tr>
       <tr
-        className="MuiTableRow-root-83"
+        className="MuiTableRow-root-84"
       >
         <td
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-body-90 Component-avatarCell-80"
+          className="MuiTableCell-root-89 MuiTableCell-body-91 Component-avatarCell-80"
           scope={undefined}
         >
           <div
-            className="MuiAvatar-root-109"
+            className="MuiAvatar-root-110"
           >
             <img
               alt={undefined}
-              className="MuiAvatar-img-111"
+              className="MuiAvatar-img-112"
               sizes={undefined}
               src="/media/__sized__/products/saleor/static/placeholders/t-shirts/6_tdo7a5D-crop-c0-5__0-5-255x255-70.jpg"
               srcSet={undefined}
@@ -539,14 +542,15 @@ exports[`<CategoryProducts /> renders with initial data 1`] = `
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-body-90"
+          className="MuiTableCell-root-89 MuiTableCell-body-91"
+          onClick={[Function]}
           scope={undefined}
         >
           Gardner, Graham and King
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-body-90"
+          className="MuiTableCell-root-89 MuiTableCell-body-91"
           scope={undefined}
         >
           T-Shirt
@@ -611,29 +615,29 @@ exports[`<CategoryProducts /> renders without initial data 1`] = `
     </div>
   </div>
   <table
-    className="MuiTable-root-81"
+    className="MuiTable-root-82"
   >
     <thead
-      className="MuiTableHead-root-82"
+      className="MuiTableHead-root-83"
     >
       <tr
-        className="MuiTableRow-root-83 MuiTableRow-head-84"
+        className="MuiTableRow-root-84 MuiTableRow-head-85"
       >
         <th
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-head-89 Component-avatarCell-80"
+          className="MuiTableCell-root-89 MuiTableCell-head-90 Component-avatarCell-80"
           scope="col"
         />
         <th
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-head-89"
+          className="MuiTableCell-root-89 MuiTableCell-head-90"
           scope="col"
         >
           Name
         </th>
         <th
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-head-89"
+          className="MuiTableCell-root-89 MuiTableCell-head-90"
           scope="col"
         >
           Type
@@ -642,22 +646,22 @@ exports[`<CategoryProducts /> renders without initial data 1`] = `
     </thead>
     <tfoot>
       <tr
-        className="MuiTableRow-root-83 MuiTableRow-footer-85"
+        className="MuiTableRow-root-84 MuiTableRow-footer-86"
       >
         <td
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-footer-91 MuiTablePagination-root-99"
+          className="MuiTableCell-root-89 MuiTableCell-footer-92 MuiTablePagination-root-100"
           colSpan={3}
           scope={undefined}
         >
           <div
-            className="MuiToolbar-root-105 MuiToolbar-gutters-106 MuiTablePagination-toolbar-104"
+            className="MuiToolbar-root-106 MuiToolbar-gutters-107 MuiTablePagination-toolbar-105"
           >
             <div
-              className="MuiTablePagination-spacer-103"
+              className="MuiTablePagination-spacer-104"
             />
             <div
-              className="MuiTablePaginationActions-root-107"
+              className="MuiTablePaginationActions-root-108"
             >
               <button
                 className="MuiButtonBase-root-64 MuiButtonBase-disabled-65 MuiIconButton-root-58 MuiIconButton-disabled-62"
@@ -734,19 +738,19 @@ exports[`<CategoryProducts /> renders without initial data 1`] = `
       </tr>
     </tfoot>
     <tbody
-      className="MuiTableBody-root-108"
+      className="MuiTableBody-root-109"
     >
       <tr
-        className="MuiTableRow-root-83"
+        className="MuiTableRow-root-84"
       >
         <td
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-body-90 Component-avatarCell-80"
+          className="MuiTableCell-root-89 MuiTableCell-body-91 Component-avatarCell-80"
           scope={undefined}
         />
         <td
           aria-sort={null}
-          className="MuiTableCell-root-88 MuiTableCell-body-90"
+          className="MuiTableCell-root-89 MuiTableCell-body-91"
           colSpan={2}
           scope={undefined}
         >
