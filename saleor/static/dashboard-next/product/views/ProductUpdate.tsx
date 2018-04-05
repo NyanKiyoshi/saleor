@@ -12,7 +12,10 @@ export const ProductUpdate: React.StatelessComponent<ProductUpdateProps> = ({
   <div>
     <Form onSubmit={() => {}}>
       {({ change, data, submit }) => (
-        <ProductDetailsForm onBack={() => window.history.back()} />
+        <ProductDetailsForm
+          onBack={() => window.history.back()}
+          onChange={() => {}}
+        />
       )}
     </Form>
   </div>
