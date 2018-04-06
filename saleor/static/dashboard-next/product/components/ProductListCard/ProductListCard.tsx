@@ -1,6 +1,7 @@
 import Card from "material-ui/Card";
 import * as React from "react";
 
+import AddIcon from "material-ui-icons/Add";
 import FilterListIcon from "material-ui-icons/FilterList";
 import Hidden from "material-ui/Hidden";
 import IconButton from "material-ui/IconButton";
@@ -9,8 +10,7 @@ import ProductList from "../../../components/ProductList";
 import i18n from "../../../i18n";
 
 interface ProductListCardProps {
-  loading?: boolean;
-  products: Array<{
+  products?: Array<{
     id: string;
     name: string;
     productType: {
@@ -18,17 +18,22 @@ interface ProductListCardProps {
     };
     thumbnailUrl: string;
   }>;
+  hasPreviousPage?: boolean;
+  hasNextPage?: boolean;
+  onCreate();
   onFilter();
-  onNextPage();
-  onPreviousPage();
+  onNextPage?();
+  onPreviousPage?();
   onRowClick?(id: string);
 }
 
 export const ProductListCard: React.StatelessComponent<
   ProductListCardProps
 > = ({
-  loading,
   products,
+  hasNextPage,
+  hasPreviousPage,
+  onCreate,
   onFilter,
   onNextPage,
   onPreviousPage,
@@ -36,14 +41,19 @@ export const ProductListCard: React.StatelessComponent<
 }) => (
   <Card>
     <PageHeader title={i18n.t("Product list")}>
+      <IconButton onClick={onCreate}>
+        <AddIcon />
+      </IconButton>
       <Hidden mdUp>
-        <IconButton disabled={loading} onClick={onFilter}>
+        <IconButton onClick={onFilter}>
           <FilterListIcon />
         </IconButton>
       </Hidden>
     </PageHeader>
     <ProductList
       products={products}
+      hasNextPage={hasNextPage}
+      hasPreviousPage={hasPreviousPage}
       onNextPage={onNextPage}
       onPreviousPage={onPreviousPage}
       onRowClick={onRowClick}

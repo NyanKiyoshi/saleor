@@ -28,6 +28,7 @@ function loadStories() {
   require("./stories/products/ProductDescription");
   require("./stories/products/ProductDetailsForm");
   require("./stories/products/ProductImages");
+  require("./stories/products/ProductListCard");
 }
 
 configure(loadStories, module);
