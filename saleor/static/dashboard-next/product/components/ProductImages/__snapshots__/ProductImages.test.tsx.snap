@@ -1,0 +1,162 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProductImages /> renders when loading data 1`] = `
+<div
+  className="MuiPaper-root-4 MuiPaper-elevation2-8 MuiPaper-rounded-5 Component-card-2"
+>
+  <div
+    className="Component-root-34"
+  >
+    <h2
+      className="MuiTypography-root-37 MuiTypography-title-43 Component-title-36"
+    >
+      Images
+    </h2>
+    <div
+      className="Component-action-31"
+    />
+  </div>
+  <div
+    className="MuiCardContent-root-61"
+  >
+    <div
+      className="Component-root-1"
+    >
+      <div
+        className="MuiCircularProgress-root-77 MuiCircularProgress-colorPrimary-78"
+        role="progressbar"
+        style={
+          Object {
+            "height": 40,
+            "width": 40,
+          }
+        }
+      >
+        <svg
+          className="MuiCircularProgress-svg-80 MuiCircularProgress-svgIndeterminate-81"
+          viewBox="0 0 50 50"
+        >
+          <circle
+            className="MuiCircularProgress-circle-82 MuiCircularProgress-circleIndeterminate-83"
+            cx={25}
+            cy={25}
+            fill="none"
+            r={20}
+            strokeWidth={3.6}
+            style={Object {}}
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ProductImages /> renders with data 1`] = `
+<div
+  className="MuiPaper-root-4 MuiPaper-elevation2-8 MuiPaper-rounded-5 Component-card-2"
+>
+  <div
+    className="Component-root-34"
+  >
+    <h2
+      className="MuiTypography-root-37 MuiTypography-title-43 Component-title-36"
+    >
+      Images
+    </h2>
+    <div
+      className="Component-action-31"
+    />
+  </div>
+  <div
+    className="MuiCardContent-root-61"
+  >
+    <div
+      className="Component-root-1"
+    >
+      <div
+        className="MuiGridListTile-root-62 Component-gridElement-3"
+      >
+        <div
+          className="MuiGridListTile-tile-63"
+        >
+          <img
+            alt="Image 1"
+            src="url/to/image.png"
+          />
+          <div
+            className="MuiGridListTileBar-root-66 MuiGridListTileBar-titlePositionBottom-67"
+          >
+            <div
+              className="MuiGridListTileBar-titleWrap-70"
+            >
+              <div
+                className="MuiGridListTileBar-title-73"
+              >
+                Image 1
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="MuiGridListTile-root-62 Component-gridElement-3"
+      >
+        <div
+          className="MuiGridListTile-tile-63"
+        >
+          <img
+            alt="Image 2"
+            src="url/to/image.png"
+          />
+          <div
+            className="MuiGridListTileBar-root-66 MuiGridListTileBar-titlePositionBottom-67"
+          >
+            <div
+              className="MuiGridListTileBar-titleWrap-70"
+            >
+              <div
+                className="MuiGridListTileBar-title-73"
+              >
+                Image 2
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ProductImages /> renders without data 1`] = `
+<div
+  className="MuiPaper-root-4 MuiPaper-elevation2-8 MuiPaper-rounded-5 Component-card-2"
+>
+  <div
+    className="Component-root-34"
+  >
+    <h2
+      className="MuiTypography-root-37 MuiTypography-title-43 Component-title-36"
+    >
+      Images
+    </h2>
+    <div
+      className="Component-action-31"
+    />
+  </div>
+  <div
+    className="MuiCardContent-root-61"
+  >
+    <div
+      className="Component-root-1"
+    >
+      <p
+        className="MuiTypography-root-37 MuiTypography-body1-46"
+      >
+        No images available
+      </p>
+    </div>
+  </div>
+</div>
+`;
