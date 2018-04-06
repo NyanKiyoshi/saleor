@@ -9,39 +9,19 @@ import Typography from "material-ui/Typography";
 import * as React from "react";
 
 import ControlledSwitch from "../../../components/ControlledSwitch";
+import Skeleton from "../../../components/Skeleton";
 import i18n from "../../../i18n";
 
+interface MoneyRangeType {
+  start: string;
+  stop: string;
+}
 interface ProductPriceAndAvailabilityProps {
-  product: {
-    id: string;
-    productType: {
-      id: string;
-    };
-    name: string;
-    description: string;
-    category: {
-      id: string;
-    };
-    price: {
-      currency: string;
-      amount: number;
-      localized: string;
-    };
-    availableOn?: string;
-    isPublished: boolean;
-    attributes: string;
-    updatedAt: string;
-    availability: {
-      available: boolean;
-      onSale: boolean;
-    };
-    images: Array<{
-      id: string;
-      alt: string;
-      url: string;
-      order: number;
-    }>;
-  };
+  grossMargin?: MoneyRangeType;
+  salePrice?: MoneyRangeType;
+  purchaseCost?: MoneyRangeType;
+  isPublished?: boolean;
+  isAvailable?: boolean;
   onPublish(event: React.ChangeEvent<any>);
 }
 
@@ -62,51 +42,86 @@ const decorate = withStyles(theme => ({
 }));
 export const ProductPriceAndAvailability = decorate<
   ProductPriceAndAvailabilityProps
->(({ classes, product, onPublish }) => (
-  <Card>
-    <CardContent>
-      <ControlledSwitch
-        onChange={onPublish}
-        uncheckedLabel={i18n.t("Draft")}
-        label={i18n.t("Published")}
-        checked={product.isPublished}
-      />
-      <Typography>
-        {product.availability.available ? (
-          <span className={classes.greenText}>{i18n.t("Available")}</span>
-        ) : (
-          <span className={classes.redText}>{i18n.t("Unavailable")}</span>
-        )}
-      </Typography>
-    </CardContent>
-    <Table>
-      <TableBody>
-        <TableRow>
-          <TableCell className={classes.leftCell}>
-            {i18n.t("Sale price")}
-          </TableCell>
-          <TableCell className={classes.rightCell}>
-            {product.price.localized} - {product.price.localized}
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell className={classes.leftCell}>
-            {i18n.t("Purchase cost")}
-          </TableCell>
-          <TableCell className={classes.rightCell}>
-            {product.price.localized} - {product.price.localized}
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell className={classes.leftCell}>
-            {i18n.t("Gross margin")}
-          </TableCell>
-          <TableCell className={classes.rightCell}>
-            {product.price.localized} - {product.price.localized}
-          </TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
-  </Card>
-));
+>(
+  ({
+    classes,
+    grossMargin,
+    salePrice,
+    purchaseCost,
+    isPublished,
+    isAvailable,
+    onPublish
+  }) => (
+    <Card>
+      <CardContent>
+        <ControlledSwitch
+          onChange={onPublish}
+          uncheckedLabel={
+            isPublished === undefined || isPublished === null
+              ? ""
+              : i18n.t("Draft")
+          }
+          label={i18n.t("Published")}
+          checked={isPublished}
+          disabled={isPublished === undefined || isPublished === null}
+        />
+        <Typography>
+          {isAvailable === undefined || isAvailable === null ? (
+            <Skeleton />
+          ) : isAvailable ? (
+            <span className={classes.greenText}>{i18n.t("Available")}</span>
+          ) : (
+            <span className={classes.redText}>{i18n.t("Unavailable")}</span>
+          )}
+        </Typography>
+      </CardContent>
+      <Table>
+        <TableBody>
+          <TableRow>
+            <TableCell className={classes.leftCell}>
+              {i18n.t("Sale price")}
+            </TableCell>
+            <TableCell className={classes.rightCell}>
+              {salePrice ? (
+                <span>
+                  {salePrice.start} - {salePrice.stop}
+                </span>
+              ) : (
+                <Skeleton />
+              )}
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell className={classes.leftCell}>
+              {i18n.t("Purchase cost")}
+            </TableCell>
+            <TableCell className={classes.rightCell}>
+              {purchaseCost ? (
+                <span>
+                  {purchaseCost.start} - {purchaseCost.stop}
+                </span>
+              ) : (
+                <Skeleton />
+              )}
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell className={classes.leftCell}>
+              {i18n.t("Gross margin")}
+            </TableCell>
+            <TableCell className={classes.rightCell}>
+              {grossMargin ? (
+                <span>
+                  {grossMargin.start} - {grossMargin.stop}
+                </span>
+              ) : (
+                <Skeleton />
+              )}
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </Card>
+  )
+);
 export default ProductPriceAndAvailability;

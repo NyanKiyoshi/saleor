@@ -47,7 +47,7 @@ const products = [
   }
 ];
 
-describe("<CategoryProducts />", () => {
+describe("<ProductListCard />", () => {
   it("renders with initial data", () => {
     const component = renderer.create(
       <ProductListCard
