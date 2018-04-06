@@ -4,6 +4,7 @@ import * as React from "react";
 
 interface ControlledSwitchProps {
   checked: boolean;
+  disabled?: boolean;
   uncheckedLabel?: string;
   label: string;
   onChange?(event: React.ChangeEvent<any>);
@@ -11,10 +12,11 @@ interface ControlledSwitchProps {
 
 export const ControlledSwitch: React.StatelessComponent<
   ControlledSwitchProps
-> = ({ checked, onChange, label, uncheckedLabel }) => (
+> = ({ checked, disabled, onChange, label, uncheckedLabel }) => (
   <FormControlLabel
     control={<Switch onChange={onChange} checked={checked} />}
     label={uncheckedLabel ? (checked ? label : uncheckedLabel) : label}
+    disabled={disabled}
   />
 );
 export default ControlledSwitch;

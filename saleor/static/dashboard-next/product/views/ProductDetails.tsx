@@ -136,10 +136,7 @@ export const ProductDetails = decorate(({ classes }) => (
           </Hidden>
         </div>
         <div>
-          <ProductPriceAndAvailability
-            product={product}
-            onPublish={event => {}}
-          />
+          <ProductPriceAndAvailability onPublish={event => {}} />
           <ProductCollections
             collections={product.collections}
             // TODO: Replace when API is ready
