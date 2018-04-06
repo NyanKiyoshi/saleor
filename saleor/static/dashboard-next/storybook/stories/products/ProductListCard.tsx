@@ -64,7 +64,6 @@ storiesOf("Products / ProductListCard", module)
       hasNextPage={true}
       hasPreviousPage={false}
       products={[]}
-      onCreate={() => {}}
       onFilter={() => {}}
       onNextPage={() => {}}
       onPreviousPage={() => {}}
@@ -75,7 +74,6 @@ storiesOf("Products / ProductListCard", module)
       hasNextPage={true}
       hasPreviousPage={false}
       products={products}
-      onCreate={() => {}}
       onFilter={() => {}}
       onNextPage={() => {}}
       onPreviousPage={() => {}}
@@ -86,7 +84,6 @@ storiesOf("Products / ProductListCard", module)
       hasNextPage={true}
       hasPreviousPage={false}
       products={products}
-      onCreate={() => {}}
       onFilter={() => {}}
       onNextPage={() => {}}
       onPreviousPage={() => {}}
@@ -97,7 +94,6 @@ storiesOf("Products / ProductListCard", module)
     <ProductListCard
       hasNextPage={true}
       hasPreviousPage={false}
-      onCreate={() => {}}
       onFilter={() => {}}
       onNextPage={() => {}}
       onPreviousPage={() => {}}
