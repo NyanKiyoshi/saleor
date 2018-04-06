@@ -56,7 +56,7 @@ export const ProductImages = decorate<ProductImagesProps>(
             <CircularProgress />
           ) : imageList.length > 0 ? (
             imageList
-              .sort((prev, next) => (prev.order < next.order ? 1 : -1))
+              .sort((prev, next) => (prev.order > next.order ? 1 : -1))
               .map(tile => (
                 <GridListTile
                   key={tile.id}

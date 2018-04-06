@@ -13,7 +13,7 @@ const product = {
   price: "300"
 };
 
-describe("<PriceRangeField />", () => {
+describe("<ProductDetailsForm />", () => {
   it("renders with no value", () => {
     const component = renderer.create(
       <ProductDetailsForm onBack={() => {}} onChange={() => {}} />

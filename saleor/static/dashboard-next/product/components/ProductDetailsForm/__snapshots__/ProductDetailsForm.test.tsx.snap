@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<PriceRangeField /> renders when loading data 1`] = `
+exports[`<ProductDetailsForm /> renders when loading data 1`] = `
 <div
   className="MuiPaper-root-2 MuiPaper-elevation2-6 MuiPaper-rounded-3"
 >
@@ -201,7 +201,7 @@ exports[`<PriceRangeField /> renders when loading data 1`] = `
 </div>
 `;
 
-exports[`<PriceRangeField /> renders with no value 1`] = `
+exports[`<ProductDetailsForm /> renders with no value 1`] = `
 <div
   className="MuiPaper-root-2 MuiPaper-elevation2-6 MuiPaper-rounded-3"
 >
@@ -402,7 +402,7 @@ exports[`<PriceRangeField /> renders with no value 1`] = `
 </div>
 `;
 
-exports[`<PriceRangeField /> renders with value 1`] = `
+exports[`<ProductDetailsForm /> renders with value 1`] = `
 <div
   className="MuiPaper-root-2 MuiPaper-elevation2-6 MuiPaper-rounded-3"
 >
