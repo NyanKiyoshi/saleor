@@ -18,6 +18,7 @@ interface ProductImagesProps {
     url: string;
     order: number;
   }>;
+  placeholder?: string;
 }
 
 const decorate = withStyles(theme => ({
@@ -47,13 +48,16 @@ const decorate = withStyles(theme => ({
 }));
 
 export const ProductImages = decorate<ProductImagesProps>(
-  ({ classes, imageList }) => (
+  ({ classes, imageList, placeholder }) => (
     <Card className={classes.card}>
       <PageHeader title={i18n.t("Images")} />
       <CardContent>
         <div className={classes.root}>
           {imageList === undefined || imageList === null ? (
-            <CircularProgress />
+            <GridListTile className={classes.gridElement} component="div">
+              <img src={placeholder} />
+              <GridListTileBar title={i18n.t("Loading...")} />
+            </GridListTile>
           ) : imageList.length > 0 ? (
             imageList
               .sort((prev, next) => (prev.order > next.order ? 1 : -1))

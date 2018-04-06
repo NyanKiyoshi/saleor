@@ -31,6 +31,7 @@ function loadStories() {
   require("./stories/products/ProductListCard");
   require("./stories/products/ProductPriceAndAvailability");
   require("./stories/products/ProductVariants");
+  require("./stories/products/ProductDetailsPage");
 }
 
 configure(loadStories, module);

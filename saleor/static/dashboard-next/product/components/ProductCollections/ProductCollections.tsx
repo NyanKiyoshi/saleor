@@ -6,6 +6,7 @@ import Table, { TableBody, TableCell, TableRow } from "material-ui/Table";
 import * as React from "react";
 
 import PageHeader from "../../../components/PageHeader";
+import Skeleton from "../../../components/Skeleton";
 import i18n from "../../../i18n";
 
 interface ProductPriceAndAvailabilityProps {
@@ -35,9 +36,15 @@ export const ProductPriceAndAvailability = decorate<
     <PageHeader title={i18n.t("Collections")} />
     <Table>
       <TableBody>
-        {collections.length > 0 ? (
+        {collections === undefined || collections === null ? (
+          <TableRow>
+            <TableCell>
+              <Skeleton />
+            </TableCell>
+          </TableRow>
+        ) : collections.length > 0 ? (
           collections.map(collection => (
-            <TableRow>
+            <TableRow key={collection.id}>
               <TableCell
                 className={classes.link}
                 onClick={onRowClick(collection.id)}

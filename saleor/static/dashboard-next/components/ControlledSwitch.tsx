@@ -14,7 +14,7 @@ export const ControlledSwitch: React.StatelessComponent<
   ControlledSwitchProps
 > = ({ checked, disabled, onChange, label, uncheckedLabel }) => (
   <FormControlLabel
-    control={<Switch onChange={onChange} checked={checked} />}
+    control={<Switch onChange={onChange} checked={checked} color="primary" />}
     label={uncheckedLabel ? (checked ? label : uncheckedLabel) : label}
     disabled={disabled}
   />

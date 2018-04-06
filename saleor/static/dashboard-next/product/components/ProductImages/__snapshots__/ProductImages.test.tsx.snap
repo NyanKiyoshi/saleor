@@ -23,29 +23,28 @@ exports[`<ProductImages /> renders when loading data 1`] = `
       className="Component-root-1"
     >
       <div
-        className="MuiCircularProgress-root-77 MuiCircularProgress-colorPrimary-78"
-        role="progressbar"
-        style={
-          Object {
-            "height": 40,
-            "width": 40,
-          }
-        }
+        className="MuiGridListTile-root-62 Component-gridElement-3"
       >
-        <svg
-          className="MuiCircularProgress-svg-80 MuiCircularProgress-svgIndeterminate-81"
-          viewBox="0 0 50 50"
+        <div
+          className="MuiGridListTile-tile-63"
         >
-          <circle
-            className="MuiCircularProgress-circle-82 MuiCircularProgress-circleIndeterminate-83"
-            cx={25}
-            cy={25}
-            fill="none"
-            r={20}
-            strokeWidth={3.6}
-            style={Object {}}
+          <img
+            src={undefined}
           />
-        </svg>
+          <div
+            className="MuiGridListTileBar-root-66 MuiGridListTileBar-titlePositionBottom-67"
+          >
+            <div
+              className="MuiGridListTileBar-titleWrap-70"
+            >
+              <div
+                className="MuiGridListTileBar-title-73"
+              >
+                Loading...
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
