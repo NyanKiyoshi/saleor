@@ -58,11 +58,11 @@ export const ProductPriceAndAvailability = decorate<
           onChange={onPublish}
           uncheckedLabel={
             isPublished === undefined || isPublished === null
-              ? ""
+              ? " "
               : i18n.t("Draft")
           }
           label={i18n.t("Published")}
-          checked={isPublished}
+          checked={!(isPublished === undefined || isPublished === null)}
           disabled={isPublished === undefined || isPublished === null}
         />
         <Typography>

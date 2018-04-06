@@ -54,7 +54,7 @@ exports[`<ProductPriceAndAvailability /> renders product is not available 1`] = 
       <span
         className="MuiTypography-root-59 MuiTypography-body1-68 MuiFormControlLabel-label-35"
       >
-        Published
+         
       </span>
     </label>
     <p
@@ -198,7 +198,7 @@ exports[`<ProductPriceAndAvailability /> renders when loading data 1`] = `
       <span
         className="MuiTypography-root-59 MuiTypography-body1-68 MuiFormControlLabel-label-35"
       >
-        Published
+         
       </span>
     </label>
     <p
@@ -346,7 +346,7 @@ exports[`<ProductPriceAndAvailability /> renders when product is available 1`] =
       <span
         className="MuiTypography-root-59 MuiTypography-body1-68 MuiFormControlLabel-label-35"
       >
-        Published
+         
       </span>
     </label>
     <p
