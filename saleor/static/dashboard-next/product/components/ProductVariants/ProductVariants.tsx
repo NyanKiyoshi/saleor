@@ -16,10 +16,11 @@ import Typography from "material-ui/Typography";
 import * as React from "react";
 
 import PageHeader from "../../../components/PageHeader";
+import Skeleton from "../../../components/Skeleton";
 import i18n from "../../../i18n";
 
 interface ProductVariantsProps {
-  variants: Array<{
+  variants?: Array<{
     id: string;
     name: string;
     sku: string;
@@ -29,7 +30,7 @@ interface ProductVariantsProps {
     };
     grossMargin: string;
   }>;
-  onRowClick(id: string);
+  onRowClick?(id: string);
 }
 
 const decorate = withStyles(theme => ({
@@ -54,12 +55,12 @@ export const ProductVariants = decorate<ProductVariantsProps>(
       <Table>
         <TableHead>
           <TableRow>
-            <Hidden mdDown>
+            <Hidden smDown>
               <TableCell>{i18n.t("SKU")}</TableCell>
             </Hidden>
             <TableCell>{i18n.t("Name")}</TableCell>
             <TableCell>{i18n.t("Status")}</TableCell>
-            <Hidden mdDown>
+            <Hidden smDown>
               <TableCell className={classes.alignRightText}>
                 {i18n.t("Price")}
               </TableCell>
@@ -70,36 +71,66 @@ export const ProductVariants = decorate<ProductVariantsProps>(
           </TableRow>
         </TableHead>
         <TableBody>
-          {variants.map(variant => (
-            <TableRow key={variant.id}>
-              <Hidden mdDown>
-                <TableCell>{variant.sku}</TableCell>
+          {variants === undefined || variants === null ? (
+            <TableRow>
+              <Hidden smDown>
+                <TableCell>
+                  <Skeleton />
+                </TableCell>
               </Hidden>
-              <TableCell
-                className={classes.link}
-                onClick={onRowClick(variant.id)}
-              >
-                {variant.name}
+              <TableCell>
+                <Skeleton />
               </TableCell>
-              <TableCell
-                className={
-                  variant.availability ? classes.greenText : classes.redText
-                }
-              >
-                {variant.availability
-                  ? i18n.t("Available")
-                  : i18n.t("Unavailable")}
+              <TableCell>
+                <Skeleton />
               </TableCell>
-              <Hidden mdDown>
+              <Hidden smDown>
                 <TableCell className={classes.alignRightText}>
-                  {variant.price.grossLocalized}
+                  <Skeleton />
                 </TableCell>
                 <TableCell className={classes.alignRightText}>
-                  {variant.grossMargin}
+                  <Skeleton />
                 </TableCell>
               </Hidden>
             </TableRow>
-          ))}
+          ) : variants.length > 0 ? (
+            variants.map(variant => (
+              <TableRow key={variant.id}>
+                <Hidden smDown>
+                  <TableCell>{variant.sku}</TableCell>
+                </Hidden>
+                <TableCell
+                  className={onRowClick ? classes.link : ""}
+                  onClick={onRowClick ? onRowClick(variant.id) : () => {}}
+                >
+                  {variant.name}
+                </TableCell>
+                <TableCell
+                  className={
+                    variant.availability ? classes.greenText : classes.redText
+                  }
+                >
+                  {variant.availability
+                    ? i18n.t("Available")
+                    : i18n.t("Unavailable")}
+                </TableCell>
+                <Hidden smDown>
+                  <TableCell className={classes.alignRightText}>
+                    {variant.price.grossLocalized}
+                  </TableCell>
+                  <TableCell className={classes.alignRightText}>
+                    {variant.grossMargin}
+                  </TableCell>
+                </Hidden>
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={2}>
+                {i18n.t("This product has no variants")}
+              </TableCell>
+            </TableRow>
+          )}
         </TableBody>
       </Table>
     </Card>

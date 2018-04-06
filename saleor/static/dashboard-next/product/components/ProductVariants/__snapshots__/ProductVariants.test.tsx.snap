@@ -1,0 +1,677 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProductVariants /> renders when loading data 1`] = `
+<div
+  className="MuiPaper-root-5 MuiPaper-elevation2-9 MuiPaper-rounded-6"
+>
+  <div
+    className="Component-root-35"
+  >
+    <h2
+      className="MuiTypography-root-38 MuiTypography-title-44 Component-title-37"
+    >
+      Variants
+    </h2>
+    <div
+      className="Component-action-32"
+    />
+  </div>
+  <table
+    className="MuiTable-root-62"
+  >
+    <thead
+      className="MuiTableHead-root-63"
+    >
+      <tr
+        className="MuiTableRow-root-64 MuiTableRow-head-65"
+      >
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-head-70"
+          scope="col"
+        >
+          SKU
+        </th>
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-head-70"
+          scope="col"
+        >
+          Name
+        </th>
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-head-70"
+          scope="col"
+        >
+          Status
+        </th>
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-head-70 Component-alignRightText-1"
+          scope="col"
+        >
+          Price
+        </th>
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-head-70 Component-alignRightText-1"
+          scope="col"
+        >
+          Gross margin
+        </th>
+      </tr>
+    </thead>
+    <tbody
+      className="MuiTableBody-root-77"
+    >
+      <tr
+        className="MuiTableRow-root-64"
+      >
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71"
+          scope={undefined}
+        >
+          <span
+            className="Component-skeleton-78"
+            style={undefined}
+          >
+            ‌
+          </span>
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71"
+          scope={undefined}
+        >
+          <span
+            className="Component-skeleton-78"
+            style={undefined}
+          >
+            ‌
+          </span>
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71"
+          scope={undefined}
+        >
+          <span
+            className="Component-skeleton-78"
+            style={undefined}
+          >
+            ‌
+          </span>
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
+          scope={undefined}
+        >
+          <span
+            className="Component-skeleton-78"
+            style={undefined}
+          >
+            ‌
+          </span>
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
+          scope={undefined}
+        >
+          <span
+            className="Component-skeleton-78"
+            style={undefined}
+          >
+            ‌
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`<ProductVariants /> renders when product has no variants 1`] = `
+<div
+  className="MuiPaper-root-5 MuiPaper-elevation2-9 MuiPaper-rounded-6"
+>
+  <div
+    className="Component-root-35"
+  >
+    <h2
+      className="MuiTypography-root-38 MuiTypography-title-44 Component-title-37"
+    >
+      Variants
+    </h2>
+    <div
+      className="Component-action-32"
+    />
+  </div>
+  <table
+    className="MuiTable-root-62"
+  >
+    <thead
+      className="MuiTableHead-root-63"
+    >
+      <tr
+        className="MuiTableRow-root-64 MuiTableRow-head-65"
+      >
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-head-70"
+          scope="col"
+        >
+          SKU
+        </th>
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-head-70"
+          scope="col"
+        >
+          Name
+        </th>
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-head-70"
+          scope="col"
+        >
+          Status
+        </th>
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-head-70 Component-alignRightText-1"
+          scope="col"
+        >
+          Price
+        </th>
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-head-70 Component-alignRightText-1"
+          scope="col"
+        >
+          Gross margin
+        </th>
+      </tr>
+    </thead>
+    <tbody
+      className="MuiTableBody-root-77"
+    >
+      <tr
+        className="MuiTableRow-root-64"
+      >
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71"
+          colSpan={2}
+          scope={undefined}
+        >
+          This product has no variants
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`<ProductVariants /> renders when product has variants 1`] = `
+<div
+  className="MuiPaper-root-5 MuiPaper-elevation2-9 MuiPaper-rounded-6"
+>
+  <div
+    className="Component-root-35"
+  >
+    <h2
+      className="MuiTypography-root-38 MuiTypography-title-44 Component-title-37"
+    >
+      Variants
+    </h2>
+    <div
+      className="Component-action-32"
+    />
+  </div>
+  <table
+    className="MuiTable-root-62"
+  >
+    <thead
+      className="MuiTableHead-root-63"
+    >
+      <tr
+        className="MuiTableRow-root-64 MuiTableRow-head-65"
+      >
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-head-70"
+          scope="col"
+        >
+          SKU
+        </th>
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-head-70"
+          scope="col"
+        >
+          Name
+        </th>
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-head-70"
+          scope="col"
+        >
+          Status
+        </th>
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-head-70 Component-alignRightText-1"
+          scope="col"
+        >
+          Price
+        </th>
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-head-70 Component-alignRightText-1"
+          scope="col"
+        >
+          Gross margin
+        </th>
+      </tr>
+    </thead>
+    <tbody
+      className="MuiTableBody-root-77"
+    >
+      <tr
+        className="MuiTableRow-root-64"
+      >
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71"
+          scope={undefined}
+        >
+          abc123
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71"
+          onClick={[Function]}
+          scope={undefined}
+        >
+          XS
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-greenText-2"
+          scope={undefined}
+        >
+          Available
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
+          scope={undefined}
+        >
+          10 $
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
+          scope={undefined}
+        >
+          5 %
+        </td>
+      </tr>
+      <tr
+        className="MuiTableRow-root-64"
+      >
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71"
+          scope={undefined}
+        >
+          abc124
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71"
+          onClick={[Function]}
+          scope={undefined}
+        >
+          S
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-greenText-2"
+          scope={undefined}
+        >
+          Available
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
+          scope={undefined}
+        >
+          10 $
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
+          scope={undefined}
+        >
+          5 %
+        </td>
+      </tr>
+      <tr
+        className="MuiTableRow-root-64"
+      >
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71"
+          scope={undefined}
+        >
+          abc125
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71"
+          onClick={[Function]}
+          scope={undefined}
+        >
+          M
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-redText-4"
+          scope={undefined}
+        >
+          Unavailable
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
+          scope={undefined}
+        >
+          11 $
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
+          scope={undefined}
+        >
+          6 %
+        </td>
+      </tr>
+      <tr
+        className="MuiTableRow-root-64"
+      >
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71"
+          scope={undefined}
+        >
+          abc126
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71"
+          onClick={[Function]}
+          scope={undefined}
+        >
+          L
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-greenText-2"
+          scope={undefined}
+        >
+          Available
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
+          scope={undefined}
+        >
+          12 $
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
+          scope={undefined}
+        >
+          6 %
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`<ProductVariants /> renders when product has variants and has clickable rows 1`] = `
+<div
+  className="MuiPaper-root-5 MuiPaper-elevation2-9 MuiPaper-rounded-6"
+>
+  <div
+    className="Component-root-35"
+  >
+    <h2
+      className="MuiTypography-root-38 MuiTypography-title-44 Component-title-37"
+    >
+      Variants
+    </h2>
+    <div
+      className="Component-action-32"
+    />
+  </div>
+  <table
+    className="MuiTable-root-62"
+  >
+    <thead
+      className="MuiTableHead-root-63"
+    >
+      <tr
+        className="MuiTableRow-root-64 MuiTableRow-head-65"
+      >
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-head-70"
+          scope="col"
+        >
+          SKU
+        </th>
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-head-70"
+          scope="col"
+        >
+          Name
+        </th>
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-head-70"
+          scope="col"
+        >
+          Status
+        </th>
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-head-70 Component-alignRightText-1"
+          scope="col"
+        >
+          Price
+        </th>
+        <th
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-head-70 Component-alignRightText-1"
+          scope="col"
+        >
+          Gross margin
+        </th>
+      </tr>
+    </thead>
+    <tbody
+      className="MuiTableBody-root-77"
+    >
+      <tr
+        className="MuiTableRow-root-64"
+      >
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71"
+          scope={undefined}
+        >
+          abc123
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-link-3"
+          onClick={undefined}
+          scope={undefined}
+        >
+          XS
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-greenText-2"
+          scope={undefined}
+        >
+          Available
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
+          scope={undefined}
+        >
+          10 $
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
+          scope={undefined}
+        >
+          5 %
+        </td>
+      </tr>
+      <tr
+        className="MuiTableRow-root-64"
+      >
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71"
+          scope={undefined}
+        >
+          abc124
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-link-3"
+          onClick={undefined}
+          scope={undefined}
+        >
+          S
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-greenText-2"
+          scope={undefined}
+        >
+          Available
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
+          scope={undefined}
+        >
+          10 $
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
+          scope={undefined}
+        >
+          5 %
+        </td>
+      </tr>
+      <tr
+        className="MuiTableRow-root-64"
+      >
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71"
+          scope={undefined}
+        >
+          abc125
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-link-3"
+          onClick={undefined}
+          scope={undefined}
+        >
+          M
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-redText-4"
+          scope={undefined}
+        >
+          Unavailable
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
+          scope={undefined}
+        >
+          11 $
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
+          scope={undefined}
+        >
+          6 %
+        </td>
+      </tr>
+      <tr
+        className="MuiTableRow-root-64"
+      >
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71"
+          scope={undefined}
+        >
+          abc126
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-link-3"
+          onClick={undefined}
+          scope={undefined}
+        >
+          L
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-greenText-2"
+          scope={undefined}
+        >
+          Available
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
+          scope={undefined}
+        >
+          12 $
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
+          scope={undefined}
+        >
+          6 %
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
