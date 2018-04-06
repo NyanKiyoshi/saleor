@@ -1,7 +1,6 @@
 import Card from "material-ui/Card";
 import * as React from "react";
 
-import AddIcon from "material-ui-icons/Add";
 import FilterListIcon from "material-ui-icons/FilterList";
 import Hidden from "material-ui/Hidden";
 import IconButton from "material-ui/IconButton";
@@ -20,7 +19,6 @@ interface ProductListCardProps {
   }>;
   hasPreviousPage?: boolean;
   hasNextPage?: boolean;
-  onCreate();
   onFilter();
   onNextPage?();
   onPreviousPage?();
@@ -33,7 +31,6 @@ export const ProductListCard: React.StatelessComponent<
   products,
   hasNextPage,
   hasPreviousPage,
-  onCreate,
   onFilter,
   onNextPage,
   onPreviousPage,
@@ -41,9 +38,6 @@ export const ProductListCard: React.StatelessComponent<
 }) => (
   <Card>
     <PageHeader title={i18n.t("Product list")}>
-      <IconButton onClick={onCreate}>
-        <AddIcon />
-      </IconButton>
       <Hidden mdUp>
         <IconButton onClick={onFilter}>
           <FilterListIcon />

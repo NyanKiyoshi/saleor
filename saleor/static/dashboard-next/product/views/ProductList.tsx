@@ -252,7 +252,6 @@ export const ProductList = decorate<ProductListProps>(
                       products={productList.map(p => p.node)}
                       onFilter={showFilters}
                       // TODO: Replace when API is ready
-                      onCreate={() => {}}
                       onNextPage={() => {}}
                       onPreviousPage={() => {}}
                       onRowClick={id => () => navigate(productShowUrl(id))}
