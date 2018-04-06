@@ -7,11 +7,12 @@ import { withStyles } from "material-ui/styles";
 import Typography from "material-ui/Typography";
 import * as React from "react";
 
+import { CircularProgress } from "material-ui/Progress";
 import PageHeader from "../../../components/PageHeader";
 import i18n from "../../../i18n";
 
 interface ProductImagesProps {
-  imageList: Array<{
+  imageList?: Array<{
     id: string;
     alt: string;
     url: string;
@@ -51,16 +52,26 @@ export const ProductImages = decorate<ProductImagesProps>(
       <PageHeader title={i18n.t("Images")} />
       <CardContent>
         <div className={classes.root}>
-          {imageList.map(tile => (
-            <GridListTile
-              key={tile.id}
-              className={classes.gridElement}
-              component="div"
-            >
-              <img src={tile.url} alt={tile.alt} />
-              <GridListTileBar title={tile.alt || i18n.t("No description")} />
-            </GridListTile>
-          ))}
+          {imageList === undefined || imageList === null ? (
+            <CircularProgress />
+          ) : imageList.length > 0 ? (
+            imageList
+              .sort((prev, next) => (prev.order < next.order ? 1 : -1))
+              .map(tile => (
+                <GridListTile
+                  key={tile.id}
+                  className={classes.gridElement}
+                  component="div"
+                >
+                  <img src={tile.url} alt={tile.alt} />
+                  <GridListTileBar
+                    title={tile.alt || i18n.t("No description")}
+                  />
+                </GridListTile>
+              ))
+          ) : (
+            <Typography>{i18n.t("No images available")}</Typography>
+          )}
         </div>
       </CardContent>
     </Card>
