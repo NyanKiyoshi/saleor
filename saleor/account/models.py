@@ -120,6 +120,38 @@ class User(PermissionsMixin, AbstractBaseUser):
             ('impersonate_user',
              pgettext_lazy('Permission description', 'Can impersonate users')))
 
+    def cannot_be_edited_by(self, request_user):
+        """This function checks if the current user has lower hierarchy
+        than the instance user.
+
+        ---
+
+        1. returns True if:
+          - the instance user is a super user;
+
+          - the instance user is a staff member and
+            the request user is not a super user.
+
+        2. Returns False if:
+          - the instance user is a simple user;
+          - both users are simple users;
+          - the instance user is a staff member
+            and the request user is a super user.
+
+        ---
+
+        Note: it doesn't check the current user permissions,
+              has it's not its job.
+              Its job is only to check if the current user has
+              a higher hierarchy than the target.
+        """
+        # true if the instance is a super user
+        result = self.is_superuser or (
+            # false if this request user is a super user
+            # or if instance is not a staff member
+            self.is_staff and not request_user.is_superuser)
+        return result
+
     def get_full_name(self):
         return self.email
 

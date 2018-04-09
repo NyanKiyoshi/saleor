@@ -58,7 +58,7 @@
           </div>
         </div>
         <div class="card-action">
-          {% if perms.account.edit_user %}
+          {% if can_edit_user and perms.account.edit_user %}
             <a href="{% url 'dashboard:customer-update' customer.pk %}" class="btn-flat waves-effect">
               {% trans "Edit customer" context "Customer action" %}
             </a>

@@ -1,4 +1,4 @@
-from django.contrib.auth.models import Permission
+from django.contrib.auth.models import Permission, User
 
 MODELS_PERMISSIONS = [
     'menu.view_menu',
@@ -32,8 +32,22 @@ MODELS_PERMISSIONS = [
     'voucher.edit_voucher',
 ]
 
+PERMISSION_CODENAMES = [
+    permission.split('.')[1] for permission in MODELS_PERMISSIONS]
 
-def get_permissions():
-    codenames = [permission.split('.')[1] for permission in MODELS_PERMISSIONS]
-    return Permission.objects.filter(codename__in=codenames)\
+
+def _permissions_from_queryset(queryset):
+    return queryset.filter(codename__in=PERMISSION_CODENAMES) \
         .prefetch_related('content_type')
+
+
+def get_all_permissions():
+    return _permissions_from_queryset(Permission.objects)
+
+
+def get_modifiable_permissions(user: User):
+    if not user.is_superuser:
+        available_permissions = user.user_permissions
+    else:
+        available_permissions = Permission.objects
+    return _permissions_from_queryset(available_permissions)

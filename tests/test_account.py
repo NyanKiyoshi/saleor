@@ -207,14 +207,40 @@ def test_user_ajax_label_without_address(admin_user):
     assert admin_user.ajax_label == admin_user.email
 
 
-def test_ajax_users_list(admin_client, admin_user, customer_user):
-    users_list = [
-        {'id': admin_user.pk, 'text': admin_user.ajax_label},
-        {'id': customer_user.pk, 'text': customer_user.ajax_label}]
-    url = reverse('dashboard:ajax-users-list')
+@pytest.mark.parametrize('user1_is_staff', [True, False])
+@pytest.mark.parametrize('user1_is_superuser', [True, False])
+@pytest.mark.parametrize('user2_is_staff', [True, False])
+@pytest.mark.parametrize('user2_is_superuser', [True, False])
+def test_cannot_be_edited_by(
+        customer_user, staff_user,
+        user1_is_staff, user1_is_superuser,
+        user2_is_staff, user2_is_superuser):
 
-    response = admin_client.get(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-    resp_decoded = json.loads(response.content.decode('utf-8'))
+    user1 = customer_user
+    user2 = staff_user
 
-    assert response.status_code == 200
-    assert resp_decoded == {'results': users_list}
+    # user1 should have a higher superuser weight
+    # as it must not be editable by user2 if user1 is superuser.
+    user1_superuser_weight = 4
+    user2_superuser_weight = 2
+
+    user1.is_staff = user1_is_staff
+    user1.is_superuser = user1_is_superuser
+    user1_perms_sum = user1.is_staff + (
+        user1.is_superuser * user1_superuser_weight)
+
+    user2.is_staff = user2_is_staff
+    user2.is_superuser = user2_is_superuser
+    user2_perms_sum = user2.is_staff + (
+        user2.is_superuser * user2_superuser_weight)
+
+    expected = (
+        # false if both users don't have any privileges
+        (user1_perms_sum + user2_perms_sum) and (
+
+            # true if user1 has higher privileges
+            user1_perms_sum >= user2_perms_sum
+        ))
+
+    result = user1.cannot_be_edited_by(user2)
+    assert result == expected

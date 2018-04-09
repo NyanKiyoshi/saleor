@@ -9,10 +9,50 @@ from django.utils.translation import pgettext_lazy
 
 from ...account.models import User
 from ...core.utils import get_paginator_items
-from ..emails import send_set_password_email
 from ..views import staff_member_required
 from .filters import UserFilter
 from .forms import CustomerForm
+
+
+def _handle_customer_form(request, customer, success_message):
+    form = CustomerForm(request.POST or None, instance=customer)
+    if form.is_valid():
+        form.save()
+        msg = success_message % customer
+        messages.success(request, msg)
+        return redirect('dashboard:customer-details', pk=customer.pk)
+    ctx = {'form': form, 'customer': customer}
+    return TemplateResponse(request, 'dashboard/customer/form.html', ctx)
+
+
+@staff_member_required
+@permission_required('account.edit_user')
+def customer_create(request):
+    success_msg = pgettext_lazy('Dashboard message', 'Added customer %s')
+    customer = User()
+    return _handle_customer_form(request, customer, success_msg)
+
+
+@staff_member_required
+@permission_required('account.edit_user')
+def customer_edit(request, pk=None):
+    success_msg = pgettext_lazy('Dashboard message', 'Updated customer %s')
+    customer = get_object_or_404(User, pk=pk)
+    return _handle_customer_form(request, customer, success_msg)
+
+
+@staff_member_required
+@permission_required('account.view_user')
+def customer_details(request, pk):
+    queryset = User.objects.prefetch_related(
+        'orders', 'addresses').select_related(
+            'default_billing_address', 'default_shipping_address')
+    customer = get_object_or_404(queryset, pk=pk)
+    customer_orders = customer.orders.all()
+    ctx = {
+        'customer': customer, 'customer_orders': customer_orders,
+        'can_edit_user': not customer.cannot_be_edited_by(request.user)}
+    return TemplateResponse(request, 'dashboard/customer/detail.html', ctx)
 
 
 @staff_member_required
@@ -34,49 +74,6 @@ def customer_list(request):
         'customers': customers, 'filter_set': customer_filter,
         'is_empty': not customer_filter.queryset.exists()}
     return TemplateResponse(request, 'dashboard/customer/list.html', ctx)
-
-
-@staff_member_required
-@permission_required('account.view_user')
-def customer_details(request, pk):
-    queryset = User.objects.prefetch_related(
-        'orders', 'addresses').select_related(
-            'default_billing_address', 'default_shipping_address')
-    customer = get_object_or_404(queryset, pk=pk)
-    customer_orders = customer.orders.all()
-    ctx = {'customer': customer, 'customer_orders': customer_orders}
-    return TemplateResponse(request, 'dashboard/customer/detail.html', ctx)
-
-
-@staff_member_required
-@permission_required('account.edit_user')
-def customer_create(request):
-    customer = User()
-    form = CustomerForm(request.POST or None, instance=customer)
-    if form.is_valid():
-        form.save()
-        msg = pgettext_lazy(
-            'Dashboard message', 'Added customer %s' % customer)
-        send_set_password_email(customer)
-        messages.success(request, msg)
-        return redirect('dashboard:customer-details', pk=customer.pk)
-    ctx = {'form': form, 'customer': customer}
-    return TemplateResponse(request, 'dashboard/customer/form.html', ctx)
-
-
-@staff_member_required
-@permission_required('account.edit_user')
-def customer_edit(request, pk=None):
-    customer = get_object_or_404(User, pk=pk)
-    form = CustomerForm(request.POST or None, instance=customer)
-    if form.is_valid():
-        form.save()
-        msg = pgettext_lazy(
-            'Dashboard message', 'Updated customer %s' % customer)
-        messages.success(request, msg)
-        return redirect('dashboard:customer-details', pk=customer.pk)
-    ctx = {'form': form, 'customer': customer}
-    return TemplateResponse(request, 'dashboard/customer/form.html', ctx)
 
 
 @staff_member_required

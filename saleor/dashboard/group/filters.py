@@ -4,7 +4,7 @@ from django_filters import (
     CharFilter, ModelMultipleChoiceFilter, OrderingFilter)
 
 from ...core.filters import SortedFilterSet
-from ...core.permissions import get_permissions
+from ...core.permissions import get_all_permissions
 
 SORT_BY_FIELDS = {
     'name': pgettext_lazy('Group list sorting option', 'name')}
@@ -17,7 +17,7 @@ class GroupFilter(SortedFilterSet):
     permissions = ModelMultipleChoiceFilter(
         label=pgettext_lazy('Group list filter label', 'Permissions'),
         name='permissions',
-        queryset=get_permissions())
+        queryset=get_all_permissions())
     sort_by = OrderingFilter(
         label=pgettext_lazy('Group list filter label', 'Sort by'),
         fields=SORT_BY_FIELDS.keys(),

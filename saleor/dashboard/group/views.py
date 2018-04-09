@@ -32,7 +32,8 @@ def group_list(request):
 @permission_required('account.edit_group')
 def group_create(request):
     group = Group()
-    form = GroupPermissionsForm(request.POST or None)
+    form = GroupPermissionsForm(
+        request.POST or None, current_user=request.user)
     if form.is_valid():
         form.save()
         msg = pgettext_lazy('Dashboard message', 'Created group')
@@ -46,7 +47,8 @@ def group_create(request):
 @permission_required('account.edit_group')
 def group_details(request, pk):
     group = Group.objects.get(pk=pk)
-    form = GroupPermissionsForm(request.POST or None, instance=group)
+    form = GroupPermissionsForm(
+        request.POST or None, instance=group, current_user=request.user)
     if form.is_valid():
         form.save()
         msg = pgettext_lazy(
