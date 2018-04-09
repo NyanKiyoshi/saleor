@@ -33,21 +33,32 @@ interface ProductVariantsProps {
   onRowClick?(id: string);
 }
 
-const decorate = withStyles(theme => ({
-  alignRightText: {
-    textAlign: "right"
-  },
-  greenText: {
-    color: green[500]
-  },
-  link: {
-    color: blue[500],
-    cursor: "pointer"
-  },
-  redText: {
-    color: red[500]
-  }
-}));
+const decorate = withStyles(theme => {
+  const dot = {
+    borderRadius: "100%",
+    display: "inline-block",
+    height: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: theme.spacing.unit
+  };
+  return {
+    alignRightText: {
+      textAlign: "right"
+    },
+    greenDot: {
+      ...dot,
+      backgroundColor: green[500]
+    },
+    link: {
+      color: blue[500],
+      cursor: "pointer"
+    },
+    redDot: {
+      ...dot,
+      backgroundColor: red[500]
+    }
+  };
+});
 export const ProductVariants = decorate<ProductVariantsProps>(
   ({ classes, variants, onRowClick }) => (
     <Card>
@@ -105,11 +116,12 @@ export const ProductVariants = decorate<ProductVariantsProps>(
                 >
                   {variant.name}
                 </TableCell>
-                <TableCell
-                  className={
-                    variant.availability ? classes.greenText : classes.redText
-                  }
-                >
+                <TableCell>
+                  <span
+                    className={
+                      variant.availability ? classes.greenDot : classes.redDot
+                    }
+                  />
                   {variant.availability
                     ? i18n.t("Available")
                     : i18n.t("Unavailable")}

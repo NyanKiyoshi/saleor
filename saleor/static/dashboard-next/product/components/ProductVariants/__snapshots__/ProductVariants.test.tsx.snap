@@ -301,9 +301,12 @@ exports[`<ProductVariants /> renders when product has variants 1`] = `
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-greenText-2"
+          className="MuiTableCell-root-69 MuiTableCell-body-71"
           scope={undefined}
         >
+          <span
+            className="Component-greenDot-2"
+          />
           Available
         </td>
         <td
@@ -341,9 +344,12 @@ exports[`<ProductVariants /> renders when product has variants 1`] = `
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-greenText-2"
+          className="MuiTableCell-root-69 MuiTableCell-body-71"
           scope={undefined}
         >
+          <span
+            className="Component-greenDot-2"
+          />
           Available
         </td>
         <td
@@ -381,9 +387,12 @@ exports[`<ProductVariants /> renders when product has variants 1`] = `
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-redText-4"
+          className="MuiTableCell-root-69 MuiTableCell-body-71"
           scope={undefined}
         >
+          <span
+            className="Component-redDot-4"
+          />
           Unavailable
         </td>
         <td
@@ -421,9 +430,12 @@ exports[`<ProductVariants /> renders when product has variants 1`] = `
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-greenText-2"
+          className="MuiTableCell-root-69 MuiTableCell-body-71"
           scope={undefined}
         >
+          <span
+            className="Component-greenDot-2"
+          />
           Available
         </td>
         <td
@@ -531,9 +543,12 @@ exports[`<ProductVariants /> renders when product has variants and has clickable
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-greenText-2"
+          className="MuiTableCell-root-69 MuiTableCell-body-71"
           scope={undefined}
         >
+          <span
+            className="Component-greenDot-2"
+          />
           Available
         </td>
         <td
@@ -571,9 +586,12 @@ exports[`<ProductVariants /> renders when product has variants and has clickable
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-greenText-2"
+          className="MuiTableCell-root-69 MuiTableCell-body-71"
           scope={undefined}
         >
+          <span
+            className="Component-greenDot-2"
+          />
           Available
         </td>
         <td
@@ -611,9 +629,12 @@ exports[`<ProductVariants /> renders when product has variants and has clickable
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-redText-4"
+          className="MuiTableCell-root-69 MuiTableCell-body-71"
           scope={undefined}
         >
+          <span
+            className="Component-redDot-4"
+          />
           Unavailable
         </td>
         <td
@@ -651,9 +672,12 @@ exports[`<ProductVariants /> renders when product has variants and has clickable
         </td>
         <td
           aria-sort={null}
-          className="MuiTableCell-root-69 MuiTableCell-body-71 Component-greenText-2"
+          className="MuiTableCell-root-69 MuiTableCell-body-71"
           scope={undefined}
         >
+          <span
+            className="Component-greenDot-2"
+          />
           Available
         </td>
         <td

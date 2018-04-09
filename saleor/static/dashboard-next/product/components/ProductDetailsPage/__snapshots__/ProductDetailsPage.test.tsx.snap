@@ -1078,9 +1078,12 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root-111 MuiTableCell-body-113 Component-greenText-122"
+            className="MuiTableCell-root-111 MuiTableCell-body-113"
             scope={undefined}
           >
+            <span
+              className="Component-greenDot-122"
+            />
             Available
           </td>
           <td
@@ -1118,9 +1121,12 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root-111 MuiTableCell-body-113 Component-greenText-122"
+            className="MuiTableCell-root-111 MuiTableCell-body-113"
             scope={undefined}
           >
+            <span
+              className="Component-greenDot-122"
+            />
             Available
           </td>
           <td
@@ -1158,9 +1164,12 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root-111 MuiTableCell-body-113 Component-redText-124"
+            className="MuiTableCell-root-111 MuiTableCell-body-113"
             scope={undefined}
           >
+            <span
+              className="Component-redDot-124"
+            />
             Unavailable
           </td>
           <td
@@ -1198,9 +1207,12 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
           </td>
           <td
             aria-sort={null}
-            className="MuiTableCell-root-111 MuiTableCell-body-113 Component-greenText-122"
+            className="MuiTableCell-root-111 MuiTableCell-body-113"
             scope={undefined}
           >
+            <span
+              className="Component-greenDot-122"
+            />
             Available
           </td>
           <td
