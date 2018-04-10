@@ -32,6 +32,7 @@ function loadStories() {
   require("./stories/products/ProductPriceAndAvailability");
   require("./stories/products/ProductVariants");
   require("./stories/products/ProductDetailsPage");
+  require("./stories/products/ProductUpdatePage");
 }
 
 configure(loadStories, module);

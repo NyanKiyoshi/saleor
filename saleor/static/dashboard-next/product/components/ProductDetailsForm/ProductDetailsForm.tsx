@@ -16,13 +16,13 @@ interface ProductDetailsFormProps {
   name?: string;
   price?: string;
   onBack();
-  onChange();
+  onChange(event: any);
 }
 
 const decorate = withStyles(theme => ({
   root: {
     display: "grid",
-    gridTemplateColumns: `1fr ${theme.spacing.unit}px 5rem`
+    gridTemplateColumns: `1fr ${theme.spacing.unit}px 6rem`
   }
 }));
 
@@ -41,9 +41,16 @@ export const ProductDetailsForm = decorate<ProductDetailsFormProps>(
       <PageHeader title={i18n.t("Edit product")} onBack={onBack} />
       <CardContent>
         <div className={classes.root}>
-          <TextField disabled={loading} value={name} fullWidth />
+          <TextField
+            disabled={loading}
+            value={name}
+            fullWidth
+            label={i18n.t("Name")}
+            name="name"
+          />
           <span />
           <PriceField
+            label={i18n.t("Price")}
             disabled={loading}
             value={price}
             onChange={onChange}
@@ -52,6 +59,7 @@ export const ProductDetailsForm = decorate<ProductDetailsFormProps>(
         </div>
         <FormSpacer />
         <RichTextEditor
+          label={i18n.t("Description")}
           fullWidth
           disabled={loading}
           value={description}
