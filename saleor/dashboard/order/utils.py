@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import get_template
 from prices import Money
+from weasyprint import HTML
 
 from ...discount import VoucherType
 from ...discount.models import NotApplicable
@@ -24,24 +25,25 @@ def get_statics_absolute_url(request):
     return absolute_url
 
 
-def _create_pdf(rendered_template, absolute_url):
-    from weasyprint import HTML
+def _create_pdf(rendered_template, **kwargs):
+    absolute_url = kwargs.setdefault(
+        'absolute_url', settings.WEBPACK_BASE_ABSOLUTE_DIR)
     pdf_file = (HTML(string=rendered_template, base_url=absolute_url)
                 .write_pdf())
     return pdf_file
 
 
-def create_invoice_pdf(order, absolute_url):
+def create_invoice_pdf(order, **kwargs):
     ctx = {'order': order}
     rendered_template = get_template(INVOICE_TEMPLATE).render(ctx)
-    pdf_file = _create_pdf(rendered_template, absolute_url)
+    pdf_file = _create_pdf(rendered_template, **kwargs)
     return pdf_file, order
 
 
-def create_packing_slip_pdf(order, fulfillment, absolute_url):
+def create_packing_slip_pdf(order, fulfillment, **kwargs):
     ctx = {'order': order, 'fulfillment': fulfillment}
     rendered_template = get_template(PACKING_SLIP_TEMPLATE).render(ctx)
-    pdf_file = _create_pdf(rendered_template, absolute_url)
+    pdf_file = _create_pdf(rendered_template, **kwargs)
     return pdf_file, order
 
 

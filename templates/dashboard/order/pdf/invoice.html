@@ -1,17 +1,17 @@
-{% load i18n static %}
+{% load i18n %}
 {% load prices_i18n %}
 {% load discount_as_negative from voucher %}
-{% load render_bundle from webpack_loader %}
+{% load render_bundle_as_real_path from webpack_storage_utils %}
 
 <html>
 <head>
   <title>{% trans "Invoice for Order" context "Invoice title" %} #{{ order.id }}</title>
-  {% render_bundle 'document' 'css' %}
+  {% render_bundle_as_real_path 'document' 'css' %}
 </head>
 <body>
 <header>
   <div style="float:left">
-    <img src="{% static '/images/logo-document.svg' %}">
+    <img src="images/logo-document.svg">
   </div>
   <div
       style="float:right">{{ order.created }}<br>{% trans 'Order' context 'Invoice header' %} #{{ order.id }}

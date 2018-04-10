@@ -105,11 +105,12 @@ MEDIA_URL = '/media/'
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 STATIC_URL = '/static/'
+WEBPACK_BASE_ABSOLUTE_DIR = os.path.join(PROJECT_ROOT, 'saleor', 'static')
 STATICFILES_DIRS = [
-    ('assets', os.path.join(PROJECT_ROOT, 'saleor', 'static', 'assets')),
-    ('favicons', os.path.join(PROJECT_ROOT, 'saleor', 'static', 'favicons')),
-    ('images', os.path.join(PROJECT_ROOT, 'saleor', 'static', 'images')),
-    ('dashboard', os.path.join(PROJECT_ROOT, 'saleor', 'static', 'dashboard'))]
+    ('assets', os.path.join(WEBPACK_BASE_ABSOLUTE_DIR, 'assets')),
+    ('favicons', os.path.join(WEBPACK_BASE_ABSOLUTE_DIR, 'favicons')),
+    ('images', os.path.join(WEBPACK_BASE_ABSOLUTE_DIR, 'images')),
+    ('dashboard', os.path.join(WEBPACK_BASE_ABSOLUTE_DIR, 'dashboard'))]
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder']

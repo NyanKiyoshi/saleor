@@ -1,3 +1,4 @@
+import os.path
 from unittest.mock import patch
 
 import pytest
@@ -10,8 +11,8 @@ from tests.utils import get_form_errors, get_redirect_location
 from saleor.core.utils import ZERO_TAXED_MONEY
 from saleor.dashboard.order.forms import ChangeQuantityForm, OrderNoteForm
 from saleor.dashboard.order.utils import (
-    fulfill_order_line, remove_customer_from_order, save_address_in_order,
-    update_order_with_user_addresses)
+    _create_pdf, fulfill_order_line, remove_customer_from_order,
+    save_address_in_order, update_order_with_user_addresses)
 from saleor.discount.utils import increase_voucher_usage
 from saleor.order import OrderStatus
 from saleor.order.models import Order, OrderLine, OrderNote
@@ -1140,3 +1141,20 @@ def test_view_mark_order_as_paid(admin_client, order_with_lines):
     assert order_with_lines.is_fully_paid()
     assert order_with_lines.history.filter(
         content='Order manually marked as paid').exists()
+
+
+@patch('weasyprint.logger.LOGGER')
+def test__create_pdf_unauthorized_path(patched_logger):
+    bad_url = os.path.join(settings.PROJECT_ROOT, 'saleor', 'settings.py')
+    bad_url = os.path.relpath(bad_url, settings.WEBPACK_BASE_ABSOLUTE_DIR)
+    bad_template = (
+        '<link type="text/css" href="{}" rel="stylesheet" />'
+    ).format(bad_url)
+    expected_error = 'ERROR: Failed to load stylesheet at '
+
+    assert patched_logger.call_count == 0
+    _create_pdf(bad_template)
+    assert patched_logger.call_count == 1
+    args, kwargs = patched_logger.call_args
+    assert args
+    assert args[0].startswith(expected_error)
