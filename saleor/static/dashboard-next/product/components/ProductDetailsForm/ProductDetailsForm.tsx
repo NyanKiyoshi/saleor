@@ -47,6 +47,7 @@ export const ProductDetailsForm = decorate<ProductDetailsFormProps>(
             fullWidth
             label={i18n.t("Name")}
             name="name"
+            onChange={onChange}
           />
           <span />
           <PriceField
