@@ -18,6 +18,9 @@ const product = {
     title: "Buy our awesome book now!",
     description: "Order our awesome book right now!"
   },
+  category: {
+    id: "123123"
+  },
   slug: "our-awesome-book-1231u",
   attributes: [
     {
@@ -33,6 +36,7 @@ const product = {
       value: "blue"
     }
   ],
+  collections: { edges: [{ node: { id: "1", name: "Winter collection" } }] },
   productType: {
     name: "Book",
     productAttributes: {

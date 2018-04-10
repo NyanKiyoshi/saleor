@@ -2,6 +2,7 @@ import Card, { CardContent } from "material-ui/Card";
 import { withStyles } from "material-ui/styles";
 import * as React from "react";
 
+import FormSpacer from "../../../components/FormSpacer";
 import PageHeader from "../../../components/PageHeader";
 import SingleSelectField from "../../../components/SingleSelectField";
 import Skeleton from "../../../components/Skeleton";
@@ -21,7 +22,7 @@ export const ProductAttributesForm = decorate<ProductAttributesFormProps>(
     if (loading) {
       return (
         <Card>
-          <PageHeader />
+          <PageHeader title={i18n.t("Attributes")} />
           <CardContent>
             <Skeleton />
           </CardContent>
@@ -41,21 +42,24 @@ export const ProductAttributesForm = decorate<ProductAttributesFormProps>(
         <PageHeader title={i18n.t("Attributes")} />
         <CardContent>
           {attributes.map((attribute, index) => (
-            <SingleSelectField
-              name={}
-              label={attribute.name}
-              onChange={onChange}
-              value={
-                keyedAttributes[attribute.slug].values.filter(
-                  attr => attr.slug === keyedProductAttributes[attribute.slug]
-                )[0]
-              }
-              choices={attribute.values.map(choice => ({
-                label: choice.name,
-                value: choice.slug
-              }))}
-              key={index}
-            />
+            <>
+              <SingleSelectField
+                name={attribute.slug}
+                label={attribute.name}
+                onChange={onChange}
+                value={
+                  keyedAttributes[attribute.slug].values.filter(
+                    attr => attr.slug === keyedProductAttributes[attribute.slug]
+                  )[0].slug
+                }
+                choices={attribute.values.map(choice => ({
+                  label: choice.name,
+                  value: choice.slug
+                }))}
+                key={index}
+              />
+              <FormSpacer />
+            </>
           ))}
         </CardContent>
       </Card>

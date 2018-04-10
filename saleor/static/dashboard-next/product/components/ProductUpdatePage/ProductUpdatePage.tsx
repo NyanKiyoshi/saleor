@@ -2,6 +2,7 @@ import { withStyles } from "material-ui/styles";
 import * as React from "react";
 
 import Form from "../../../components/Form";
+import SaveButtonBar from "../../../components/SaveButtonBar/SaveButtonBar";
 import SeoForm from "../../../components/SeoForm";
 import ProductAttributesForm from "../ProductAttributesForm";
 import ProductAvailabilityForm from "../ProductAvailabilityForm";
@@ -34,7 +35,8 @@ const decorate = withStyles(theme => ({
     marginTop: theme.spacing.unit * 2,
     [theme.breakpoints.down("sm")]: {
       marginTop: theme.spacing.unit,
-      gridGap: theme.spacing.unit + "px"
+      gridGap: theme.spacing.unit + "px",
+      gridTemplateColumns: "1fr"
     }
   },
   cardContainer: {
@@ -53,77 +55,109 @@ export const ProductUpdate = decorate<ProductUpdateProps>(
     product,
     onBack,
     onSubmit
-  }) => (
-    <div className={classes.root}>
-      <Form onSubmit={onSubmit}>
-        {({ change, data, submit }) => (
-          <>
-            <ProductDetailsForm
-              onBack={onBack}
-              onChange={change}
-              name={loading ? "" : product.name}
-              description={loading ? "" : product.description}
-              currencySymbol={loading ? "" : product.price.currencySymbol}
-              price={loading ? "" : product.price.net}
-              loading={loading}
-            />
-            <div className={classes.grid}>
-              <div>
-                <ProductAvailabilityForm
-                  available={loading ? "" : product.available}
-                  availableOn={loading ? "" : product.availableOn}
-                  onChange={change}
-                />
-                <div className={classes.cardContainer}>
-                  <SeoForm
-                    title={loading ? "" : product.seo.title}
-                    description={loading ? "" : product.seo.description}
-                    storefrontUrl={
-                      loading
-                        ? ""
-                        : `http://demo.getsaleor.com/product/${product.slug}`
-                    }
-                    loading={loading}
-                    onClick={() => {}}
-                    onChange={change}
-                  />
-                </div>
-              </div>
-              <div>
-                <ProductCategoryAndCollectionsForm
-                  category={loading ? "" : product.category}
-                  categories={categories.map(category => ({
-                    label: category.name,
-                    value: category.id
-                  }))}
-                  productCollections={product.collection}
-                  collections={collections.map(collection => ({
-                    label: collection.name,
-                    value: collection.id
-                  }))}
-                  loading={loading}
-                  onChange={change}
-                />
-                <div className={classes.cardContainer}>
-                  <ProductAttributesForm
-                    attributes={
-                      loading
-                        ? []
-                        : product.productType.productAttributes.edges.map(
-                            edge => edge.node
-                          )
-                    }
-                    productAttributes={loading ? [] : product.attributes}
+  }) => {
+    const initialData = {
+      attributes: loading ? [] : product.attributes,
+      available: loading ? "" : product.available,
+      availableOn: loading ? "" : product.availableOn,
+      category: loading ? "" : product.category.id,
+      collections: loading
+        ? []
+        : product.collections.edges.map(edge => edge.node).map(node => node.id),
+      description: loading ? "" : product.description,
+      name: loading ? "" : product.name,
+      price: loading ? "" : product.price.net,
+      seoDescription: loading ? "" : product.seo.description,
+      seoTitle: loading ? "" : product.seo.title
+    };
+    return (
+      <div className={classes.root}>
+        <Form onSubmit={onSubmit} initial={initialData}>
+          {({ change, data, submit }) => (
+            <>
+              <ProductDetailsForm
+                onBack={onBack}
+                onChange={change}
+                name={data.name}
+                description={data.description}
+                currencySymbol={loading ? "" : product.price.currencySymbol}
+                price={data.price}
+                loading={loading}
+              />
+              <div className={classes.grid}>
+                <div>
+                  <ProductAvailabilityForm
+                    available={data.available}
+                    availableOn={data.availableOn}
                     loading={loading}
                     onChange={change}
                   />
+                  <div className={classes.cardContainer}>
+                    <SeoForm
+                      title={data.seoTitle}
+                      titlePlaceholder={data.name}
+                      description={data.seoDescription}
+                      descriptionPlaceholder={data.description}
+                      storefrontUrl={
+                        loading
+                          ? ""
+                          : `http://demo.getsaleor.com/product/${product.slug}`
+                      }
+                      loading={loading}
+                      onClick={() => {}}
+                      onChange={change}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <ProductCategoryAndCollectionsForm
+                    category={data.category}
+                    categories={
+                      categories !== undefined && categories !== null
+                        ? categories.map(category => ({
+                            label: category.name,
+                            value: category.id
+                          }))
+                        : []
+                    }
+                    productCollections={data.collections}
+                    collections={
+                      collections !== undefined && collections !== null
+                        ? collections.map(collection => ({
+                            label: collection.name,
+                            value: collection.id
+                          }))
+                        : []
+                    }
+                    loading={loading}
+                    onChange={change}
+                  />
+                  <div className={classes.cardContainer}>
+                    <ProductAttributesForm
+                      attributes={
+                        loading
+                          ? []
+                          : product.productType.productAttributes.edges.map(
+                              edge => edge.node
+                            )
+                      }
+                      productAttributes={data.attributes}
+                      loading={loading}
+                      onChange={change}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          </>
-        )}
-      </Form>
-    </div>
-  )
+              <SaveButtonBar
+                onSave={submit}
+                onBack={onBack}
+                disabled={loading}
+              />
+            </>
+          )}
+        </Form>
+      </div>
+    );
+  }
 );
 export default ProductUpdate;

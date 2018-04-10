@@ -6,8 +6,10 @@ import FormSpacer from "../../../components/FormSpacer";
 import MultiSelectField from "../../../components/MultiSelectField";
 import SingleSelectField from "../../../components/SingleSelectField";
 import i18n from "../../../i18n";
+import PageHeader from "../../../components/PageHeader";
 
 interface ProductCategoryAndCollectionsFormProps {
+  // TODO: TYPE IT
   categories: any[];
   collections: any[];
   productCollections: any[];
@@ -30,6 +32,7 @@ const ProductCategoryAndCollectionsForm = decorate<
     onChange
   }) => (
     <Card>
+      <PageHeader title={i18n.t("Belongs to")} />
       <CardContent>
         <SingleSelectField
           disabled={loading}
