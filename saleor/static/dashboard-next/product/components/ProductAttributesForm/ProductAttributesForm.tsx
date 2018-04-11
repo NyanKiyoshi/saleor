@@ -59,7 +59,7 @@ export const ProductAttributesForm = decorate<ProductAttributesFormProps>(
                 key={index}
               />
               <FormSpacer />
-            </>
+            </React.Fragment>
           ))}
         </CardContent>
       </Card>

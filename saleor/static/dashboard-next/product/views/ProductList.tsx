@@ -4,213 +4,18 @@ import Hidden from "material-ui/Hidden";
 import { withStyles } from "material-ui/styles";
 import { stringify as stringifyQs } from "qs";
 import * as React from "react";
-// import {Query} from 'react-apollo'
 
 import { productShowUrl } from "..";
 import { ProductFilters } from "../../category/components/ProductFilters";
+import ErrorMessageCard from "../../components/ErrorMessageCard";
 import Navigator from "../../components/Navigator";
 import Toggle from "../../components/Toggle";
 import ProductListCard from "../components/ProductListCard";
+import { productListQuery, TypedProductListQuery } from "../queries";
 
 interface ProductListProps {
   filters: any;
 }
-
-// TODO: Replace when API is ready
-const productList = [
-  {
-    cursor: "YXJyYXljb25uZWN0aW9uOjA=",
-    node: {
-      id: "UHJvZHVjdDozNQ==",
-      name: "Arroyo and Sons",
-      thumbnailUrl:
-        "/media/__sized__/products/saleor/static/placeholders/candy/2_QQHBQc7-crop-c0-5__0-5-255x255-70.jpg",
-      productType: {
-        id: "4",
-        name: "Candy",
-        __typename: "ProductType"
-      },
-      __typename: "Product"
-    },
-    __typename: "ProductCountableEdge"
-  },
-  {
-    cursor: "YXJyYXljb25uZWN0aW9uOjE=",
-    node: {
-      id: "UHJvZHVjdDoyMw==",
-      name: "Diaz, Adams and Shelton",
-      thumbnailUrl:
-        "/media/__sized__/products/saleor/static/placeholders/coffee/coffee-04_Prs72Dk-crop-c0-5__0-5-255x255-70.jpg",
-      productType: {
-        id: "3",
-        name: "Coffee",
-        __typename: "ProductType"
-      },
-      __typename: "Product"
-    },
-    __typename: "ProductCountableEdge"
-  },
-  {
-    cursor: "YXJyYXljb25uZWN0aW9uOjI=",
-    node: {
-      id: "UHJvZHVjdDozNA==",
-      name: "Davis Group",
-      thumbnailUrl:
-        "/media/__sized__/products/saleor/static/placeholders/candy/2_dizYqCn-crop-c0-5__0-5-255x255-70.jpg",
-      productType: {
-        id: "4",
-        name: "Candy",
-        __typename: "ProductType"
-      },
-      __typename: "Product"
-    },
-    __typename: "ProductCountableEdge"
-  },
-  {
-    cursor: "YXJyYXljb25uZWN0aW9uOjM=",
-    node: {
-      id: "UHJvZHVjdDozNg==",
-      name: "Ritter-Weber",
-      thumbnailUrl:
-        "/media/__sized__/products/saleor/static/placeholders/candy/1_9lezPG8-crop-c0-5__0-5-255x255-70.jpg",
-      productType: {
-        id: "4",
-        name: "Candy",
-        __typename: "ProductType"
-      },
-      __typename: "Product"
-    },
-    __typename: "ProductCountableEdge"
-  },
-  {
-    cursor: "YXJyYXljb25uZWN0aW9uOjQ=",
-    node: {
-      id: "UHJvZHVjdDozOQ==",
-      name: "Obrien, Ellis and Marks",
-      thumbnailUrl:
-        "/media/__sized__/products/saleor/static/placeholders/candy/2_YsqWwfJ-crop-c0-5__0-5-255x255-70.jpg",
-      productType: {
-        id: "4",
-        name: "Candy",
-        __typename: "ProductType"
-      },
-      __typename: "Product"
-    },
-    __typename: "ProductCountableEdge"
-  },
-  {
-    cursor: "YXJyYXljb25uZWN0aW9uOjU=",
-    node: {
-      id: "UHJvZHVjdDozNw==",
-      name: "Gonzalez-Gonzalez",
-      thumbnailUrl:
-        "/media/__sized__/products/saleor/static/placeholders/candy/2_HdpF68z-crop-c0-5__0-5-255x255-70.jpg",
-      productType: {
-        id: "4",
-        name: "Candy",
-        __typename: "ProductType"
-      },
-      __typename: "Product"
-    },
-    __typename: "ProductCountableEdge"
-  },
-  {
-    cursor: "YXJyYXljb25uZWN0aW9uOjY=",
-    node: {
-      id: "UHJvZHVjdDozOA==",
-      name: "Morgan Group",
-      thumbnailUrl:
-        "/media/__sized__/products/saleor/static/placeholders/candy/2_DM9os0n-crop-c0-5__0-5-255x255-70.jpg",
-      productType: {
-        id: "4",
-        name: "Candy",
-        __typename: "ProductType"
-      },
-      __typename: "Product"
-    },
-    __typename: "ProductCountableEdge"
-  },
-  {
-    cursor: "YXJyYXljb25uZWN0aW9uOjc=",
-    node: {
-      id: "UHJvZHVjdDoyOQ==",
-      name: "Jones Inc",
-      thumbnailUrl:
-        "/media/__sized__/products/saleor/static/placeholders/coffee/8_dJqg8nJ-crop-c0-5__0-5-255x255-70.jpg",
-      productType: {
-        id: "3",
-        name: "Coffee",
-        __typename: "ProductType"
-      },
-      __typename: "Product"
-    },
-    __typename: "ProductCountableEdge"
-  },
-  {
-    cursor: "YXJyYXljb25uZWN0aW9uOjg=",
-    node: {
-      id: "UHJvZHVjdDoyNA==",
-      name: "Rubio, Murphy and Woodard",
-      thumbnailUrl:
-        "/media/__sized__/products/saleor/static/placeholders/coffee/8_PlCFs9g-crop-c0-5__0-5-255x255-70.jpg",
-      productType: {
-        id: "3",
-        name: "Coffee",
-        __typename: "ProductType"
-      },
-      __typename: "Product"
-    },
-    __typename: "ProductCountableEdge"
-  },
-  {
-    cursor: "YXJyYXljb25uZWN0aW9uOjk=",
-    node: {
-      id: "UHJvZHVjdDo0MA==",
-      name: "Hickman-Garcia",
-      thumbnailUrl:
-        "/media/__sized__/products/saleor/static/placeholders/candy/1_2NZ5JGK-crop-c0-5__0-5-255x255-70.jpg",
-      productType: {
-        id: "4",
-        name: "Candy",
-        __typename: "ProductType"
-      },
-      __typename: "Product"
-    },
-    __typename: "ProductCountableEdge"
-  },
-  {
-    cursor: "YXJyYXljb25uZWN0aW9uOjEw",
-    node: {
-      id: "UHJvZHVjdDozMQ==",
-      name: "Ochoa PLC",
-      thumbnailUrl:
-        "/media/__sized__/products/saleor/static/placeholders/candy/1_9Fe7vhq-crop-c0-5__0-5-255x255-70.jpg",
-      productType: {
-        id: "4",
-        name: "Candy",
-        __typename: "ProductType"
-      },
-      __typename: "Product"
-    },
-    __typename: "ProductCountableEdge"
-  },
-  {
-    cursor: "YXJyYXljb25uZWN0aW9uOjEx",
-    node: {
-      id: "UHJvZHVjdDoyMQ==",
-      name: "Hall-Harris",
-      thumbnailUrl:
-        "/media/__sized__/products/saleor/static/placeholders/coffee/coffee-03_RYXhsDS-crop-c0-5__0-5-255x255-70.jpg",
-      productType: {
-        id: "3",
-        name: "Coffee",
-        __typename: "ProductType"
-      },
-      __typename: "Product"
-    },
-    __typename: "ProductCountableEdge"
-  }
-];
 
 // TODO: Replace when API is ready
 const dummyProductTypes = [
@@ -227,6 +32,7 @@ const decorate = withStyles(theme => ({
     gridTemplateColumns: "100%",
     [theme.breakpoints.up("md")]: {
       gridGap: theme.spacing.unit * 2 + "px",
+      // TODO: Check on firefox
       gridTemplateColumns: "3fr 1fr"
     }
   }
@@ -246,42 +52,123 @@ export const ProductList = decorate<ProductListProps>(
                 filtersVisible,
                 { disable: hideFilters, enable: showFilters }
               ) => (
-                <>
-                  <div>
-                    <ProductListCard
-                      products={productList.map(p => p.node)}
-                      onFilter={showFilters}
-                      // TODO: Replace when API is ready
-                      onNextPage={() => {}}
-                      onPreviousPage={() => {}}
-                      onRowClick={id => () => navigate(productShowUrl(id))}
-                    />
-                  </div>
-                  <div>
-                    <Hidden smDown implementation="css">
-                      <ProductFilters
-                        handleSubmit={applyFilters}
-                        handleClear={clearFilters}
-                        productTypes={dummyProductTypes}
-                        formState={filters}
-                      />
-                    </Hidden>
-                    <Hidden mdUp implementation="css">
-                      <Drawer
-                        open={filtersVisible}
-                        onClose={hideFilters}
-                        anchor="bottom"
-                      >
-                        <ProductFilters
-                          handleSubmit={applyFilters}
-                          handleClear={clearFilters}
-                          productTypes={dummyProductTypes}
-                          formState={filters}
-                        />
-                      </Drawer>
-                    </Hidden>
-                  </div>
-                </>
+                <TypedProductListQuery
+                  query={productListQuery}
+                  variables={{ first: 12 }}
+                  fetchPolicy="network-only"
+                >
+                  {({ data, loading, error, fetchMore }) => {
+                    if (error) {
+                      return (
+                        <ErrorMessageCard message="Something went wrong" />
+                      );
+                    }
+                    const loadNextPage = () => {
+                      if (loading) {
+                        return;
+                      }
+                      return fetchMore({
+                        updateQuery: (previousResult, { fetchMoreResult }) => {
+                          return {
+                            ...fetchMoreResult,
+                            products: {
+                              ...fetchMoreResult.products,
+                              pageInfo: {
+                                ...fetchMoreResult.products.pageInfo,
+                                hasPreviousPage: true
+                              }
+                            }
+                          };
+                        },
+                        variables: {
+                          after: data.products.pageInfo.endCursor,
+                          first: 12
+                        }
+                      });
+                    };
+                    const loadPreviousPage = () => {
+                      if (loading) {
+                        return;
+                      }
+                      return fetchMore({
+                        updateQuery: (
+                          previousResult,
+                          { fetchMoreResult, variables }
+                        ) => {
+                          return {
+                            ...fetchMoreResult,
+                            products: {
+                              ...fetchMoreResult.products,
+                              pageInfo: {
+                                ...fetchMoreResult.products.pageInfo,
+                                hasNextPage: true
+                              }
+                            }
+                          };
+                        },
+                        variables: {
+                          before: data.products.pageInfo.startCursor,
+                          first: undefined,
+                          last: 12
+                        }
+                      });
+                    };
+                    return (
+                      <>
+                        <div>
+                          <ProductListCard
+                            products={
+                              data &&
+                              data.products !== undefined &&
+                              data.products !== null
+                                ? data.products.edges.map(p => p.node)
+                                : undefined
+                            }
+                            onFilter={showFilters}
+                            onNextPage={loadNextPage}
+                            onPreviousPage={loadPreviousPage}
+                            hasPreviousPage={
+                              data && data.products && !loading
+                                ? data.products.pageInfo.hasPreviousPage
+                                : false
+                            }
+                            hasNextPage={
+                              data && data.products && !loading
+                                ? data.products.pageInfo.hasNextPage
+                                : false
+                            }
+                            onRowClick={id => () =>
+                              navigate(productShowUrl(id))}
+                          />
+                        </div>
+                        <div>
+                          <Hidden smDown>
+                            <ProductFilters
+                              handleSubmit={applyFilters}
+                              handleClear={clearFilters}
+                              productTypes={dummyProductTypes}
+                              formState={filters}
+                            />
+                          </Hidden>
+                          <Hidden mdUp>
+                            <Drawer
+                              open={filtersVisible}
+                              onClose={hideFilters}
+                              anchor="bottom"
+                            >
+                              <ProductFilters
+                                handleSubmit={applyFilters}
+                                handleClear={clearFilters}
+                                productTypes={dummyProductTypes}
+                                formState={filters}
+                              />
+                            </Drawer>
+                          </Hidden>
+                        </div>
+                      </>
+                    );
+                  }}
+                </TypedProductListQuery>
               )}
             </Toggle>
           );
