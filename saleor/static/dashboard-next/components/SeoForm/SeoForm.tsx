@@ -59,7 +59,7 @@ const SeoForm = decorate<SeoFormProps>(
     onChange
   }) => (
     <Card>
-      <PageHeader title={i18n.t("SEO Preview Tools")} />
+      <PageHeader title={i18n.t("Search Engine Preview")} />
       <CardContent>
         <div>
           {loading ? (

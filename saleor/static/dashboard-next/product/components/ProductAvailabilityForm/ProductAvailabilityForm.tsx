@@ -42,10 +42,6 @@ export const ProductAvailabilityForm = decorate<ProductAvailabilityFormProps>(
           InputLabelProps={{
             shrink: true
           }}
-          // helperText={
-          //   errorList && errorList.availableOn ? errorList.availableOn : ""
-          // }
-          // error={!!(errorList && errorList.availableOn)}
         />
       </CardContent>
     </Card>

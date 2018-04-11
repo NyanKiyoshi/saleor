@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProductCollections /> renders when loading data 1`] = `
+<div
+  className="MuiPaper-root-3 MuiPaper-elevation2-7 MuiPaper-rounded-4 Component-card-1"
+>
+  <div
+    className="Component-root-33"
+  >
+    <h2
+      className="MuiTypography-root-36 MuiTypography-title-42 Component-title-35"
+    >
+      Collections
+    </h2>
+    <div
+      className="Component-action-30"
+    />
+  </div>
+  <table
+    className="MuiTable-root-60"
+  >
+    <tbody
+      className="MuiTableBody-root-61"
+    >
+      <tr
+        className="MuiTableRow-root-62"
+      >
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-67 MuiTableCell-body-69"
+          scope={undefined}
+        >
+          <span
+            className="Component-skeleton-75"
+            style={undefined}
+          >
+            ‌
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`<ProductCollections /> renders with data loaded 1`] = `
+<div
+  className="MuiPaper-root-3 MuiPaper-elevation2-7 MuiPaper-rounded-4 Component-card-1"
+>
+  <div
+    className="Component-root-33"
+  >
+    <h2
+      className="MuiTypography-root-36 MuiTypography-title-42 Component-title-35"
+    >
+      Collections
+    </h2>
+    <div
+      className="Component-action-30"
+    />
+  </div>
+  <table
+    className="MuiTable-root-60"
+  >
+    <tbody
+      className="MuiTableBody-root-61"
+    >
+      <tr
+        className="MuiTableRow-root-62"
+      >
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-67 MuiTableCell-body-69 Component-link-2"
+          onClick={undefined}
+          scope={undefined}
+        >
+          Winter collection
+        </td>
+      </tr>
+      <tr
+        className="MuiTableRow-root-62"
+      >
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-67 MuiTableCell-body-69 Component-link-2"
+          onClick={undefined}
+          scope={undefined}
+        >
+          Emperor's choice
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

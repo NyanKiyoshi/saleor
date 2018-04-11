@@ -9,6 +9,7 @@ const collections = [
 ];
 
 storiesOf("Products / ProductCollections", module)
+  .add("when loading data", () => <ProductCollections onRowClick={() => {}} />)
   .add("with no collections", () => (
     <ProductCollections collections={[]} onRowClick={() => {}} />
   ))

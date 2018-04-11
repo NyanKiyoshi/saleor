@@ -33,6 +33,9 @@ function loadStories() {
   require("./stories/products/ProductVariants");
   require("./stories/products/ProductDetailsPage");
   require("./stories/products/ProductUpdatePage");
+  require("./stories/products/ProductAttributesForm");
+  require("./stories/products/ProductAvailabilityForm");
+  require("./stories/products/ProductCategoryAndCollectionsForm");
 }
 
 configure(loadStories, module);

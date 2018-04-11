@@ -4,16 +4,16 @@ import * as React from "react";
 
 import FormSpacer from "../../../components/FormSpacer";
 import MultiSelectField from "../../../components/MultiSelectField";
+import PageHeader from "../../../components/PageHeader";
 import SingleSelectField from "../../../components/SingleSelectField";
 import i18n from "../../../i18n";
-import PageHeader from "../../../components/PageHeader";
 
 interface ProductCategoryAndCollectionsFormProps {
   // TODO: TYPE IT
-  categories: any[];
-  collections: any[];
-  productCollections: any[];
-  category: any;
+  categories?: any[];
+  collections?: any[];
+  productCollections?: any[];
+  category?: any;
   loading?: boolean;
   onChange(event: any);
 }
@@ -32,12 +32,12 @@ const ProductCategoryAndCollectionsForm = decorate<
     onChange
   }) => (
     <Card>
-      <PageHeader title={i18n.t("Belongs to")} />
+      <PageHeader title={i18n.t("Organisation")} />
       <CardContent>
         <SingleSelectField
           disabled={loading}
           label={i18n.t("Category")}
-          choices={categories}
+          choices={loading ? [] : categories}
           name="category"
           value={category}
           onChange={onChange}
@@ -46,7 +46,7 @@ const ProductCategoryAndCollectionsForm = decorate<
         <MultiSelectField
           disabled={loading}
           label={i18n.t("Collections")}
-          choices={collections}
+          choices={loading ? [] : collections}
           name="collections"
           value={productCollections}
           onChange={onChange}

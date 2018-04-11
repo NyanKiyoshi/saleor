@@ -1,0 +1,235 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProductAvailabilityForm /> renders when loading data 1`] = `
+<div
+  className="MuiPaper-root-2 MuiPaper-elevation2-6 MuiPaper-rounded-3"
+>
+  <div
+    className="Component-root-32"
+  >
+    <h2
+      className="MuiTypography-root-35 MuiTypography-title-41 Component-title-34"
+    >
+      Status
+    </h2>
+    <div
+      className="Component-action-29"
+    />
+  </div>
+  <div
+    className="MuiCardContent-root-59 Component-root-1"
+  >
+    <label
+      className="MuiFormControlLabel-root-60"
+    >
+      <span
+        className="MuiButtonBase-root-79 MuiIconButton-root-73 MuiSwitchBase-root-68 MuiSwitchBase-default-70 MuiCheckbox-default-63"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        role={undefined}
+        tabIndex={null}
+      >
+        <span
+          className="MuiIconButton-label-78"
+        >
+          <svg
+            aria-hidden="true"
+            className="MuiSvgIcon-root-82"
+            color={undefined}
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"
+            />
+          </svg>
+          <input
+            checked={false}
+            className="MuiSwitchBase-input-69"
+            disabled={undefined}
+            id={undefined}
+            name="available"
+            onChange={[Function]}
+            tabIndex={undefined}
+            type="checkbox"
+            value={undefined}
+          />
+        </span>
+        <span
+          className="MuiTouchRipple-root-88"
+        />
+      </span>
+      <span
+        className="MuiTypography-root-35 MuiTypography-body1-44 MuiFormControlLabel-label-62"
+      >
+        Available
+      </span>
+    </label>
+    <div
+      aria-describedby={undefined}
+      className="MuiFormControl-root-95"
+      onBlur={[Function]}
+      onFocus={[Function]}
+    >
+      <label
+        className="MuiFormLabel-root-105 MuiInputLabel-root-99 MuiInputLabel-formControl-100 MuiInputLabel-animated-103 MuiInputLabel-shrink-102"
+        data-shrink={true}
+        htmlFor={undefined}
+      >
+        Available on
+      </label>
+      <div
+        className="MuiInput-root-111 MuiInput-disabled-114 MuiInput-formControl-112 MuiInput-underline-115"
+      >
+        <input
+          aria-invalid={false}
+          aria-required={false}
+          autoComplete={undefined}
+          autoFocus={undefined}
+          className="MuiInput-input-119 MuiInput-inputDisabled-121 MuiInput-inputType-123"
+          defaultValue={undefined}
+          disabled={true}
+          id={undefined}
+          name="availableOn"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          onKeyDown={undefined}
+          onKeyUp={undefined}
+          placeholder={undefined}
+          readOnly={undefined}
+          required={undefined}
+          rows={undefined}
+          type="date"
+          value={undefined}
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ProductAvailabilityForm /> renders with loaded data 1`] = `
+<div
+  className="MuiPaper-root-2 MuiPaper-elevation2-6 MuiPaper-rounded-3"
+>
+  <div
+    className="Component-root-32"
+  >
+    <h2
+      className="MuiTypography-root-35 MuiTypography-title-41 Component-title-34"
+    >
+      Status
+    </h2>
+    <div
+      className="Component-action-29"
+    />
+  </div>
+  <div
+    className="MuiCardContent-root-59 Component-root-1"
+  >
+    <label
+      className="MuiFormControlLabel-root-60"
+    >
+      <span
+        className="MuiButtonBase-root-79 MuiIconButton-root-73 MuiSwitchBase-root-68 MuiSwitchBase-default-70 MuiCheckbox-default-63 MuiSwitchBase-checked-71 MuiCheckbox-checked-64 MuiCheckbox-checkedSecondary-66"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        role={undefined}
+        tabIndex={null}
+      >
+        <span
+          className="MuiIconButton-label-78"
+        >
+          <svg
+            aria-hidden="true"
+            className="MuiSvgIcon-root-82"
+            color={undefined}
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+            />
+          </svg>
+          <input
+            checked={true}
+            className="MuiSwitchBase-input-69"
+            disabled={undefined}
+            id={undefined}
+            name="available"
+            onChange={[Function]}
+            tabIndex={undefined}
+            type="checkbox"
+            value={undefined}
+          />
+        </span>
+        <span
+          className="MuiTouchRipple-root-88"
+        />
+      </span>
+      <span
+        className="MuiTypography-root-35 MuiTypography-body1-44 MuiFormControlLabel-label-62"
+      >
+        Available
+      </span>
+    </label>
+    <div
+      aria-describedby={undefined}
+      className="MuiFormControl-root-95"
+      onBlur={[Function]}
+      onFocus={[Function]}
+    >
+      <label
+        className="MuiFormLabel-root-105 MuiInputLabel-root-99 MuiInputLabel-formControl-100 MuiInputLabel-animated-103 MuiInputLabel-shrink-102"
+        data-shrink={true}
+        htmlFor={undefined}
+      >
+        Available on
+      </label>
+      <div
+        className="MuiInput-root-111 MuiInput-formControl-112 MuiInput-underline-115"
+      >
+        <input
+          aria-invalid={false}
+          aria-required={false}
+          autoComplete={undefined}
+          autoFocus={undefined}
+          className="MuiInput-input-119 MuiInput-inputType-123"
+          defaultValue={undefined}
+          disabled={false}
+          id={undefined}
+          name="availableOn"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          onKeyDown={undefined}
+          onKeyUp={undefined}
+          placeholder={undefined}
+          readOnly={undefined}
+          required={undefined}
+          rows={undefined}
+          type="date"
+          value="14-29-2019"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

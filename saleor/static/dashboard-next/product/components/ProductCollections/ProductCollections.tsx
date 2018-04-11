@@ -10,7 +10,7 @@ import Skeleton from "../../../components/Skeleton";
 import i18n from "../../../i18n";
 
 interface ProductPriceAndAvailabilityProps {
-  collections: Array<{
+  collections?: Array<{
     id: string;
     name: string;
   }>;

@@ -10,8 +10,8 @@ import i18n from "../../../i18n";
 
 interface ProductAttributesFormProps {
   // TODO: type when API blah blah blah
-  attributes: any[];
-  productAttributes: any[];
+  attributes?: any[];
+  productAttributes?: any[];
   loading?: boolean;
   onChange(event: any);
 }
@@ -42,7 +42,7 @@ export const ProductAttributesForm = decorate<ProductAttributesFormProps>(
         <PageHeader title={i18n.t("Attributes")} />
         <CardContent>
           {attributes.map((attribute, index) => (
-            <>
+            <React.Fragment key={index}>
               <SingleSelectField
                 name={attribute.slug}
                 label={attribute.name}

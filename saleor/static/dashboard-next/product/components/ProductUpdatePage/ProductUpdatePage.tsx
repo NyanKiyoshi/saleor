@@ -75,22 +75,16 @@ export const ProductUpdate = decorate<ProductUpdateProps>(
         <Form onSubmit={onSubmit} initial={initialData}>
           {({ change, data, submit }) => (
             <>
-              <ProductDetailsForm
-                onBack={onBack}
-                onChange={change}
-                name={data.name}
-                description={data.description}
-                currencySymbol={loading ? "" : product.price.currencySymbol}
-                price={data.price}
-                loading={loading}
-              />
               <div className={classes.grid}>
                 <div>
-                  <ProductAvailabilityForm
-                    available={data.available}
-                    availableOn={data.availableOn}
-                    loading={loading}
+                  <ProductDetailsForm
+                    onBack={onBack}
                     onChange={change}
+                    name={data.name}
+                    description={data.description}
+                    currencySymbol={loading ? "" : product.price.currencySymbol}
+                    price={data.price}
+                    loading={loading}
                   />
                   <div className={classes.cardContainer}>
                     <SeoForm
@@ -110,28 +104,36 @@ export const ProductUpdate = decorate<ProductUpdateProps>(
                   </div>
                 </div>
                 <div>
-                  <ProductCategoryAndCollectionsForm
-                    category={data.category}
-                    categories={
-                      categories !== undefined && categories !== null
-                        ? categories.map(category => ({
-                            label: category.name,
-                            value: category.id
-                          }))
-                        : []
-                    }
-                    productCollections={data.collections}
-                    collections={
-                      collections !== undefined && collections !== null
-                        ? collections.map(collection => ({
-                            label: collection.name,
-                            value: collection.id
-                          }))
-                        : []
-                    }
+                  <ProductAvailabilityForm
+                    available={data.available}
+                    availableOn={data.availableOn}
                     loading={loading}
                     onChange={change}
                   />
+                  <div className={classes.cardContainer}>
+                    <ProductCategoryAndCollectionsForm
+                      category={data.category}
+                      categories={
+                        categories !== undefined && categories !== null
+                          ? categories.map(category => ({
+                              label: category.name,
+                              value: category.id
+                            }))
+                          : []
+                      }
+                      productCollections={data.collections}
+                      collections={
+                        collections !== undefined && collections !== null
+                          ? collections.map(collection => ({
+                              label: collection.name,
+                              value: collection.id
+                            }))
+                          : []
+                      }
+                      loading={loading}
+                      onChange={change}
+                    />
+                  </div>
                   <div className={classes.cardContainer}>
                     <ProductAttributesForm
                       attributes={

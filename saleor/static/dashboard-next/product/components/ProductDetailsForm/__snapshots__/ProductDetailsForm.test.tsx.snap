@@ -64,19 +64,26 @@ exports[`<ProductDetailsForm /> renders when loading data 1`] = `
         onBlur={[Function]}
         onFocus={[Function]}
       >
+        <label
+          className="MuiFormLabel-root-92 MuiInputLabel-root-86 MuiInputLabel-formControl-87 MuiInputLabel-animated-90"
+          data-shrink={false}
+          htmlFor={undefined}
+        >
+          Name
+        </label>
         <div
-          className="MuiInput-root-86 MuiInput-disabled-89 MuiInput-fullWidth-93 MuiInput-formControl-87 MuiInput-underline-90"
+          className="MuiInput-root-98 MuiInput-disabled-101 MuiInput-fullWidth-105 MuiInput-formControl-99 MuiInput-underline-102"
         >
           <input
             aria-invalid={false}
             aria-required={false}
             autoComplete={undefined}
             autoFocus={undefined}
-            className="MuiInput-input-94 MuiInput-inputDisabled-96"
+            className="MuiInput-input-106 MuiInput-inputDisabled-108"
             defaultValue={undefined}
             disabled={true}
             id={undefined}
-            name={undefined}
+            name="name"
             onBlur={[Function]}
             onChange={[Function]}
             onFocus={[Function]}
@@ -97,15 +104,22 @@ exports[`<ProductDetailsForm /> renders when loading data 1`] = `
         onBlur={[Function]}
         onFocus={[Function]}
       >
+        <label
+          className="MuiFormLabel-root-92 MuiInputLabel-root-86 MuiInputLabel-formControl-87 MuiInputLabel-animated-90"
+          data-shrink={false}
+          htmlFor="price"
+        >
+          Price
+        </label>
         <div
-          className="MuiInput-root-86 MuiInput-disabled-89 MuiInput-formControl-87 MuiInput-underline-90"
+          className="MuiInput-root-98 MuiInput-disabled-101 MuiInput-formControl-99 MuiInput-underline-102"
         >
           <input
             aria-invalid={false}
             aria-required={false}
             autoComplete={undefined}
             autoFocus={undefined}
-            className="MuiInput-input-94 MuiInput-inputDisabled-96 MuiInput-inputType-98"
+            className="MuiInput-input-106 MuiInput-inputDisabled-108 MuiInput-inputType-110"
             defaultValue={undefined}
             disabled={true}
             id={undefined}
@@ -127,7 +141,7 @@ exports[`<ProductDetailsForm /> renders when loading data 1`] = `
       </div>
     </div>
     <div
-      className="Component-spacer-104"
+      className="Component-spacer-116"
     />
     <div
       className="MuiFormControl-root-82"
@@ -139,11 +153,17 @@ exports[`<ProductDetailsForm /> renders when loading data 1`] = `
         }
       }
     >
+      <label
+        className="MuiFormLabel-root-92 MuiInputLabel-root-86 MuiInputLabel-formControl-87 MuiInputLabel-animated-90"
+        data-shrink={false}
+      >
+        Description
+      </label>
       <div
-        className="MuiInput-root-86 MuiInput-disabled-89 MuiInput-fullWidth-93 MuiInput-formControl-87 MuiInput-multiline-92 MuiInput-underline-90"
+        className="MuiInput-root-98 MuiInput-disabled-101 MuiInput-fullWidth-105 MuiInput-formControl-99 MuiInput-multiline-104 MuiInput-underline-102"
       >
         <div
-          className="MuiTextarea-root-105"
+          className="MuiTextarea-root-117"
           style={
             Object {
               "height": 19,
@@ -152,7 +172,7 @@ exports[`<ProductDetailsForm /> renders when loading data 1`] = `
         >
           <textarea
             aria-hidden="true"
-            className="MuiTextarea-shadow-107 MuiTextarea-textarea-106"
+            className="MuiTextarea-shadow-119 MuiTextarea-textarea-118"
             readOnly={true}
             rows="1"
             tabIndex={-1}
@@ -160,7 +180,7 @@ exports[`<ProductDetailsForm /> renders when loading data 1`] = `
           />
           <textarea
             aria-hidden="true"
-            className="MuiTextarea-shadow-107 MuiTextarea-textarea-106"
+            className="MuiTextarea-shadow-119 MuiTextarea-textarea-118"
             defaultValue={undefined}
             readOnly={true}
             rows={1}
@@ -172,7 +192,7 @@ exports[`<ProductDetailsForm /> renders when loading data 1`] = `
             aria-required={false}
             autoComplete={undefined}
             autoFocus={undefined}
-            className="MuiTextarea-textarea-106 MuiInput-input-94 MuiInput-inputDisabled-96 MuiInput-inputMultiline-97"
+            className="MuiTextarea-textarea-118 MuiInput-input-106 MuiInput-inputDisabled-108 MuiInput-inputMultiline-109"
             defaultValue={undefined}
             disabled={true}
             id={undefined}
@@ -192,7 +212,7 @@ exports[`<ProductDetailsForm /> renders when loading data 1`] = `
         </div>
       </div>
       <p
-        className="MuiFormHelperText-root-108"
+        className="MuiFormHelperText-root-120"
       >
         Select text to enable text-formatting tools.
       </p>
@@ -265,19 +285,26 @@ exports[`<ProductDetailsForm /> renders with no value 1`] = `
         onBlur={[Function]}
         onFocus={[Function]}
       >
+        <label
+          className="MuiFormLabel-root-92 MuiInputLabel-root-86 MuiInputLabel-formControl-87 MuiInputLabel-animated-90"
+          data-shrink={false}
+          htmlFor={undefined}
+        >
+          Name
+        </label>
         <div
-          className="MuiInput-root-86 MuiInput-fullWidth-93 MuiInput-formControl-87 MuiInput-underline-90"
+          className="MuiInput-root-98 MuiInput-fullWidth-105 MuiInput-formControl-99 MuiInput-underline-102"
         >
           <input
             aria-invalid={false}
             aria-required={false}
             autoComplete={undefined}
             autoFocus={undefined}
-            className="MuiInput-input-94"
+            className="MuiInput-input-106"
             defaultValue={undefined}
             disabled={false}
             id={undefined}
-            name={undefined}
+            name="name"
             onBlur={[Function]}
             onChange={[Function]}
             onFocus={[Function]}
@@ -298,15 +325,22 @@ exports[`<ProductDetailsForm /> renders with no value 1`] = `
         onBlur={[Function]}
         onFocus={[Function]}
       >
+        <label
+          className="MuiFormLabel-root-92 MuiInputLabel-root-86 MuiInputLabel-formControl-87 MuiInputLabel-animated-90"
+          data-shrink={false}
+          htmlFor="price"
+        >
+          Price
+        </label>
         <div
-          className="MuiInput-root-86 MuiInput-formControl-87 MuiInput-underline-90"
+          className="MuiInput-root-98 MuiInput-formControl-99 MuiInput-underline-102"
         >
           <input
             aria-invalid={false}
             aria-required={false}
             autoComplete={undefined}
             autoFocus={undefined}
-            className="MuiInput-input-94 MuiInput-inputType-98"
+            className="MuiInput-input-106 MuiInput-inputType-110"
             defaultValue={undefined}
             disabled={false}
             id={undefined}
@@ -328,7 +362,7 @@ exports[`<ProductDetailsForm /> renders with no value 1`] = `
       </div>
     </div>
     <div
-      className="Component-spacer-104"
+      className="Component-spacer-116"
     />
     <div
       className="MuiFormControl-root-82"
@@ -340,11 +374,17 @@ exports[`<ProductDetailsForm /> renders with no value 1`] = `
         }
       }
     >
+      <label
+        className="MuiFormLabel-root-92 MuiInputLabel-root-86 MuiInputLabel-formControl-87 MuiInputLabel-animated-90"
+        data-shrink={false}
+      >
+        Description
+      </label>
       <div
-        className="MuiInput-root-86 MuiInput-fullWidth-93 MuiInput-formControl-87 MuiInput-multiline-92 MuiInput-underline-90"
+        className="MuiInput-root-98 MuiInput-fullWidth-105 MuiInput-formControl-99 MuiInput-multiline-104 MuiInput-underline-102"
       >
         <div
-          className="MuiTextarea-root-105"
+          className="MuiTextarea-root-117"
           style={
             Object {
               "height": 19,
@@ -353,7 +393,7 @@ exports[`<ProductDetailsForm /> renders with no value 1`] = `
         >
           <textarea
             aria-hidden="true"
-            className="MuiTextarea-shadow-107 MuiTextarea-textarea-106"
+            className="MuiTextarea-shadow-119 MuiTextarea-textarea-118"
             readOnly={true}
             rows="1"
             tabIndex={-1}
@@ -361,7 +401,7 @@ exports[`<ProductDetailsForm /> renders with no value 1`] = `
           />
           <textarea
             aria-hidden="true"
-            className="MuiTextarea-shadow-107 MuiTextarea-textarea-106"
+            className="MuiTextarea-shadow-119 MuiTextarea-textarea-118"
             defaultValue={undefined}
             readOnly={true}
             rows={1}
@@ -373,7 +413,7 @@ exports[`<ProductDetailsForm /> renders with no value 1`] = `
             aria-required={false}
             autoComplete={undefined}
             autoFocus={undefined}
-            className="MuiTextarea-textarea-106 MuiInput-input-94 MuiInput-inputMultiline-97"
+            className="MuiTextarea-textarea-118 MuiInput-input-106 MuiInput-inputMultiline-109"
             defaultValue={undefined}
             disabled={false}
             id={undefined}
@@ -393,7 +433,7 @@ exports[`<ProductDetailsForm /> renders with no value 1`] = `
         </div>
       </div>
       <p
-        className="MuiFormHelperText-root-108"
+        className="MuiFormHelperText-root-120"
       >
         Select text to enable text-formatting tools.
       </p>
@@ -466,19 +506,26 @@ exports[`<ProductDetailsForm /> renders with value 1`] = `
         onBlur={[Function]}
         onFocus={[Function]}
       >
+        <label
+          className="MuiFormLabel-root-92 MuiInputLabel-root-86 MuiInputLabel-formControl-87 MuiInputLabel-animated-90 MuiInputLabel-shrink-89"
+          data-shrink={true}
+          htmlFor={undefined}
+        >
+          Name
+        </label>
         <div
-          className="MuiInput-root-86 MuiInput-fullWidth-93 MuiInput-formControl-87 MuiInput-underline-90"
+          className="MuiInput-root-98 MuiInput-fullWidth-105 MuiInput-formControl-99 MuiInput-underline-102"
         >
           <input
             aria-invalid={false}
             aria-required={false}
             autoComplete={undefined}
             autoFocus={undefined}
-            className="MuiInput-input-94"
+            className="MuiInput-input-106"
             defaultValue={undefined}
             disabled={false}
             id={undefined}
-            name={undefined}
+            name="name"
             onBlur={[Function]}
             onChange={[Function]}
             onFocus={[Function]}
@@ -499,15 +546,22 @@ exports[`<ProductDetailsForm /> renders with value 1`] = `
         onBlur={[Function]}
         onFocus={[Function]}
       >
+        <label
+          className="MuiFormLabel-root-92 MuiInputLabel-root-86 MuiInputLabel-formControl-87 MuiInputLabel-animated-90 MuiInputLabel-shrink-89"
+          data-shrink={true}
+          htmlFor="price"
+        >
+          Price
+        </label>
         <div
-          className="MuiInput-root-86 MuiInput-formControl-87 MuiInput-underline-90"
+          className="MuiInput-root-98 MuiInput-formControl-99 MuiInput-underline-102"
         >
           <input
             aria-invalid={false}
             aria-required={false}
             autoComplete={undefined}
             autoFocus={undefined}
-            className="MuiInput-input-94 MuiInput-inputType-98"
+            className="MuiInput-input-106 MuiInput-inputType-110"
             defaultValue={undefined}
             disabled={false}
             id={undefined}
@@ -525,7 +579,7 @@ exports[`<ProductDetailsForm /> renders with value 1`] = `
             value="300"
           />
           <div
-            className="MuiInputAdornment-root-112 MuiInputAdornment-positionEnd-114"
+            className="MuiInputAdornment-root-124 MuiInputAdornment-positionEnd-126"
           >
             <p
               className="MuiTypography-root-57 MuiTypography-body1-66 MuiTypography-colorTextSecondary-79"
@@ -537,7 +591,7 @@ exports[`<ProductDetailsForm /> renders with value 1`] = `
       </div>
     </div>
     <div
-      className="Component-spacer-104"
+      className="Component-spacer-116"
     />
     <div
       className="MuiFormControl-root-82"
@@ -549,11 +603,17 @@ exports[`<ProductDetailsForm /> renders with value 1`] = `
         }
       }
     >
+      <label
+        className="MuiFormLabel-root-92 MuiInputLabel-root-86 MuiInputLabel-formControl-87 MuiInputLabel-animated-90 MuiInputLabel-shrink-89"
+        data-shrink={true}
+      >
+        Description
+      </label>
       <div
-        className="MuiInput-root-86 MuiInput-fullWidth-93 MuiInput-formControl-87 MuiInput-multiline-92 MuiInput-underline-90"
+        className="MuiInput-root-98 MuiInput-fullWidth-105 MuiInput-formControl-99 MuiInput-multiline-104 MuiInput-underline-102"
       >
         <div
-          className="MuiTextarea-root-105"
+          className="MuiTextarea-root-117"
           style={
             Object {
               "height": 19,
@@ -562,7 +622,7 @@ exports[`<ProductDetailsForm /> renders with value 1`] = `
         >
           <textarea
             aria-hidden="true"
-            className="MuiTextarea-shadow-107 MuiTextarea-textarea-106"
+            className="MuiTextarea-shadow-119 MuiTextarea-textarea-118"
             readOnly={true}
             rows="1"
             tabIndex={-1}
@@ -570,7 +630,7 @@ exports[`<ProductDetailsForm /> renders with value 1`] = `
           />
           <textarea
             aria-hidden="true"
-            className="MuiTextarea-shadow-107 MuiTextarea-textarea-106"
+            className="MuiTextarea-shadow-119 MuiTextarea-textarea-118"
             defaultValue={undefined}
             readOnly={true}
             rows={1}
@@ -582,7 +642,7 @@ exports[`<ProductDetailsForm /> renders with value 1`] = `
             aria-required={false}
             autoComplete={undefined}
             autoFocus={undefined}
-            className="MuiTextarea-textarea-106 MuiInput-input-94 MuiInput-inputMultiline-97"
+            className="MuiTextarea-textarea-118 MuiInput-input-106 MuiInput-inputMultiline-109"
             defaultValue={undefined}
             disabled={false}
             id={undefined}
@@ -602,7 +662,7 @@ exports[`<ProductDetailsForm /> renders with value 1`] = `
         </div>
       </div>
       <p
-        className="MuiFormHelperText-root-108"
+        className="MuiFormHelperText-root-120"
       >
         Select text to enable text-formatting tools.
       </p>
