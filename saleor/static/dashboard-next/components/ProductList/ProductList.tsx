@@ -94,11 +94,13 @@ export const ProductList = decorate<ProductListProps>(
               <TableCell className={classes.avatarCell}>
                 <Avatar src={product.thumbnailUrl} />
               </TableCell>
-              <TableCell
-                onClick={onRowClick ? onRowClick(product.id) : () => {}}
-                className={onRowClick ? classes.link : ""}
-              >
-                {product.name}
+              <TableCell>
+                <span
+                  onClick={onRowClick ? onRowClick(product.id) : () => {}}
+                  className={onRowClick ? classes.link : ""}
+                >
+                  {product.name}
+                </span>
               </TableCell>
               <TableCell>{product.productType.name}</TableCell>
             </TableRow>

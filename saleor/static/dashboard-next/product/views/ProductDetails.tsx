@@ -3,8 +3,8 @@ import { withStyles } from "material-ui/styles";
 import * as React from "react";
 
 import { productEditUrl } from "..";
+import { productStorefrontUrl } from "../";
 import Navigator from "../../components/Navigator";
-import { pageStorefrontUrl } from "../../page";
 import ProductCollections from "../components/ProductCollections";
 import ProductDescription from "../components/ProductDescription";
 import ProductImages from "../components/ProductImages";
@@ -129,7 +129,8 @@ export const ProductDetails = decorate(({ classes }) => (
             // TODO: Replace when API is ready
             onDelete={() => {}}
             onEdit={id => () => navigate(productEditUrl(id))}
-            onShow={(slug: string) => window.open(pageStorefrontUrl(slug))}
+            onShow={(slug: string) => () =>
+              window.open(productStorefrontUrl(slug))}
           />
           <Hidden smDown>
             <ProductImages imageList={product.images} />
