@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/react";
 import * as React from "react";
 
-import ProductVariants from "../../../product/components/ProductVariants";
+import ProductVariants from "../../../products/components/ProductVariants";
 
 const variants = [
   {

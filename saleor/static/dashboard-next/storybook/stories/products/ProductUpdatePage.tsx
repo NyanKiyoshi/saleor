@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/react";
 import * as React from "react";
 
-import ProductUpdatePage from "../../../product/components/ProductUpdatePage";
+import ProductUpdatePage from "../../../products/components/ProductUpdatePage";
 
 const product = {
   id: "1231u",

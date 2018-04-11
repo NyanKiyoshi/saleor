@@ -2,7 +2,7 @@ import { storiesOf } from "@storybook/react";
 import * as React from "react";
 
 import * as placeholder from "../../../../images/placeholder255x255.png";
-import ProductDetailsPage from "../../../product/components/ProductDetailsPage";
+import ProductDetailsPage from "../../../products/components/ProductDetailsPage";
 
 const product = {
   id: "1",

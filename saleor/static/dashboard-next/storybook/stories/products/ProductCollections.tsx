@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/react";
 import * as React from "react";
 
-import ProductCollections from "../../../product/components/ProductCollections";
+import ProductCollections from "../../../products/components/ProductCollections";
 
 const collections = [
   { id: "1", name: "Winter collection" },

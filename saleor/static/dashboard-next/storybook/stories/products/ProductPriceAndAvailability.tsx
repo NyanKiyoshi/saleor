@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/react";
 import * as React from "react";
 
-import ProductPriceAndAvailability from "../../../product/components/ProductPriceAndAvailability";
+import ProductPriceAndAvailability from "../../../products/components/ProductPriceAndAvailability";
 
 const grossMargin = {
   start: "30 $",

@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/react";
 import * as React from "react";
 
-import ProductAvailabilityForm from "../../../product/components/ProductAvailabilityForm";
+import ProductAvailabilityForm from "../../../products/components/ProductAvailabilityForm";
 
 storiesOf("Products / ProductAvailabilityForm", module)
   .add("when loading data", () => (

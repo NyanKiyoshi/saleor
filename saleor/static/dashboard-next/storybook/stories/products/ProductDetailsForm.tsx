@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/react";
 import * as React from "react";
 
-import ProductDetailsForm from "../../../product/components/ProductDetailsForm";
+import ProductDetailsForm from "../../../products/components/ProductDetailsForm";
 
 const product = {
   id: "1",

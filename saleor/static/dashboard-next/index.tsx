@@ -15,7 +15,7 @@ import AppRoot from "./AppRoot";
 import CategorySection from "./category";
 import "./i18n";
 import PageSection from "./page";
-import ProductSection from "./product";
+import ProductSection from "./products";
 import theme from "./theme";
 
 const cookies = new Cookies();

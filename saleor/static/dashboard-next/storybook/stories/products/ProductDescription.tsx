@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/react";
 import * as React from "react";
 
-import ProductDescription from "../../../product/components/ProductDescription";
+import ProductDescription from "../../../products/components/ProductDescription";
 
 const product = {
   id: "1",

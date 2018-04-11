@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/react";
 import * as React from "react";
 
-import ProductAttributesForm from "../../../product/components/ProductAttributesForm";
+import ProductAttributesForm from "../../../products/components/ProductAttributesForm";
 
 const productAttributes = [
   {

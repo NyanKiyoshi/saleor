@@ -1,7 +1,7 @@
 import { storiesOf } from "@storybook/react";
 import * as React from "react";
 
-import ProductCategoryAndCollectionsForm from "../../../product/components/ProductCategoryAndCollectionsForm";
+import ProductCategoryAndCollectionsForm from "../../../products/components/ProductCategoryAndCollectionsForm";
 
 const category = "876752";
 const collections = [
