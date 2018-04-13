@@ -2,11 +2,7 @@ import { storiesOf } from "@storybook/react";
 import * as React from "react";
 
 import ProductCollections from "../../../products/components/ProductCollections";
-
-const collections = [
-  { id: "1", name: "Winter collection" },
-  { id: "2", name: "Emperor's choice" }
-];
+import { collections } from "../../../products/fixtures";
 
 storiesOf("Products / ProductCollections", module)
   .add("when loading data", () => <ProductCollections onRowClick={() => {}} />)

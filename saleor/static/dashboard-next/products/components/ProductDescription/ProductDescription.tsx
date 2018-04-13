@@ -11,12 +11,10 @@ import Skeleton from "../../../components/Skeleton";
 import i18n from "../../../i18n";
 
 interface ProductDetailsCardProps {
-  product?: {
-    id: string;
-    name: string;
-    description: string;
-    url: string;
-  };
+  id?: string;
+  name?: string;
+  description?: string;
+  url?: string;
   onBack();
   onDelete();
   onEdit(id: string);
@@ -25,49 +23,30 @@ interface ProductDetailsCardProps {
 
 export const ProductDetailsCard: React.StatelessComponent<
   ProductDetailsCardProps
-> = ({ onBack, onDelete, onEdit, onShow, product }) => (
+> = ({ onBack, onDelete, onEdit, onShow, id, name, description, url }) => (
   <Card>
-    {product === undefined || product === null ? (
-      <>
-        <PageHeader onBack={onBack}>
-          <IconButton onClick={() => {}} disabled>
-            <VisibilityIcon />
-          </IconButton>
-          <IconButton onClick={() => {}} disabled>
-            <EditIcon />
-          </IconButton>
-          <IconButton onClick={() => {}} disabled>
-            <DeleteIcon />
-          </IconButton>
-        </PageHeader>
-        <CardContent>
-          <Typography>
-            <Skeleton />
-          </Typography>
-        </CardContent>
-      </>
-    ) : (
-      <>
-        <PageHeader title={product.name} onBack={onBack}>
-          <IconButton onClick={onShow(product.url)}>
-            <VisibilityIcon />
-          </IconButton>
-          <IconButton onClick={onEdit(product.id)}>
-            <EditIcon />
-          </IconButton>
-          <IconButton onClick={onDelete}>
-            <DeleteIcon />
-          </IconButton>
-        </PageHeader>
-        <CardContent>
-          <Typography>
-            {product.description
-              ? product.description
-              : i18n.t("No description")}
-          </Typography>
-        </CardContent>
-      </>
-    )}
+    <PageHeader onBack={onBack} title={name}>
+      <IconButton onClick={url ? onShow(url) : () => {}} disabled={!url}>
+        <VisibilityIcon />
+      </IconButton>
+      <IconButton onClick={id ? onEdit(id) : () => {}} disabled={!id}>
+        <EditIcon />
+      </IconButton>
+      <IconButton onClick={id ? onEdit(id) : () => {}} disabled={!id}>
+        <DeleteIcon />
+      </IconButton>
+    </PageHeader>
+    <CardContent>
+      <Typography>
+        {description ? (
+          description
+        ) : description === undefined || description === null ? (
+          <Skeleton />
+        ) : (
+          i18n.t("No description")
+        )}
+      </Typography>
+    </CardContent>
   </Card>
 );
 export default ProductDetailsCard;

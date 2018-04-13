@@ -44,6 +44,14 @@ export const productDetailsQuery = gql`
       id
       name
       description
+      collections {
+        edges {
+          node {
+            id
+            name
+          }
+        }
+      }
       price {
         localized
       }

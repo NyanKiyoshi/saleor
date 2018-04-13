@@ -313,16 +313,12 @@ exports[`<ProductVariants /> renders when product has variants 1`] = `
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
-        >
-          na
-        </td>
+        />
         <td
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
-        >
-          na
-        </td>
+        />
       </tr>
       <tr
         className="MuiTableRow-root-64"
@@ -356,16 +352,12 @@ exports[`<ProductVariants /> renders when product has variants 1`] = `
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
-        >
-          na
-        </td>
+        />
         <td
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
-        >
-          na
-        </td>
+        />
       </tr>
       <tr
         className="MuiTableRow-root-64"
@@ -399,16 +391,12 @@ exports[`<ProductVariants /> renders when product has variants 1`] = `
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
-        >
-          na
-        </td>
+        />
         <td
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
-        >
-          na
-        </td>
+        />
       </tr>
       <tr
         className="MuiTableRow-root-64"
@@ -442,16 +430,12 @@ exports[`<ProductVariants /> renders when product has variants 1`] = `
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
-        >
-          na
-        </td>
+        />
         <td
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
-        >
-          na
-        </td>
+        />
       </tr>
     </tbody>
   </table>
@@ -555,16 +539,12 @@ exports[`<ProductVariants /> renders when product has variants and has clickable
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
-        >
-          na
-        </td>
+        />
         <td
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
-        >
-          na
-        </td>
+        />
       </tr>
       <tr
         className="MuiTableRow-root-64"
@@ -598,16 +578,12 @@ exports[`<ProductVariants /> renders when product has variants and has clickable
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
-        >
-          na
-        </td>
+        />
         <td
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
-        >
-          na
-        </td>
+        />
       </tr>
       <tr
         className="MuiTableRow-root-64"
@@ -641,16 +617,12 @@ exports[`<ProductVariants /> renders when product has variants and has clickable
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
-        >
-          na
-        </td>
+        />
         <td
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
-        >
-          na
-        </td>
+        />
       </tr>
       <tr
         className="MuiTableRow-root-64"
@@ -684,16 +656,12 @@ exports[`<ProductVariants /> renders when product has variants and has clickable
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
-        >
-          na
-        </td>
+        />
         <td
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
-        >
-          na
-        </td>
+        />
       </tr>
     </tbody>
   </table>

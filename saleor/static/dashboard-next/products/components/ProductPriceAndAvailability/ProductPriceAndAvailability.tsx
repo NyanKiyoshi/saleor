@@ -13,33 +13,17 @@ import Skeleton from "../../../components/Skeleton";
 import i18n from "../../../i18n";
 
 interface ProductPriceAndAvailabilityProps {
-  grossMargin?: Array<{
+  grossMargin?: {
     start: number;
     stop: number;
-  }>;
+  };
   salePrice?: {
-    start: {
-      net: {
-        localized: string;
-      };
-    };
-    stop: {
-      net: {
-        localized: string;
-      };
-    };
+    start: string;
+    stop: string;
   };
   purchaseCost?: {
-    start: {
-      gross: {
-        localized: string;
-      };
-    };
-    stop: {
-      gross: {
-        localized: string;
-      };
-    };
+    start: string;
+    stop: string;
   };
   isPublished?: boolean;
   isAvailable?: boolean;
@@ -105,8 +89,7 @@ export const ProductPriceAndAvailability = decorate<
             <TableCell className={classes.rightCell}>
               {salePrice ? (
                 <span>
-                  {salePrice.start.net.localized} -{" "}
-                  {salePrice.stop.net.localized}
+                  {salePrice.start} - {salePrice.stop}
                 </span>
               ) : (
                 <Skeleton />
@@ -120,8 +103,7 @@ export const ProductPriceAndAvailability = decorate<
             <TableCell className={classes.rightCell}>
               {purchaseCost ? (
                 <span>
-                  {purchaseCost.start.gross.localized} -{" "}
-                  {purchaseCost.stop.gross.localized}
+                  {purchaseCost.start} - {purchaseCost.stop}
                 </span>
               ) : (
                 <Skeleton />
@@ -135,7 +117,7 @@ export const ProductPriceAndAvailability = decorate<
             <TableCell className={classes.rightCell}>
               {grossMargin ? (
                 <span>
-                  {grossMargin[0].start}% - {grossMargin[0].stop}%
+                  {grossMargin.start}% - {grossMargin.stop}%
                 </span>
               ) : (
                 <Skeleton />

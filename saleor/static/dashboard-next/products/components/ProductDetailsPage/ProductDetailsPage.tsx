@@ -13,6 +13,14 @@ interface ProductDetailsPageProps {
   product?: {
     id: string;
     name: string;
+    collections: {
+      edges: Array<{
+        node: {
+          id: string;
+          name: string;
+        };
+      }>;
+    };
     description: string;
     price: {
       localized: string;
@@ -115,7 +123,10 @@ export const ProductDetailsPage = decorate<ProductDetailsPageProps>(
     <div className={classes.root}>
       <div>
         <ProductDescription
-          product={product}
+          id={product ? product.id : null}
+          name={product ? product.name : null}
+          description={product ? product.description : null}
+          url={product ? product.url : null}
           onBack={onBack}
           onDelete={onDelete}
           onEdit={onEdit}
@@ -133,21 +144,29 @@ export const ProductDetailsPage = decorate<ProductDetailsPageProps>(
       <div>
         <ProductPriceAndAvailability
           onPublish={onProductPublish}
-          grossMargin={product ? product.grossMargin : null}
+          grossMargin={product ? product.grossMargin[0] : null}
           isAvailable={product ? product.availability.available : null}
-          purchaseCost={product ? product.purchaseCost : null}
-          salePrice={product ? product.priceRange : null}
+          purchaseCost={
+            product
+              ? {
+                  start: product.purchaseCost.start.gross.localized,
+                  stop: product.purchaseCost.stop.gross.localized
+                }
+              : null
+          }
+          salePrice={
+            product
+              ? {
+                  start: product.priceRange.start.net.localized,
+                  stop: product.priceRange.stop.net.localized
+                }
+              : null
+          }
           isPublished={product ? product.isPublished : null}
         />
         <ProductCollections
-          // TODO: replace with product.collections when API is ready
           collections={
-            product
-              ? [
-                  { id: "1", name: "Winter collection" },
-                  { id: "2", name: "Emperor's choice" }
-                ]
-              : null
+            product ? product.collections.edges.map(edge => edge.node) : null
           }
           onRowClick={onCollectionShow}
         />

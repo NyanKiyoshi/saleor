@@ -2,19 +2,12 @@ import { storiesOf } from "@storybook/react";
 import * as React from "react";
 
 import ProductPriceAndAvailability from "../../../products/components/ProductPriceAndAvailability";
+import {
+  grossMargin,
+  purchaseCost,
+  salePrice
+} from "../../../products/fixtures";
 
-const grossMargin = {
-  start: "30 $",
-  stop: "40 $"
-};
-const salePrice = {
-  start: "30 $",
-  stop: "40 $"
-};
-const purchaseCost = {
-  start: "30 $",
-  stop: "40 $"
-};
 storiesOf("Products / ProductPriceAndAvailability", module)
   .add("when loading data", () => (
     <ProductPriceAndAvailability onPublish={() => {}} />

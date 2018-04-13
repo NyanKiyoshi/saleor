@@ -46,7 +46,7 @@ export const ProductDetails = decorate<ProductDetailsProps>(
               onProductPublish={() => {}}
               onProductShow={id => () => navigate(productShowUrl(id))}
               onVariantShow={() => {}}
-              // TODO: replace with something bold ant cool
+              // TODO: replace with something nicers
               placeholderImage={"/static/images/placeholder255x255.png"}
               product={loading ? undefined : data && data.product}
             />

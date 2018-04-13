@@ -350,6 +350,16 @@ export interface ProductDetailsQuery {
     id: string,
     name: string,
     description: string,
+    collections:  {
+      edges:  Array< {
+        // The item at the end of the edge
+        node:  {
+          // The ID of the object.
+          id: string,
+          name: string,
+        } | null,
+      } | null >,
+    } | null,
     // The product's base price (without any discounts
     // applied).
     price:  {

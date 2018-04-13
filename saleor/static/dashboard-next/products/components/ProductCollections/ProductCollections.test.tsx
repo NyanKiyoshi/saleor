@@ -1,12 +1,8 @@
 import * as React from "react";
 import * as renderer from "react-test-renderer";
 
+import { collections } from "../../fixtures";
 import ProductCollections from "./";
-
-const collections = [
-  { id: "1", name: "Winter collection" },
-  { id: "2", name: "Emperor's choice" }
-];
 
 describe("<ProductCollections />", () => {
   it("renders when loading data", () => {
