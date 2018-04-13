@@ -74,7 +74,7 @@ exports[`<ProductCollections /> renders with data loaded 1`] = `
           onClick={undefined}
           scope={undefined}
         >
-          Winter collection
+          Winter Collection
         </td>
       </tr>
       <tr
@@ -86,7 +86,7 @@ exports[`<ProductCollections /> renders with data loaded 1`] = `
           onClick={undefined}
           scope={undefined}
         >
-          Emperor's choice
+          Summer Collection
         </td>
       </tr>
     </tbody>

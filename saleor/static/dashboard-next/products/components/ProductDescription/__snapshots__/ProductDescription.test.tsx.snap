@@ -224,7 +224,7 @@ exports[`<ProductDescription /> renders with full data 1`] = `
     <h2
       className="MuiTypography-root-56 MuiTypography-title-62 Component-title-33"
     >
-      Our totally awesome book
+      Stewart-Barrera
     </h2>
     <div
       className="Component-action-28"
@@ -305,7 +305,7 @@ exports[`<ProductDescription /> renders with full data 1`] = `
         className="MuiButtonBase-root-40 MuiIconButton-root-34"
         disabled={false}
         onBlur={[Function]}
-        onClick={[Function]}
+        onClick={undefined}
         onFocus={[Function]}
         onKeyDown={[Function]}
         onKeyUp={[Function]}
@@ -345,7 +345,15 @@ exports[`<ProductDescription /> renders with full data 1`] = `
     <p
       className="MuiTypography-root-56 MuiTypography-body1-65"
     >
-      Aenean sit amet malesuada nibh. Proin nisi lorem, facilisis at tortor vel, convallis ornare nibh. In nec ipsum porta, varius leo eu, condimentum quam. Donec gravida euismod ipsum, at consequat orci efficitur nec. Phasellus lectus arcu, auctor eget porttitor eget, venenatis a lacus. Suspendisse quis urna rhoncus, commodo justo at, tempor nisl.
+      Light light office style present life military. Enough executive coach cause own.
+
+Care season wrong fly. Example age between discuss assume.
+
+Their third build might strong account. Worry enter room note level air.
+
+Weight director mother. Because find task with now enter tree management.
+
+Soon name recently ground green. There owner sport box them red information.
     </p>
   </div>
 </div>
@@ -397,7 +405,7 @@ exports[`<ProductDescription /> renders with no description 1`] = `
     <h2
       className="MuiTypography-root-56 MuiTypography-title-62 Component-title-33"
     >
-      Our totally awesome cup
+      Stewart-Barrera
     </h2>
     <div
       className="Component-action-28"
@@ -478,7 +486,7 @@ exports[`<ProductDescription /> renders with no description 1`] = `
         className="MuiButtonBase-root-40 MuiIconButton-root-34"
         disabled={false}
         onBlur={[Function]}
-        onClick={[Function]}
+        onClick={undefined}
         onFocus={[Function]}
         onKeyDown={[Function]}
         onKeyUp={[Function]}

@@ -49,18 +49,7 @@ exports[`<ProductDetailsPage /> renders when loading data 1`] = `
         </button>
         <h2
           className="MuiTypography-root-57 MuiTypography-title-63 Component-title-34"
-        >
-          <span
-            className="Component-skeleton-81"
-            style={
-              Object {
-                "width": "10em",
-              }
-            }
-          >
-            ‌
-          </span>
-        </h2>
+        />
         <div
           className="Component-action-29"
         >
@@ -166,13 +155,13 @@ exports[`<ProductDetailsPage /> renders when loading data 1`] = `
         </div>
       </div>
       <div
-        className="MuiCardContent-root-82"
+        className="MuiCardContent-root-81"
       >
         <p
           className="MuiTypography-root-57 MuiTypography-body1-66"
         >
           <span
-            className="Component-skeleton-81"
+            className="Component-skeleton-82"
             style={undefined}
           >
             ‌
@@ -196,7 +185,7 @@ exports[`<ProductDetailsPage /> renders when loading data 1`] = `
         />
       </div>
       <div
-        className="MuiCardContent-root-82"
+        className="MuiCardContent-root-81"
       >
         <div
           className="Component-root-126"
@@ -234,7 +223,7 @@ exports[`<ProductDetailsPage /> renders when loading data 1`] = `
       className="MuiPaper-root-2 MuiPaper-elevation2-6 MuiPaper-rounded-3"
     >
       <div
-        className="MuiCardContent-root-82"
+        className="MuiCardContent-root-81"
       >
         <label
           className="MuiFormControlLabel-root-87 MuiFormControlLabel-disabled-88"
@@ -290,7 +279,7 @@ exports[`<ProductDetailsPage /> renders when loading data 1`] = `
           className="MuiTypography-root-57 MuiTypography-body1-66"
         >
           <span
-            className="Component-skeleton-81"
+            className="Component-skeleton-82"
             style={undefined}
           >
             ‌
@@ -319,7 +308,7 @@ exports[`<ProductDetailsPage /> renders when loading data 1`] = `
               scope={undefined}
             >
               <span
-                className="Component-skeleton-81"
+                className="Component-skeleton-82"
                 style={undefined}
               >
                 ‌
@@ -342,7 +331,7 @@ exports[`<ProductDetailsPage /> renders when loading data 1`] = `
               scope={undefined}
             >
               <span
-                className="Component-skeleton-81"
+                className="Component-skeleton-82"
                 style={undefined}
               >
                 ‌
@@ -365,7 +354,7 @@ exports[`<ProductDetailsPage /> renders when loading data 1`] = `
               scope={undefined}
             >
               <span
-                className="Component-skeleton-81"
+                className="Component-skeleton-82"
                 style={undefined}
               >
                 ‌
@@ -405,7 +394,7 @@ exports[`<ProductDetailsPage /> renders when loading data 1`] = `
               scope={undefined}
             >
               <span
-                className="Component-skeleton-81"
+                className="Component-skeleton-82"
                 style={undefined}
               >
                 ‌
@@ -489,7 +478,7 @@ exports[`<ProductDetailsPage /> renders when loading data 1`] = `
             scope={undefined}
           >
             <span
-              className="Component-skeleton-81"
+              className="Component-skeleton-82"
               style={undefined}
             >
               ‌
@@ -501,7 +490,7 @@ exports[`<ProductDetailsPage /> renders when loading data 1`] = `
             scope={undefined}
           >
             <span
-              className="Component-skeleton-81"
+              className="Component-skeleton-82"
               style={undefined}
             >
               ‌
@@ -513,7 +502,7 @@ exports[`<ProductDetailsPage /> renders when loading data 1`] = `
             scope={undefined}
           >
             <span
-              className="Component-skeleton-81"
+              className="Component-skeleton-82"
               style={undefined}
             >
               ‌
@@ -525,7 +514,7 @@ exports[`<ProductDetailsPage /> renders when loading data 1`] = `
             scope={undefined}
           >
             <span
-              className="Component-skeleton-81"
+              className="Component-skeleton-82"
               style={undefined}
             >
               ‌
@@ -537,7 +526,7 @@ exports[`<ProductDetailsPage /> renders when loading data 1`] = `
             scope={undefined}
           >
             <span
-              className="Component-skeleton-81"
+              className="Component-skeleton-82"
               style={undefined}
             >
               ‌
@@ -600,7 +589,7 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
         <h2
           className="MuiTypography-root-57 MuiTypography-title-63 Component-title-34"
         >
-          Our totally awesome book
+          Stewart-Barrera
         </h2>
         <div
           className="Component-action-29"
@@ -681,7 +670,7 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
             className="MuiButtonBase-root-41 MuiIconButton-root-35"
             disabled={false}
             onBlur={[Function]}
-            onClick={[Function]}
+            onClick={undefined}
             onFocus={[Function]}
             onKeyDown={[Function]}
             onKeyUp={[Function]}
@@ -716,12 +705,20 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
         </div>
       </div>
       <div
-        className="MuiCardContent-root-82"
+        className="MuiCardContent-root-81"
       >
         <p
           className="MuiTypography-root-57 MuiTypography-body1-66"
         >
-          Aenean sit amet malesuada nibh. Proin nisi lorem, facilisis at tortor vel, convallis ornare nibh. In nec ipsum porta, varius leo eu, condimentum quam. Donec gravida euismod ipsum, at consequat orci efficitur nec. Phasellus lectus arcu, auctor eget porttitor eget, venenatis a lacus. Suspendisse quis urna rhoncus, commodo justo at, tempor nisl.
+          Light light office style present life military. Enough executive coach cause own.
+
+Care season wrong fly. Example age between discuss assume.
+
+Their third build might strong account. Worry enter room note level air.
+
+Weight director mother. Because find task with now enter tree management.
+
+Soon name recently ground green. There owner sport box them red information.
         </p>
       </div>
     </div>
@@ -741,7 +738,7 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
         />
       </div>
       <div
-        className="MuiCardContent-root-82"
+        className="MuiCardContent-root-81"
       >
         <div
           className="Component-root-126"
@@ -753,8 +750,8 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
               className="MuiGridListTile-tile-130"
             >
               <img
-                alt="Image 1"
-                src="/url/to/image.png"
+                alt=""
+                src="/media/products/saleor/static/placeholders/coffee/coffee-02_IS8e8b3.jpg"
               />
               <div
                 className="MuiGridListTileBar-root-133 MuiGridListTileBar-titlePositionBottom-134"
@@ -765,7 +762,7 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
                   <div
                     className="MuiGridListTileBar-title-140"
                   >
-                    Image 1
+                    No description
                   </div>
                 </div>
               </div>
@@ -778,8 +775,8 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
               className="MuiGridListTile-tile-130"
             >
               <img
-                alt="Image 2"
-                src="/url/to/image.png"
+                alt=""
+                src="/media/products/saleor/static/placeholders/coffee/coffee-02_ZIk8H8C.jpg"
               />
               <div
                 className="MuiGridListTileBar-root-133 MuiGridListTileBar-titlePositionBottom-134"
@@ -790,7 +787,32 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
                   <div
                     className="MuiGridListTileBar-title-140"
                   >
-                    Image 2
+                    No description
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="MuiGridListTile-root-129 Component-gridElement-128"
+          >
+            <div
+              className="MuiGridListTile-tile-130"
+            >
+              <img
+                alt=""
+                src="/media/products/saleor/static/placeholders/coffee/coffee-03_i5b2KpM.jpg"
+              />
+              <div
+                className="MuiGridListTileBar-root-133 MuiGridListTileBar-titlePositionBottom-134"
+              >
+                <div
+                  className="MuiGridListTileBar-titleWrap-137"
+                >
+                  <div
+                    className="MuiGridListTileBar-title-140"
+                  >
+                    No description
                   </div>
                 </div>
               </div>
@@ -805,7 +827,7 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
       className="MuiPaper-root-2 MuiPaper-elevation2-6 MuiPaper-rounded-3"
     >
       <div
-        className="MuiCardContent-root-82"
+        className="MuiCardContent-root-81"
       >
         <label
           className="MuiFormControlLabel-root-87"
@@ -892,9 +914,9 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
               scope={undefined}
             >
               <span>
-                30 $
+                55,14 USD
                  - 
-                40 $
+                88,36 USD
               </span>
             </td>
           </tr>
@@ -914,9 +936,9 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
               scope={undefined}
             >
               <span>
-                30 $
+                1,88 USD
                  - 
-                40 $
+                48,10 USD
               </span>
             </td>
           </tr>
@@ -936,9 +958,10 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
               scope={undefined}
             >
               <span>
-                30 $
-                 - 
-                40 $
+                56
+                % - 
+                98
+                %
               </span>
             </td>
           </tr>
@@ -975,7 +998,7 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
               onClick={undefined}
               scope={undefined}
             >
-              Winter collection
+              Winter Collection
             </td>
           </tr>
           <tr
@@ -987,7 +1010,7 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
               onClick={undefined}
               scope={undefined}
             >
-              Emperor's choice
+              Summer Collection
             </td>
           </tr>
         </tbody>
@@ -1066,7 +1089,7 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
             className="MuiTableCell-root-111 MuiTableCell-body-113"
             scope={undefined}
           >
-            abc123
+            2-1337
           </td>
           <td
             aria-sort={null}
@@ -1074,7 +1097,7 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
             onClick={undefined}
             scope={undefined}
           >
-            XS
+            XXL
           </td>
           <td
             aria-sort={null}
@@ -1091,15 +1114,13 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
             className="MuiTableCell-root-111 MuiTableCell-body-113 Component-alignRightText-121"
             scope={undefined}
           >
-            10 $
+            95,47 USD
           </td>
           <td
             aria-sort={null}
             className="MuiTableCell-root-111 MuiTableCell-body-113 Component-alignRightText-121"
             scope={undefined}
-          >
-            5 %
-          </td>
+          />
         </tr>
         <tr
           className="MuiTableRow-root-106"
@@ -1109,7 +1130,7 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
             className="MuiTableCell-root-111 MuiTableCell-body-113"
             scope={undefined}
           >
-            abc124
+            2-1338
           </td>
           <td
             aria-sort={null}
@@ -1117,50 +1138,7 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
             onClick={undefined}
             scope={undefined}
           >
-            S
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root-111 MuiTableCell-body-113"
-            scope={undefined}
-          >
-            <span
-              className="Component-greenDot-122"
-            />
-            Available
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root-111 MuiTableCell-body-113 Component-alignRightText-121"
-            scope={undefined}
-          >
-            10 $
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root-111 MuiTableCell-body-113 Component-alignRightText-121"
-            scope={undefined}
-          >
-            5 %
-          </td>
-        </tr>
-        <tr
-          className="MuiTableRow-root-106"
-        >
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root-111 MuiTableCell-body-113"
-            scope={undefined}
-          >
-            abc125
-          </td>
-          <td
-            aria-sort={null}
-            className="MuiTableCell-root-111 MuiTableCell-body-113 Component-link-123"
-            onClick={undefined}
-            scope={undefined}
-          >
-            M
+            XL
           </td>
           <td
             aria-sort={null}
@@ -1177,15 +1155,13 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
             className="MuiTableCell-root-111 MuiTableCell-body-113 Component-alignRightText-121"
             scope={undefined}
           >
-            11 $
+            95,47 USD
           </td>
           <td
             aria-sort={null}
             className="MuiTableCell-root-111 MuiTableCell-body-113 Component-alignRightText-121"
             scope={undefined}
-          >
-            6 %
-          </td>
+          />
         </tr>
         <tr
           className="MuiTableRow-root-106"
@@ -1195,7 +1171,7 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
             className="MuiTableCell-root-111 MuiTableCell-body-113"
             scope={undefined}
           >
-            abc126
+            2-1339
           </td>
           <td
             aria-sort={null}
@@ -1220,15 +1196,136 @@ exports[`<ProductDetailsPage /> renders with data 1`] = `
             className="MuiTableCell-root-111 MuiTableCell-body-113 Component-alignRightText-121"
             scope={undefined}
           >
-            12 $
+            95,47 USD
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root-111 MuiTableCell-body-113 Component-alignRightText-121"
+            scope={undefined}
+          />
+        </tr>
+        <tr
+          className="MuiTableRow-root-106"
+        >
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root-111 MuiTableCell-body-113"
+            scope={undefined}
+          >
+            2-1340
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root-111 MuiTableCell-body-113 Component-link-123"
+            onClick={undefined}
+            scope={undefined}
+          >
+            M
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root-111 MuiTableCell-body-113"
+            scope={undefined}
+          >
+            <span
+              className="Component-greenDot-122"
+            />
+            Available
           </td>
           <td
             aria-sort={null}
             className="MuiTableCell-root-111 MuiTableCell-body-113 Component-alignRightText-121"
             scope={undefined}
           >
-            6 %
+            95,47 USD
           </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root-111 MuiTableCell-body-113 Component-alignRightText-121"
+            scope={undefined}
+          />
+        </tr>
+        <tr
+          className="MuiTableRow-root-106"
+        >
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root-111 MuiTableCell-body-113"
+            scope={undefined}
+          >
+            2-1341
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root-111 MuiTableCell-body-113 Component-link-123"
+            onClick={undefined}
+            scope={undefined}
+          >
+            S
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root-111 MuiTableCell-body-113"
+            scope={undefined}
+          >
+            <span
+              className="Component-redDot-124"
+            />
+            Unavailable
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root-111 MuiTableCell-body-113 Component-alignRightText-121"
+            scope={undefined}
+          >
+            95,47 USD
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root-111 MuiTableCell-body-113 Component-alignRightText-121"
+            scope={undefined}
+          />
+        </tr>
+        <tr
+          className="MuiTableRow-root-106"
+        >
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root-111 MuiTableCell-body-113"
+            scope={undefined}
+          >
+            2-1342
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root-111 MuiTableCell-body-113 Component-link-123"
+            onClick={undefined}
+            scope={undefined}
+          >
+            XS
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root-111 MuiTableCell-body-113"
+            scope={undefined}
+          >
+            <span
+              className="Component-redDot-124"
+            />
+            Unavailable
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root-111 MuiTableCell-body-113 Component-alignRightText-121"
+            scope={undefined}
+          >
+            95,47 USD
+          </td>
+          <td
+            aria-sort={null}
+            className="MuiTableCell-root-111 MuiTableCell-body-113 Component-alignRightText-121"
+            scope={undefined}
+          />
         </tr>
       </tbody>
     </table>

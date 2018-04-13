@@ -2,11 +2,7 @@ import * as React from "react";
 import { MemoryRouter } from "react-router-dom";
 import * as renderer from "react-test-renderer";
 
-import {
-  grossMargin,
-  purchaseCost,
-  salePrice
-} from "../ProductDetailsPage/fixtures";
+import { grossMargin, purchaseCost, salePrice } from "../../fixtures";
 import ProductPriceAndAvailability from "./";
 
 describe("<ProductPriceAndAvailability />", () => {
