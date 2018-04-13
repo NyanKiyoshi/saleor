@@ -41,23 +41,72 @@ export const TypedProductDetailsQuery = Query as React.ComponentType<
 export const productDetailsQuery = gql`
   query ProductDetails($id: ID!) {
     product(id: $id) {
-      edges {
-        node {
-          id
-          name
-          thumbnailUrl
-          productType {
-            id
-            name
+      id
+      name
+      description
+      price {
+        localized
+      }
+      grossMargin {
+        start
+        stop
+      }
+      purchaseCost {
+        start {
+          gross {
+            localized
+          }
+        }
+        stop {
+          gross {
+            localized
           }
         }
       }
-      pageInfo {
-        hasPreviousPage
-        hasNextPage
-        startCursor
-        endCursor
+      priceRange {
+        start {
+          net {
+            localized
+          }
+        }
+        stop {
+          net {
+            localized
+          }
+        }
       }
+      isPublished
+      availability {
+        available
+      }
+      images {
+        edges {
+          node {
+            id
+            alt
+            order
+            url
+          }
+        }
+      }
+      variants {
+        edges {
+          node {
+            id
+            sku
+            name
+            priceOverride {
+              localized
+            }
+            stockQuantity
+          }
+        }
+      }
+      productType {
+        id
+        name
+      }
+      url
     }
   }
 `;

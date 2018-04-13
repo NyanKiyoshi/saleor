@@ -8,47 +8,80 @@ import ProductImages from "../ProductImages";
 import ProductPriceAndAvailability from "../ProductPriceAndAvailability";
 import ProductVariants from "../ProductVariants";
 
-interface MoneyRangeType {
-  start: string;
-  stop: string;
-}
 interface ProductDetailsPageProps {
   placeholderImage: string;
   product?: {
     id: string;
     name: string;
     description: string;
-    slug: string;
-    grossMargin: MoneyRangeType;
-    salePrice: MoneyRangeType;
-    purchaseCost: MoneyRangeType;
-    isPublished: boolean;
-    isAvailable: boolean;
-    collections: Array<{
-      id: string;
-      name: string;
+    price: {
+      localized: string;
+    };
+    grossMargin: Array<{
+      start: number;
+      stop: number;
     }>;
-    images: Array<{
-      id: string;
-      alt: string;
-      url: string;
-      order: number;
-    }>;
-    variants: Array<{
-      id: string;
-      name: string;
-      sku: string;
-      availability: boolean;
-      price: {
-        grossLocalized: string;
+    purchaseCost: {
+      start: {
+        gross: {
+          localized: string;
+        };
       };
-      grossMargin: string;
-    }>;
+      stop: {
+        gross: {
+          localized: string;
+        };
+      };
+    };
+    priceRange: {
+      start: {
+        net: {
+          localized: string;
+        };
+      };
+      stop: {
+        net: {
+          localized: string;
+        };
+      };
+    };
+    isPublished: boolean;
+    availability: {
+      available: boolean;
+    };
+    images: {
+      edges: Array<{
+        node: {
+          id: string;
+          alt: string;
+          order: number;
+          url: string;
+        };
+      }>;
+    };
+    variants: {
+      edges: Array<{
+        node: {
+          id: string;
+          sku: string;
+          name: string;
+          priceOverride: {
+            localized: string;
+          };
+          stockQuantity: number;
+        };
+      }>;
+    };
+    productType: {
+      id: string;
+      name: string;
+    };
+    url: string;
   };
   onBack();
   onDelete();
-  onEdit();
-  onProductShow();
+  onEdit(id: string);
+  onProductShow(url: string);
   onVariantShow(id: string);
   onCollectionShow(id: string);
   onProductPublish();
@@ -90,7 +123,9 @@ export const ProductDetailsPage = decorate<ProductDetailsPageProps>(
         />
         <Hidden smDown>
           <ProductImages
-            imageList={product ? product.images : null}
+            imageList={
+              product ? product.images.edges.map(edge => edge.node) : null
+            }
             placeholder={placeholderImage}
           />
         </Hidden>
@@ -99,26 +134,39 @@ export const ProductDetailsPage = decorate<ProductDetailsPageProps>(
         <ProductPriceAndAvailability
           onPublish={onProductPublish}
           grossMargin={product ? product.grossMargin : null}
-          isAvailable={product ? product.isAvailable : null}
+          isAvailable={product ? product.availability.available : null}
           purchaseCost={product ? product.purchaseCost : null}
-          salePrice={product ? product.salePrice : null}
+          salePrice={product ? product.priceRange : null}
           isPublished={product ? product.isPublished : null}
         />
         <ProductCollections
-          collections={product ? product.collections : null}
+          // TODO: replace with product.collections when API is ready
+          collections={
+            product
+              ? [
+                  { id: "1", name: "Winter collection" },
+                  { id: "2", name: "Emperor's choice" }
+                ]
+              : null
+          }
           onRowClick={onCollectionShow}
         />
       </div>
       <Hidden mdUp>
         <div>
           <ProductImages
-            imageList={product ? product.images : null}
+            imageList={
+              product ? product.images.edges.map(edge => edge.node) : null
+            }
             placeholder={placeholderImage}
           />
         </div>
       </Hidden>
       <ProductVariants
-        variants={product ? product.variants : null}
+        variants={
+          product ? product.variants.edges.map(edge => edge.node) : null
+        }
+        fallbackPrice={product ? product.price.localized : ""}
         onRowClick={onVariantShow}
       />
     </div>

@@ -92,7 +92,7 @@ export interface CategoryDetailsQuery {
 };
 
 export interface RootCategoryChildrenQuery {
-  // List of shop's categories.
+  // List of the shop's categories.
   categories:  {
     edges:  Array< {
       // A cursor for use in pagination
@@ -162,9 +162,10 @@ export interface CategoryPropertiesQuery {
           // The URL of a main thumbnail for a product.
           thumbnailUrl: string | null,
           productType:  {
+            // The ID of the object.
             id: string,
             name: string,
-          } | null,
+          },
         } | null,
       } | null >,
     } | null,
@@ -255,7 +256,7 @@ export interface PageListQueryVariables {
 };
 
 export interface PageListQuery {
-  // List of shop's pages.
+  // List of the shop's pages.
   pages:  {
     edges:  Array< {
       // A cursor for use in pagination
@@ -287,7 +288,7 @@ export interface PageDetailsQueryVariables {
 };
 
 export interface PageDetailsQuery {
-  // Lookup a page by ID.
+  // Lookup a page by ID or by slug.
   page:  {
     // The ID of the object.
     id: string,
@@ -308,7 +309,7 @@ export interface ProductListQueryVariables {
 };
 
 export interface ProductListQuery {
-  // List of shop's products.
+  // List of the shop's products.
   products:  {
     edges:  Array< {
       // The item at the end of the edge
@@ -319,9 +320,10 @@ export interface ProductListQuery {
         // The URL of a main thumbnail for a product.
         thumbnailUrl: string | null,
         productType:  {
+          // The ID of the object.
           id: string,
           name: string,
-        } | null,
+        },
       } | null,
     } | null >,
     pageInfo:  {
@@ -334,5 +336,109 @@ export interface ProductListQuery {
       // When paginating forwards, the cursor to continue.
       endCursor: string | null,
     },
+  } | null,
+};
+
+export interface ProductDetailsQueryVariables {
+  id: string,
+};
+
+export interface ProductDetailsQuery {
+  // Lookup a product by ID.
+  product:  {
+    // The ID of the object.
+    id: string,
+    name: string,
+    description: string,
+    // The product's base price (without any discounts
+    // applied).
+    price:  {
+      // Money formatted according to the current locale.
+      localized: string | null,
+    } | null,
+    grossMargin:  Array< {
+      start: number | null,
+      stop: number | null,
+    } | null > | null,
+    purchaseCost:  {
+      // Lower bound of a price range.
+      start:  {
+        // Amount of money including taxes.
+        gross:  {
+          // Money formatted according to the current locale.
+          localized: string | null,
+        } | null,
+      } | null,
+      // Upper bound of a price range.
+      stop:  {
+        // Amount of money including taxes.
+        gross:  {
+          // Money formatted according to the current locale.
+          localized: string | null,
+        } | null,
+      } | null,
+    } | null,
+    priceRange:  {
+      // Lower bound of a price range.
+      start:  {
+        // Amount of money without taxes.
+        net:  {
+          // Money formatted according to the current locale.
+          localized: string | null,
+        } | null,
+      } | null,
+      // Upper bound of a price range.
+      stop:  {
+        // Amount of money without taxes.
+        net:  {
+          // Money formatted according to the current locale.
+          localized: string | null,
+        } | null,
+      } | null,
+    } | null,
+    isPublished: boolean,
+    // Informs about product's availability in the storefront,
+    // current price and discounts.
+    availability:  {
+      available: boolean | null,
+    } | null,
+    images:  {
+      edges:  Array< {
+        // The item at the end of the edge
+        node:  {
+          // The ID of the object.
+          id: string,
+          alt: string,
+          order: number,
+          url: string,
+        } | null,
+      } | null >,
+    } | null,
+    variants:  {
+      edges:  Array< {
+        // The item at the end of the edge
+        node:  {
+          // The ID of the object.
+          id: string,
+          sku: string,
+          name: string,
+          // Override the base price of a product if necessary.
+          // A value of `null` indicates the the default product price is used.
+          priceOverride:  {
+            // Money formatted according to the current locale.
+            localized: string | null,
+          } | null,
+          // Quantity of a product available for sale.
+          stockQuantity: number,
+        } | null,
+      } | null >,
+    } | null,
+    productType:  {
+      // The ID of the object.
+      id: string,
+      name: string,
+    },
+    // The storefront URL for the product.
+    url: string,
   } | null,
 };

@@ -15,12 +15,12 @@ interface ProductDetailsCardProps {
     id: string;
     name: string;
     description: string;
-    slug: string;
+    url: string;
   };
   onBack();
   onDelete();
   onEdit(id: string);
-  onShow(id: string);
+  onShow(url: string);
 }
 
 export const ProductDetailsCard: React.StatelessComponent<
@@ -49,7 +49,7 @@ export const ProductDetailsCard: React.StatelessComponent<
     ) : (
       <>
         <PageHeader title={product.name} onBack={onBack}>
-          <IconButton onClick={onShow(product.slug)}>
+          <IconButton onClick={onShow(product.url)}>
             <VisibilityIcon />
           </IconButton>
           <IconButton onClick={onEdit(product.id)}>

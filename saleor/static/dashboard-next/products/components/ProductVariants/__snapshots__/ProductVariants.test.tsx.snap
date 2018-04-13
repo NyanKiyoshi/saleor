@@ -305,23 +305,23 @@ exports[`<ProductVariants /> renders when product has variants 1`] = `
           scope={undefined}
         >
           <span
-            className="Component-greenDot-2"
+            className="Component-redDot-4"
           />
-          Available
+          Unavailable
         </td>
         <td
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
         >
-          10 $
+          na
         </td>
         <td
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
         >
-          5 %
+          na
         </td>
       </tr>
       <tr
@@ -348,23 +348,23 @@ exports[`<ProductVariants /> renders when product has variants 1`] = `
           scope={undefined}
         >
           <span
-            className="Component-greenDot-2"
+            className="Component-redDot-4"
           />
-          Available
+          Unavailable
         </td>
         <td
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
         >
-          10 $
+          na
         </td>
         <td
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
         >
-          5 %
+          na
         </td>
       </tr>
       <tr
@@ -400,14 +400,14 @@ exports[`<ProductVariants /> renders when product has variants 1`] = `
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
         >
-          11 $
+          na
         </td>
         <td
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
         >
-          6 %
+          na
         </td>
       </tr>
       <tr
@@ -434,23 +434,23 @@ exports[`<ProductVariants /> renders when product has variants 1`] = `
           scope={undefined}
         >
           <span
-            className="Component-greenDot-2"
+            className="Component-redDot-4"
           />
-          Available
+          Unavailable
         </td>
         <td
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
         >
-          12 $
+          na
         </td>
         <td
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
         >
-          6 %
+          na
         </td>
       </tr>
     </tbody>
@@ -547,23 +547,23 @@ exports[`<ProductVariants /> renders when product has variants and has clickable
           scope={undefined}
         >
           <span
-            className="Component-greenDot-2"
+            className="Component-redDot-4"
           />
-          Available
+          Unavailable
         </td>
         <td
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
         >
-          10 $
+          na
         </td>
         <td
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
         >
-          5 %
+          na
         </td>
       </tr>
       <tr
@@ -590,23 +590,23 @@ exports[`<ProductVariants /> renders when product has variants and has clickable
           scope={undefined}
         >
           <span
-            className="Component-greenDot-2"
+            className="Component-redDot-4"
           />
-          Available
+          Unavailable
         </td>
         <td
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
         >
-          10 $
+          na
         </td>
         <td
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
         >
-          5 %
+          na
         </td>
       </tr>
       <tr
@@ -642,14 +642,14 @@ exports[`<ProductVariants /> renders when product has variants and has clickable
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
         >
-          11 $
+          na
         </td>
         <td
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
         >
-          6 %
+          na
         </td>
       </tr>
       <tr
@@ -676,23 +676,23 @@ exports[`<ProductVariants /> renders when product has variants and has clickable
           scope={undefined}
         >
           <span
-            className="Component-greenDot-2"
+            className="Component-redDot-4"
           />
-          Available
+          Unavailable
         </td>
         <td
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
         >
-          12 $
+          na
         </td>
         <td
           aria-sort={null}
           className="MuiTableCell-root-69 MuiTableCell-body-71 Component-alignRightText-1"
           scope={undefined}
         >
-          6 %
+          na
         </td>
       </tr>
     </tbody>

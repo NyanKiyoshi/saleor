@@ -2,7 +2,7 @@ import Hidden from "material-ui/Hidden";
 import { withStyles } from "material-ui/styles";
 import * as React from "react";
 
-import { productEditUrl } from "..";
+import { productEditUrl, productShowUrl } from "..";
 import { productStorefrontUrl } from "../";
 import Navigator from "../../components/Navigator";
 import ProductCollections from "../components/ProductCollections";
@@ -12,6 +12,10 @@ import ProductImages from "../components/ProductImages";
 import ProductPriceAndAvailability from "../components/ProductPriceAndAvailability";
 import ProductVariants from "../components/ProductVariants";
 import { productDetailsQuery, TypedProductDetailsQuery } from "../queries";
+
+interface ProductDetailsProps {
+  id: string;
+}
 
 const decorate = withStyles(theme => ({
   root: {
@@ -25,7 +29,31 @@ const decorate = withStyles(theme => ({
   }
 }));
 
-export const ProductDetails = decorate(({ classes }) => (
-  <Navigator>{navigate => <ProductDetailsPage />}</Navigator>
-));
+export const ProductDetails = decorate<ProductDetailsProps>(
+  ({ classes, id }) => (
+    <Navigator>
+      {navigate => (
+        <TypedProductDetailsQuery
+          query={productDetailsQuery}
+          variables={{ id }}
+        >
+          {({ data, error, loading }) => (
+            <ProductDetailsPage
+              onBack={() => window.history.back()}
+              onCollectionShow={() => () => navigate("#")}
+              onDelete={() => {}}
+              onEdit={id => () => navigate(productEditUrl(id))}
+              onProductPublish={() => {}}
+              onProductShow={id => () => navigate(productShowUrl(id))}
+              onVariantShow={() => {}}
+              // TODO: replace with something bold ant cool
+              placeholderImage={"/static/images/placeholder255x255.png"}
+              product={loading ? undefined : data && data.product}
+            />
+          )}
+        </TypedProductDetailsQuery>
+      )}
+    </Navigator>
+  )
+);
 export default ProductDetails;

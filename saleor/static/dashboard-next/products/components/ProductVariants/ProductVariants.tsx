@@ -22,14 +22,15 @@ import i18n from "../../../i18n";
 interface ProductVariantsProps {
   variants?: Array<{
     id: string;
-    name: string;
     sku: string;
-    availability: boolean;
-    price: {
-      grossLocalized: string;
+    name: string;
+    priceOverride: {
+      localized: string;
     };
-    grossMargin: string;
+    stockQuantity: number;
   }>;
+  fallbackPrice?: string;
+  fallbackGross?: string;
   onRowClick?(id: string);
 }
 
@@ -60,7 +61,7 @@ const decorate = withStyles(theme => {
   };
 });
 export const ProductVariants = decorate<ProductVariantsProps>(
-  ({ classes, variants, onRowClick }) => (
+  ({ classes, variants, fallbackPrice, fallbackGross, onRowClick }) => (
     <Card>
       <PageHeader title={i18n.t("Variants")} />
       <Table>
@@ -119,19 +120,26 @@ export const ProductVariants = decorate<ProductVariantsProps>(
                 <TableCell>
                   <span
                     className={
-                      variant.availability ? classes.greenDot : classes.redDot
+                      variant.stockQuantity > 0
+                        ? classes.greenDot
+                        : classes.redDot
                     }
                   />
-                  {variant.availability
+                  {variant.stockQuantity > 0
                     ? i18n.t("Available")
                     : i18n.t("Unavailable")}
                 </TableCell>
                 <Hidden smDown>
                   <TableCell className={classes.alignRightText}>
-                    {variant.price.grossLocalized}
+                    {variant.priceOverride
+                      ? variant.priceOverride.localized
+                      : fallbackPrice}
                   </TableCell>
                   <TableCell className={classes.alignRightText}>
-                    {variant.grossMargin}
+                    {/* TODO: replace with costPrice */}
+                    {variant.priceOverride
+                      ? variant.priceOverride.localized
+                      : fallbackGross}
                   </TableCell>
                 </Hidden>
               </TableRow>
@@ -148,4 +156,5 @@ export const ProductVariants = decorate<ProductVariantsProps>(
     </Card>
   )
 );
+ProductVariants.displayName = "ProductVariants";
 export default ProductVariants;

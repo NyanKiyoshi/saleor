@@ -12,14 +12,35 @@ import ControlledSwitch from "../../../components/ControlledSwitch";
 import Skeleton from "../../../components/Skeleton";
 import i18n from "../../../i18n";
 
-interface MoneyRangeType {
-  start: string;
-  stop: string;
-}
 interface ProductPriceAndAvailabilityProps {
-  grossMargin?: MoneyRangeType;
-  salePrice?: MoneyRangeType;
-  purchaseCost?: MoneyRangeType;
+  grossMargin?: Array<{
+    start: number;
+    stop: number;
+  }>;
+  salePrice?: {
+    start: {
+      net: {
+        localized: string;
+      };
+    };
+    stop: {
+      net: {
+        localized: string;
+      };
+    };
+  };
+  purchaseCost?: {
+    start: {
+      gross: {
+        localized: string;
+      };
+    };
+    stop: {
+      gross: {
+        localized: string;
+      };
+    };
+  };
   isPublished?: boolean;
   isAvailable?: boolean;
   onPublish(event: React.ChangeEvent<any>);
@@ -84,7 +105,8 @@ export const ProductPriceAndAvailability = decorate<
             <TableCell className={classes.rightCell}>
               {salePrice ? (
                 <span>
-                  {salePrice.start} - {salePrice.stop}
+                  {salePrice.start.net.localized} -{" "}
+                  {salePrice.stop.net.localized}
                 </span>
               ) : (
                 <Skeleton />
@@ -98,7 +120,8 @@ export const ProductPriceAndAvailability = decorate<
             <TableCell className={classes.rightCell}>
               {purchaseCost ? (
                 <span>
-                  {purchaseCost.start} - {purchaseCost.stop}
+                  {purchaseCost.start.gross.localized} -{" "}
+                  {purchaseCost.stop.gross.localized}
                 </span>
               ) : (
                 <Skeleton />
@@ -112,7 +135,7 @@ export const ProductPriceAndAvailability = decorate<
             <TableCell className={classes.rightCell}>
               {grossMargin ? (
                 <span>
-                  {grossMargin.start} - {grossMargin.stop}
+                  {grossMargin[0].start}% - {grossMargin[0].stop}%
                 </span>
               ) : (
                 <Skeleton />
@@ -124,4 +147,5 @@ export const ProductPriceAndAvailability = decorate<
     </Card>
   )
 );
+ProductPriceAndAvailability.displayName = "ProductPriceAndAvailability";
 export default ProductPriceAndAvailability;

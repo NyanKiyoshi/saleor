@@ -2,7 +2,7 @@ import { parse as parseQs } from "qs";
 import * as React from "react";
 import { Route, RouteComponentProps, Switch } from "react-router-dom";
 
-import ProductDetails from "./views/ProductDetails";
+import ProductDetailsComponent from "./views/ProductDetails";
 import ProductListComponent from "./views/ProductList";
 import ProductUpdate from "./views/ProductUpdate";
 
@@ -12,6 +12,11 @@ const ProductList: React.StatelessComponent<RouteComponentProps<any>> = ({
 }) => {
   const qs = parseQs(location.search.substr(1));
   return <ProductListComponent filters={qs} />;
+};
+const ProductDetails: React.StatelessComponent<RouteComponentProps<any>> = ({
+  match
+}) => {
+  return <ProductDetailsComponent id={match.params.id} />;
 };
 
 const Component = ({ match }) => (
@@ -34,6 +39,6 @@ export function productStorefrontUrl(slug: string) {
 }
 
 export const productListUrl = "/products/";
-export const productAddUrl = "/products/add";
+export const productAddUrl = "/products/add/";
 
 export default Component;
