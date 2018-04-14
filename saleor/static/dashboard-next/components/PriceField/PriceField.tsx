@@ -20,7 +20,7 @@ interface PriceRangeFieldProps {
 const decorate = withStyles(theme => ({
   inputContainer: {
     display: "grid",
-    gridTemplateColumns: "calc(50% - 1rem) 2rem calc(50% - 1rem)"
+    gridTemplateColumns: "1fr 2rem 1fr"
   },
   pullDown: {
     marginTop: theme.spacing.unit * 2

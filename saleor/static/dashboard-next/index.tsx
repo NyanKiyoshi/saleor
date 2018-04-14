@@ -15,7 +15,7 @@ import AppRoot from "./AppRoot";
 import CategorySection from "./category";
 import "./i18n";
 import PageSection from "./page";
-import ProductSection from "./product";
+import ProductSection from "./products";
 import theme from "./theme";
 
 const cookies = new Cookies();
@@ -27,7 +27,7 @@ const apolloClient = new ApolloClient({
     headers: {
       "X-CSRFToken": cookies.get("csrftoken")
     },
-    uri: "/dashboard/graphql/"
+    uri: "/graphql/"
   })
 });
 const store = createStore(() => undefined);

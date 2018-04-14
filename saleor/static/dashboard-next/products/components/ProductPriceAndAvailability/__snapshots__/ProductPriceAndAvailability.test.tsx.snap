@@ -1,0 +1,439 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProductPriceAndAvailability /> renders product is not available 1`] = `
+<div
+  className="MuiPaper-root-5 MuiPaper-elevation2-9 MuiPaper-rounded-6"
+>
+  <div
+    className="MuiCardContent-root-32"
+  >
+    <label
+      className="MuiFormControlLabel-root-33 MuiFormControlLabel-disabled-34"
+    >
+      <span
+        className="MuiSwitch-root-36"
+      >
+        <span
+          className="MuiButtonBase-root-56 MuiButtonBase-disabled-57 MuiIconButton-root-50 MuiIconButton-disabled-54 MuiSwitchBase-root-45 MuiSwitchBase-default-47 MuiSwitch-default-40 MuiSwitchBase-disabled-49 MuiSwitch-disabled-44"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          role={undefined}
+          tabIndex="-1"
+        >
+          <span
+            className="MuiIconButton-label-55"
+          >
+            <span
+              className="MuiSwitch-icon-38"
+            />
+            <input
+              checked={false}
+              className="MuiSwitchBase-input-46"
+              disabled={true}
+              id={undefined}
+              name={undefined}
+              onChange={[Function]}
+              tabIndex={undefined}
+              type="checkbox"
+              value={undefined}
+            />
+          </span>
+        </span>
+        <span
+          className="MuiSwitch-bar-37"
+        />
+      </span>
+      <span
+        className="MuiTypography-root-59 MuiTypography-body1-68 MuiFormControlLabel-label-35"
+      >
+         
+      </span>
+    </label>
+    <p
+      className="MuiTypography-root-59 MuiTypography-body1-68"
+    >
+      <span
+        className="Component-greenText-1"
+      >
+        Available
+      </span>
+    </p>
+  </div>
+  <table
+    className="MuiTable-root-84"
+  >
+    <tbody
+      className="MuiTableBody-root-85"
+    >
+      <tr
+        className="MuiTableRow-root-86"
+      >
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-91 MuiTableCell-body-93 Component-leftCell-2"
+          scope={undefined}
+        >
+          Sale price
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-91 MuiTableCell-body-93 Component-rightCell-4"
+          scope={undefined}
+        >
+          <span>
+            55,14 USD
+             - 
+            88,36 USD
+          </span>
+        </td>
+      </tr>
+      <tr
+        className="MuiTableRow-root-86"
+      >
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-91 MuiTableCell-body-93 Component-leftCell-2"
+          scope={undefined}
+        >
+          Purchase cost
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-91 MuiTableCell-body-93 Component-rightCell-4"
+          scope={undefined}
+        >
+          <span>
+            1,88 USD
+             - 
+            48,10 USD
+          </span>
+        </td>
+      </tr>
+      <tr
+        className="MuiTableRow-root-86"
+      >
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-91 MuiTableCell-body-93 Component-leftCell-2"
+          scope={undefined}
+        >
+          Gross margin
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-91 MuiTableCell-body-93 Component-rightCell-4"
+          scope={undefined}
+        >
+          <span>
+            56
+            % - 
+            98
+            %
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`<ProductPriceAndAvailability /> renders when loading data 1`] = `
+<div
+  className="MuiPaper-root-5 MuiPaper-elevation2-9 MuiPaper-rounded-6"
+>
+  <div
+    className="MuiCardContent-root-32"
+  >
+    <label
+      className="MuiFormControlLabel-root-33 MuiFormControlLabel-disabled-34"
+    >
+      <span
+        className="MuiSwitch-root-36"
+      >
+        <span
+          className="MuiButtonBase-root-56 MuiButtonBase-disabled-57 MuiIconButton-root-50 MuiIconButton-disabled-54 MuiSwitchBase-root-45 MuiSwitchBase-default-47 MuiSwitch-default-40 MuiSwitchBase-disabled-49 MuiSwitch-disabled-44"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          role={undefined}
+          tabIndex="-1"
+        >
+          <span
+            className="MuiIconButton-label-55"
+          >
+            <span
+              className="MuiSwitch-icon-38"
+            />
+            <input
+              checked={false}
+              className="MuiSwitchBase-input-46"
+              disabled={true}
+              id={undefined}
+              name={undefined}
+              onChange={[Function]}
+              tabIndex={undefined}
+              type="checkbox"
+              value={undefined}
+            />
+          </span>
+        </span>
+        <span
+          className="MuiSwitch-bar-37"
+        />
+      </span>
+      <span
+        className="MuiTypography-root-59 MuiTypography-body1-68 MuiFormControlLabel-label-35"
+      >
+         
+      </span>
+    </label>
+    <p
+      className="MuiTypography-root-59 MuiTypography-body1-68"
+    >
+      <span
+        className="Component-skeleton-83"
+        style={undefined}
+      >
+        ‌
+      </span>
+    </p>
+  </div>
+  <table
+    className="MuiTable-root-84"
+  >
+    <tbody
+      className="MuiTableBody-root-85"
+    >
+      <tr
+        className="MuiTableRow-root-86"
+      >
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-91 MuiTableCell-body-93 Component-leftCell-2"
+          scope={undefined}
+        >
+          Sale price
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-91 MuiTableCell-body-93 Component-rightCell-4"
+          scope={undefined}
+        >
+          <span
+            className="Component-skeleton-83"
+            style={undefined}
+          >
+            ‌
+          </span>
+        </td>
+      </tr>
+      <tr
+        className="MuiTableRow-root-86"
+      >
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-91 MuiTableCell-body-93 Component-leftCell-2"
+          scope={undefined}
+        >
+          Purchase cost
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-91 MuiTableCell-body-93 Component-rightCell-4"
+          scope={undefined}
+        >
+          <span
+            className="Component-skeleton-83"
+            style={undefined}
+          >
+            ‌
+          </span>
+        </td>
+      </tr>
+      <tr
+        className="MuiTableRow-root-86"
+      >
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-91 MuiTableCell-body-93 Component-leftCell-2"
+          scope={undefined}
+        >
+          Gross margin
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-91 MuiTableCell-body-93 Component-rightCell-4"
+          scope={undefined}
+        >
+          <span
+            className="Component-skeleton-83"
+            style={undefined}
+          >
+            ‌
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`<ProductPriceAndAvailability /> renders when product is available 1`] = `
+<div
+  className="MuiPaper-root-5 MuiPaper-elevation2-9 MuiPaper-rounded-6"
+>
+  <div
+    className="MuiCardContent-root-32"
+  >
+    <label
+      className="MuiFormControlLabel-root-33 MuiFormControlLabel-disabled-34"
+    >
+      <span
+        className="MuiSwitch-root-36"
+      >
+        <span
+          className="MuiButtonBase-root-56 MuiButtonBase-disabled-57 MuiIconButton-root-50 MuiIconButton-disabled-54 MuiSwitchBase-root-45 MuiSwitchBase-default-47 MuiSwitch-default-40 MuiSwitchBase-disabled-49 MuiSwitch-disabled-44"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          role={undefined}
+          tabIndex="-1"
+        >
+          <span
+            className="MuiIconButton-label-55"
+          >
+            <span
+              className="MuiSwitch-icon-38"
+            />
+            <input
+              checked={false}
+              className="MuiSwitchBase-input-46"
+              disabled={true}
+              id={undefined}
+              name={undefined}
+              onChange={[Function]}
+              tabIndex={undefined}
+              type="checkbox"
+              value={undefined}
+            />
+          </span>
+        </span>
+        <span
+          className="MuiSwitch-bar-37"
+        />
+      </span>
+      <span
+        className="MuiTypography-root-59 MuiTypography-body1-68 MuiFormControlLabel-label-35"
+      >
+         
+      </span>
+    </label>
+    <p
+      className="MuiTypography-root-59 MuiTypography-body1-68"
+    >
+      <span
+        className="Component-greenText-1"
+      >
+        Available
+      </span>
+    </p>
+  </div>
+  <table
+    className="MuiTable-root-84"
+  >
+    <tbody
+      className="MuiTableBody-root-85"
+    >
+      <tr
+        className="MuiTableRow-root-86"
+      >
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-91 MuiTableCell-body-93 Component-leftCell-2"
+          scope={undefined}
+        >
+          Sale price
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-91 MuiTableCell-body-93 Component-rightCell-4"
+          scope={undefined}
+        >
+          <span>
+            55,14 USD
+             - 
+            88,36 USD
+          </span>
+        </td>
+      </tr>
+      <tr
+        className="MuiTableRow-root-86"
+      >
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-91 MuiTableCell-body-93 Component-leftCell-2"
+          scope={undefined}
+        >
+          Purchase cost
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-91 MuiTableCell-body-93 Component-rightCell-4"
+          scope={undefined}
+        >
+          <span>
+            1,88 USD
+             - 
+            48,10 USD
+          </span>
+        </td>
+      </tr>
+      <tr
+        className="MuiTableRow-root-86"
+      >
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-91 MuiTableCell-body-93 Component-leftCell-2"
+          scope={undefined}
+        >
+          Gross margin
+        </td>
+        <td
+          aria-sort={null}
+          className="MuiTableCell-root-91 MuiTableCell-body-93 Component-rightCell-4"
+          scope={undefined}
+        >
+          <span>
+            56
+            % - 
+            98
+            %
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

@@ -1,0 +1,672 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProductDetailsForm /> renders when loading data 1`] = `
+<div
+  className="MuiPaper-root-2 MuiPaper-elevation2-6 MuiPaper-rounded-3"
+>
+  <div
+    className="Component-root-32"
+  >
+    <button
+      className="MuiButtonBase-root-41 MuiIconButton-root-35 MuiIconButton-colorInherit-36 Component-menuButton-31"
+      disabled={false}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex="0"
+      type="button"
+    >
+      <span
+        className="MuiIconButton-label-40"
+      >
+        <svg
+          aria-hidden="true"
+          className="MuiSvgIcon-root-44"
+          color={undefined}
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"
+          />
+        </svg>
+      </span>
+      <span
+        className="MuiTouchRipple-root-50"
+      />
+    </button>
+    <h2
+      className="MuiTypography-root-57 MuiTypography-title-63 Component-title-34"
+    >
+      Edit product
+    </h2>
+    <div
+      className="Component-action-29"
+    />
+  </div>
+  <div
+    className="MuiCardContent-root-81"
+  >
+    <div
+      className="Component-root-1"
+    >
+      <div
+        aria-describedby={undefined}
+        className="MuiFormControl-root-82 MuiFormControl-fullWidth-85"
+        onBlur={[Function]}
+        onFocus={[Function]}
+      >
+        <label
+          className="MuiFormLabel-root-92 MuiInputLabel-root-86 MuiInputLabel-formControl-87 MuiInputLabel-animated-90"
+          data-shrink={false}
+          htmlFor={undefined}
+        >
+          Name
+        </label>
+        <div
+          className="MuiInput-root-98 MuiInput-disabled-101 MuiInput-fullWidth-105 MuiInput-formControl-99 MuiInput-underline-102"
+        >
+          <input
+            aria-invalid={false}
+            aria-required={false}
+            autoComplete={undefined}
+            autoFocus={undefined}
+            className="MuiInput-input-106 MuiInput-inputDisabled-108"
+            defaultValue={undefined}
+            disabled={true}
+            id={undefined}
+            name="name"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            onKeyDown={undefined}
+            onKeyUp={undefined}
+            placeholder={undefined}
+            readOnly={undefined}
+            required={undefined}
+            rows={undefined}
+            type="text"
+            value={undefined}
+          />
+        </div>
+      </div>
+      <span />
+      <div
+        className="MuiFormControl-root-82 MuiFormControl-fullWidth-85"
+        onBlur={[Function]}
+        onFocus={[Function]}
+      >
+        <label
+          className="MuiFormLabel-root-92 MuiInputLabel-root-86 MuiInputLabel-formControl-87 MuiInputLabel-animated-90"
+          data-shrink={false}
+          htmlFor="price"
+        >
+          Price
+        </label>
+        <div
+          className="MuiInput-root-98 MuiInput-disabled-101 MuiInput-formControl-99 MuiInput-underline-102"
+        >
+          <input
+            aria-invalid={false}
+            aria-required={false}
+            autoComplete={undefined}
+            autoFocus={undefined}
+            className="MuiInput-input-106 MuiInput-inputDisabled-108 MuiInput-inputType-110"
+            defaultValue={undefined}
+            disabled={true}
+            id={undefined}
+            name="price"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            onKeyDown={undefined}
+            onKeyUp={undefined}
+            placeholder={undefined}
+            readOnly={undefined}
+            required={undefined}
+            rows={undefined}
+            type="number"
+            value=""
+          />
+          <span />
+        </div>
+      </div>
+    </div>
+    <div
+      className="Component-spacer-116"
+    />
+    <div
+      className="MuiFormControl-root-82"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    >
+      <label
+        className="MuiFormLabel-root-92 MuiInputLabel-root-86 MuiInputLabel-formControl-87 MuiInputLabel-animated-90"
+        data-shrink={false}
+      >
+        Description
+      </label>
+      <div
+        className="MuiInput-root-98 MuiInput-disabled-101 MuiInput-fullWidth-105 MuiInput-formControl-99 MuiInput-multiline-104 MuiInput-underline-102"
+      >
+        <div
+          className="MuiTextarea-root-117"
+          style={
+            Object {
+              "height": 19,
+            }
+          }
+        >
+          <textarea
+            aria-hidden="true"
+            className="MuiTextarea-shadow-119 MuiTextarea-textarea-118"
+            readOnly={true}
+            rows="1"
+            tabIndex={-1}
+            value=""
+          />
+          <textarea
+            aria-hidden="true"
+            className="MuiTextarea-shadow-119 MuiTextarea-textarea-118"
+            defaultValue={undefined}
+            readOnly={true}
+            rows={1}
+            tabIndex={-1}
+            value={undefined}
+          />
+          <textarea
+            aria-invalid={false}
+            aria-required={false}
+            autoComplete={undefined}
+            autoFocus={undefined}
+            className="MuiTextarea-textarea-118 MuiInput-input-106 MuiInput-inputDisabled-108 MuiInput-inputMultiline-109"
+            defaultValue={undefined}
+            disabled={true}
+            id={undefined}
+            name="description"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            onKeyDown={undefined}
+            onKeyUp={undefined}
+            placeholder={undefined}
+            readOnly={undefined}
+            required={undefined}
+            rows={1}
+            type="text"
+            value={undefined}
+          />
+        </div>
+      </div>
+      <p
+        className="MuiFormHelperText-root-120"
+      >
+        Select text to enable text-formatting tools.
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ProductDetailsForm /> renders with no value 1`] = `
+<div
+  className="MuiPaper-root-2 MuiPaper-elevation2-6 MuiPaper-rounded-3"
+>
+  <div
+    className="Component-root-32"
+  >
+    <button
+      className="MuiButtonBase-root-41 MuiIconButton-root-35 MuiIconButton-colorInherit-36 Component-menuButton-31"
+      disabled={false}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex="0"
+      type="button"
+    >
+      <span
+        className="MuiIconButton-label-40"
+      >
+        <svg
+          aria-hidden="true"
+          className="MuiSvgIcon-root-44"
+          color={undefined}
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"
+          />
+        </svg>
+      </span>
+      <span
+        className="MuiTouchRipple-root-50"
+      />
+    </button>
+    <h2
+      className="MuiTypography-root-57 MuiTypography-title-63 Component-title-34"
+    >
+      Edit product
+    </h2>
+    <div
+      className="Component-action-29"
+    />
+  </div>
+  <div
+    className="MuiCardContent-root-81"
+  >
+    <div
+      className="Component-root-1"
+    >
+      <div
+        aria-describedby={undefined}
+        className="MuiFormControl-root-82 MuiFormControl-fullWidth-85"
+        onBlur={[Function]}
+        onFocus={[Function]}
+      >
+        <label
+          className="MuiFormLabel-root-92 MuiInputLabel-root-86 MuiInputLabel-formControl-87 MuiInputLabel-animated-90"
+          data-shrink={false}
+          htmlFor={undefined}
+        >
+          Name
+        </label>
+        <div
+          className="MuiInput-root-98 MuiInput-fullWidth-105 MuiInput-formControl-99 MuiInput-underline-102"
+        >
+          <input
+            aria-invalid={false}
+            aria-required={false}
+            autoComplete={undefined}
+            autoFocus={undefined}
+            className="MuiInput-input-106"
+            defaultValue={undefined}
+            disabled={false}
+            id={undefined}
+            name="name"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            onKeyDown={undefined}
+            onKeyUp={undefined}
+            placeholder={undefined}
+            readOnly={undefined}
+            required={undefined}
+            rows={undefined}
+            type="text"
+            value={undefined}
+          />
+        </div>
+      </div>
+      <span />
+      <div
+        className="MuiFormControl-root-82 MuiFormControl-fullWidth-85"
+        onBlur={[Function]}
+        onFocus={[Function]}
+      >
+        <label
+          className="MuiFormLabel-root-92 MuiInputLabel-root-86 MuiInputLabel-formControl-87 MuiInputLabel-animated-90"
+          data-shrink={false}
+          htmlFor="price"
+        >
+          Price
+        </label>
+        <div
+          className="MuiInput-root-98 MuiInput-formControl-99 MuiInput-underline-102"
+        >
+          <input
+            aria-invalid={false}
+            aria-required={false}
+            autoComplete={undefined}
+            autoFocus={undefined}
+            className="MuiInput-input-106 MuiInput-inputType-110"
+            defaultValue={undefined}
+            disabled={false}
+            id={undefined}
+            name="price"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            onKeyDown={undefined}
+            onKeyUp={undefined}
+            placeholder={undefined}
+            readOnly={undefined}
+            required={undefined}
+            rows={undefined}
+            type="number"
+            value=""
+          />
+          <span />
+        </div>
+      </div>
+    </div>
+    <div
+      className="Component-spacer-116"
+    />
+    <div
+      className="MuiFormControl-root-82"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    >
+      <label
+        className="MuiFormLabel-root-92 MuiInputLabel-root-86 MuiInputLabel-formControl-87 MuiInputLabel-animated-90"
+        data-shrink={false}
+      >
+        Description
+      </label>
+      <div
+        className="MuiInput-root-98 MuiInput-fullWidth-105 MuiInput-formControl-99 MuiInput-multiline-104 MuiInput-underline-102"
+      >
+        <div
+          className="MuiTextarea-root-117"
+          style={
+            Object {
+              "height": 19,
+            }
+          }
+        >
+          <textarea
+            aria-hidden="true"
+            className="MuiTextarea-shadow-119 MuiTextarea-textarea-118"
+            readOnly={true}
+            rows="1"
+            tabIndex={-1}
+            value=""
+          />
+          <textarea
+            aria-hidden="true"
+            className="MuiTextarea-shadow-119 MuiTextarea-textarea-118"
+            defaultValue={undefined}
+            readOnly={true}
+            rows={1}
+            tabIndex={-1}
+            value={undefined}
+          />
+          <textarea
+            aria-invalid={false}
+            aria-required={false}
+            autoComplete={undefined}
+            autoFocus={undefined}
+            className="MuiTextarea-textarea-118 MuiInput-input-106 MuiInput-inputMultiline-109"
+            defaultValue={undefined}
+            disabled={false}
+            id={undefined}
+            name="description"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            onKeyDown={undefined}
+            onKeyUp={undefined}
+            placeholder={undefined}
+            readOnly={undefined}
+            required={undefined}
+            rows={1}
+            type="text"
+            value={undefined}
+          />
+        </div>
+      </div>
+      <p
+        className="MuiFormHelperText-root-120"
+      >
+        Select text to enable text-formatting tools.
+      </p>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ProductDetailsForm /> renders with value 1`] = `
+<div
+  className="MuiPaper-root-2 MuiPaper-elevation2-6 MuiPaper-rounded-3"
+>
+  <div
+    className="Component-root-32"
+  >
+    <button
+      className="MuiButtonBase-root-41 MuiIconButton-root-35 MuiIconButton-colorInherit-36 Component-menuButton-31"
+      disabled={false}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex="0"
+      type="button"
+    >
+      <span
+        className="MuiIconButton-label-40"
+      >
+        <svg
+          aria-hidden="true"
+          className="MuiSvgIcon-root-44"
+          color={undefined}
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"
+          />
+        </svg>
+      </span>
+      <span
+        className="MuiTouchRipple-root-50"
+      />
+    </button>
+    <h2
+      className="MuiTypography-root-57 MuiTypography-title-63 Component-title-34"
+    >
+      Edit product
+    </h2>
+    <div
+      className="Component-action-29"
+    />
+  </div>
+  <div
+    className="MuiCardContent-root-81"
+  >
+    <div
+      className="Component-root-1"
+    >
+      <div
+        aria-describedby={undefined}
+        className="MuiFormControl-root-82 MuiFormControl-fullWidth-85"
+        onBlur={[Function]}
+        onFocus={[Function]}
+      >
+        <label
+          className="MuiFormLabel-root-92 MuiInputLabel-root-86 MuiInputLabel-formControl-87 MuiInputLabel-animated-90 MuiInputLabel-shrink-89"
+          data-shrink={true}
+          htmlFor={undefined}
+        >
+          Name
+        </label>
+        <div
+          className="MuiInput-root-98 MuiInput-fullWidth-105 MuiInput-formControl-99 MuiInput-underline-102"
+        >
+          <input
+            aria-invalid={false}
+            aria-required={false}
+            autoComplete={undefined}
+            autoFocus={undefined}
+            className="MuiInput-input-106"
+            defaultValue={undefined}
+            disabled={false}
+            id={undefined}
+            name="name"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            onKeyDown={undefined}
+            onKeyUp={undefined}
+            placeholder={undefined}
+            readOnly={undefined}
+            required={undefined}
+            rows={undefined}
+            type="text"
+            value="Our totally awesome book"
+          />
+        </div>
+      </div>
+      <span />
+      <div
+        className="MuiFormControl-root-82 MuiFormControl-fullWidth-85"
+        onBlur={[Function]}
+        onFocus={[Function]}
+      >
+        <label
+          className="MuiFormLabel-root-92 MuiInputLabel-root-86 MuiInputLabel-formControl-87 MuiInputLabel-animated-90 MuiInputLabel-shrink-89"
+          data-shrink={true}
+          htmlFor="price"
+        >
+          Price
+        </label>
+        <div
+          className="MuiInput-root-98 MuiInput-formControl-99 MuiInput-underline-102"
+        >
+          <input
+            aria-invalid={false}
+            aria-required={false}
+            autoComplete={undefined}
+            autoFocus={undefined}
+            className="MuiInput-input-106 MuiInput-inputType-110"
+            defaultValue={undefined}
+            disabled={false}
+            id={undefined}
+            name="price"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            onKeyDown={undefined}
+            onKeyUp={undefined}
+            placeholder={undefined}
+            readOnly={undefined}
+            required={undefined}
+            rows={undefined}
+            type="number"
+            value="300"
+          />
+          <div
+            className="MuiInputAdornment-root-124 MuiInputAdornment-positionEnd-126"
+          >
+            <p
+              className="MuiTypography-root-57 MuiTypography-body1-66 MuiTypography-colorTextSecondary-79"
+            >
+              USD
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="Component-spacer-116"
+    />
+    <div
+      className="MuiFormControl-root-82"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      style={
+        Object {
+          "width": "100%",
+        }
+      }
+    >
+      <label
+        className="MuiFormLabel-root-92 MuiInputLabel-root-86 MuiInputLabel-formControl-87 MuiInputLabel-animated-90 MuiInputLabel-shrink-89"
+        data-shrink={true}
+      >
+        Description
+      </label>
+      <div
+        className="MuiInput-root-98 MuiInput-fullWidth-105 MuiInput-formControl-99 MuiInput-multiline-104 MuiInput-underline-102"
+      >
+        <div
+          className="MuiTextarea-root-117"
+          style={
+            Object {
+              "height": 19,
+            }
+          }
+        >
+          <textarea
+            aria-hidden="true"
+            className="MuiTextarea-shadow-119 MuiTextarea-textarea-118"
+            readOnly={true}
+            rows="1"
+            tabIndex={-1}
+            value=""
+          />
+          <textarea
+            aria-hidden="true"
+            className="MuiTextarea-shadow-119 MuiTextarea-textarea-118"
+            defaultValue={undefined}
+            readOnly={true}
+            rows={1}
+            tabIndex={-1}
+            value="Aenean sit amet malesuada nibh. Proin nisi lorem, facilisis at tortor vel, convallis ornare nibh. In nec ipsum porta, varius leo eu, condimentum quam. Donec gravida euismod ipsum, at consequat orci efficitur nec. Phasellus lectus arcu, auctor eget porttitor eget, venenatis a lacus. Suspendisse quis urna rhoncus, commodo justo at, tempor nisl."
+          />
+          <textarea
+            aria-invalid={false}
+            aria-required={false}
+            autoComplete={undefined}
+            autoFocus={undefined}
+            className="MuiTextarea-textarea-118 MuiInput-input-106 MuiInput-inputMultiline-109"
+            defaultValue={undefined}
+            disabled={false}
+            id={undefined}
+            name="description"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            onKeyDown={undefined}
+            onKeyUp={undefined}
+            placeholder={undefined}
+            readOnly={undefined}
+            required={undefined}
+            rows={1}
+            type="text"
+            value="Aenean sit amet malesuada nibh. Proin nisi lorem, facilisis at tortor vel, convallis ornare nibh. In nec ipsum porta, varius leo eu, condimentum quam. Donec gravida euismod ipsum, at consequat orci efficitur nec. Phasellus lectus arcu, auctor eget porttitor eget, venenatis a lacus. Suspendisse quis urna rhoncus, commodo justo at, tempor nisl."
+          />
+        </div>
+      </div>
+      <p
+        className="MuiFormHelperText-root-120"
+      >
+        Select text to enable text-formatting tools.
+      </p>
+    </div>
+  </div>
+</div>
+`;

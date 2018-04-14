@@ -147,10 +147,14 @@ exports[`<ProductList /> renders properly when data is loaded 1`] = `
       <td
         aria-sort={null}
         className="MuiTableCell-root-10 MuiTableCell-body-12"
-        onClick={[Function]}
         scope={undefined}
       >
-        Lewis PLC
+        <span
+          className=""
+          onClick={[Function]}
+        >
+          Lewis PLC
+        </span>
       </td>
       <td
         aria-sort={null}
@@ -183,10 +187,14 @@ exports[`<ProductList /> renders properly when data is loaded 1`] = `
       <td
         aria-sort={null}
         className="MuiTableCell-root-10 MuiTableCell-body-12"
-        onClick={[Function]}
         scope={undefined}
       >
-        Kennedy-Ramirez
+        <span
+          className=""
+          onClick={[Function]}
+        >
+          Kennedy-Ramirez
+        </span>
       </td>
       <td
         aria-sort={null}
@@ -219,10 +227,14 @@ exports[`<ProductList /> renders properly when data is loaded 1`] = `
       <td
         aria-sort={null}
         className="MuiTableCell-root-10 MuiTableCell-body-12"
-        onClick={[Function]}
         scope={undefined}
       >
-        Newman, Ashley and Roberson
+        <span
+          className=""
+          onClick={[Function]}
+        >
+          Newman, Ashley and Roberson
+        </span>
       </td>
       <td
         aria-sort={null}

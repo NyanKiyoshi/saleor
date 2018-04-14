@@ -1,0 +1,329 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProductCategoryAndCollectionsForm /> renders while loading data 1`] = `
+<div
+  className="MuiPaper-root-1 MuiPaper-elevation2-5 MuiPaper-rounded-2"
+>
+  <div
+    className="Component-root-31"
+  >
+    <h2
+      className="MuiTypography-root-34 MuiTypography-title-40 Component-title-33"
+    >
+      Organisation
+    </h2>
+    <div
+      className="Component-action-28"
+    />
+  </div>
+  <div
+    className="MuiCardContent-root-58"
+  >
+    <div
+      className="MuiFormControl-root-60 Component-formControl-59"
+      onBlur={[Function]}
+      onFocus={[Function]}
+    >
+      <label
+        className="MuiFormLabel-root-70 MuiFormLabel-disabled-72 MuiInputLabel-root-64 MuiInputLabel-formControl-65 MuiInputLabel-animated-68"
+        data-shrink={false}
+      >
+        Category
+      </label>
+      <div
+        className="MuiInput-root-81 MuiInput-disabled-84 MuiInput-fullWidth-88 MuiInput-formControl-82 MuiInput-underline-85"
+      >
+        <div
+          className="MuiSelect-root-76"
+        >
+          <div
+            aria-haspopup="true"
+            aria-owns={null}
+            aria-pressed="false"
+            className="MuiSelect-select-77 MuiSelect-selectMenu-78 MuiSelect-disabled-79 MuiInput-input-89 MuiInput-inputDisabled-91"
+            onBlur={[Function]}
+            onClick={null}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={null}
+          >
+            <span
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "&#8203",
+                }
+              }
+            />
+          </div>
+          <input
+            aria-invalid={false}
+            aria-required={false}
+            autoComplete={undefined}
+            autoFocus={undefined}
+            defaultValue={undefined}
+            id={undefined}
+            name="category"
+            onKeyDown={undefined}
+            onKeyUp={undefined}
+            placeholder={undefined}
+            readOnly={undefined}
+            required={undefined}
+            rows={undefined}
+            type="hidden"
+            value=""
+          />
+          <svg
+            aria-hidden="true"
+            className="MuiSvgIcon-root-95 MuiSelect-icon-80"
+            color={undefined}
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7 10l5 5 5-5z"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div
+      className="Component-spacer-105"
+    />
+    <div
+      className="MuiFormControl-root-60 Component-formControl-108"
+      onBlur={[Function]}
+      onFocus={[Function]}
+    >
+      <label
+        className="MuiFormLabel-root-70 MuiFormLabel-disabled-72 MuiInputLabel-root-64 MuiInputLabel-formControl-65 MuiInputLabel-animated-68"
+        data-shrink={false}
+      >
+        Collections
+      </label>
+      <div
+        className="MuiInput-root-81 MuiInput-disabled-84 MuiInput-fullWidth-88 MuiInput-formControl-82 MuiInput-underline-85"
+      >
+        <div
+          className="MuiSelect-root-76"
+        >
+          <div
+            aria-haspopup="true"
+            aria-owns={null}
+            aria-pressed="false"
+            className="MuiSelect-select-77 MuiSelect-selectMenu-78 MuiSelect-disabled-79 MuiInput-input-89 MuiInput-inputDisabled-91"
+            onBlur={[Function]}
+            onClick={null}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={null}
+          >
+            <span
+              dangerouslySetInnerHTML={
+                Object {
+                  "__html": "&#8203",
+                }
+              }
+            />
+          </div>
+          <input
+            aria-invalid={false}
+            aria-required={false}
+            autoComplete={undefined}
+            autoFocus={undefined}
+            defaultValue={undefined}
+            id={undefined}
+            name="collections"
+            onKeyDown={undefined}
+            onKeyUp={undefined}
+            placeholder={undefined}
+            readOnly={undefined}
+            required={undefined}
+            rows={undefined}
+            type="hidden"
+            value=""
+          />
+          <svg
+            aria-hidden="true"
+            className="MuiSvgIcon-root-95 MuiSelect-icon-80"
+            color={undefined}
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7 10l5 5 5-5z"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ProductCategoryAndCollectionsForm /> renders with data loaded 1`] = `
+<div
+  className="MuiPaper-root-1 MuiPaper-elevation2-5 MuiPaper-rounded-2"
+>
+  <div
+    className="Component-root-31"
+  >
+    <h2
+      className="MuiTypography-root-34 MuiTypography-title-40 Component-title-33"
+    >
+      Organisation
+    </h2>
+    <div
+      className="Component-action-28"
+    />
+  </div>
+  <div
+    className="MuiCardContent-root-58"
+  >
+    <div
+      className="MuiFormControl-root-60 Component-formControl-59"
+      onBlur={[Function]}
+      onFocus={[Function]}
+    >
+      <label
+        className="MuiFormLabel-root-70 MuiInputLabel-root-64 MuiInputLabel-formControl-65 MuiInputLabel-animated-68 MuiInputLabel-shrink-67"
+        data-shrink={true}
+      >
+        Category
+      </label>
+      <div
+        className="MuiInput-root-81 MuiInput-fullWidth-88 MuiInput-formControl-82 MuiInput-underline-85"
+      >
+        <div
+          className="MuiSelect-root-76"
+        >
+          <div
+            aria-haspopup="true"
+            aria-owns={null}
+            aria-pressed="false"
+            className="MuiSelect-select-77 MuiSelect-selectMenu-78 MuiInput-input-89"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={0}
+          >
+            Mauris vehicula tortor vulputate
+          </div>
+          <input
+            aria-invalid={false}
+            aria-required={false}
+            autoComplete={undefined}
+            autoFocus={undefined}
+            defaultValue={undefined}
+            id={undefined}
+            name="category"
+            onKeyDown={undefined}
+            onKeyUp={undefined}
+            placeholder={undefined}
+            readOnly={undefined}
+            required={undefined}
+            rows={undefined}
+            type="hidden"
+            value="876752"
+          />
+          <svg
+            aria-hidden="true"
+            className="MuiSvgIcon-root-95 MuiSelect-icon-80"
+            color={undefined}
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7 10l5 5 5-5z"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+    <div
+      className="Component-spacer-105"
+    />
+    <div
+      className="MuiFormControl-root-60 Component-formControl-108"
+      onBlur={[Function]}
+      onFocus={[Function]}
+    >
+      <label
+        className="MuiFormLabel-root-70 MuiInputLabel-root-64 MuiInputLabel-formControl-65 MuiInputLabel-animated-68 MuiInputLabel-shrink-67"
+        data-shrink={true}
+      >
+        Collections
+      </label>
+      <div
+        className="MuiInput-root-81 MuiInput-fullWidth-88 MuiInput-formControl-82 MuiInput-underline-85"
+      >
+        <div
+          className="MuiSelect-root-76"
+        >
+          <div
+            aria-haspopup="true"
+            aria-owns={null}
+            aria-pressed="false"
+            className="MuiSelect-select-77 MuiSelect-selectMenu-78 MuiInput-input-89"
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            role="button"
+            tabIndex={0}
+          >
+            <div
+              className="Component-chipContainer-107"
+            >
+              <div
+                className="MuiChip-root-109 Component-chip-106"
+                onClick={undefined}
+                onKeyDown={[Function]}
+                role="button"
+                tabIndex={-1}
+              >
+                <span
+                  className="MuiChip-label-114"
+                >
+                  Winter collection
+                </span>
+              </div>
+            </div>
+          </div>
+          <input
+            aria-invalid={false}
+            aria-required={false}
+            autoComplete={undefined}
+            autoFocus={undefined}
+            defaultValue={undefined}
+            id={undefined}
+            name="collections"
+            onKeyDown={undefined}
+            onKeyUp={undefined}
+            placeholder={undefined}
+            readOnly={undefined}
+            required={undefined}
+            rows={undefined}
+            type="hidden"
+            value="1"
+          />
+          <svg
+            aria-hidden="true"
+            className="MuiSvgIcon-root-95 MuiSelect-icon-80"
+            color={undefined}
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M7 10l5 5 5-5z"
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
