@@ -218,11 +218,12 @@ INSTALLED_APPS = [
     'phonenumber_field']
 
 if DEBUG:
-    MIDDLEWARE.append(
-        'debug_toolbar.middleware.DebugToolbarMiddleware')
+    MIDDLEWARE.insert(0, 'debug_toolbar.middleware.DebugToolbarMiddleware')
     INSTALLED_APPS.append('debug_toolbar')
+    DEBUG_TOOLBAR_CONFIG = {'PROFILER_MAX_DEPTH': 100}
 
-ENABLE_SILK = ast.literal_eval(os.environ.get('ENABLE_SILK', 'False'))
+# requires django-silk
+ENABLE_SILK = ast.literal_eval(os.environ.get('ENABLE_SILK', 'True'))
 if ENABLE_SILK:
     MIDDLEWARE.insert(0, 'silk.middleware.SilkyMiddleware')
     INSTALLED_APPS.append('silk')
