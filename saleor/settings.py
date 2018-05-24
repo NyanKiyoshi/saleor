@@ -302,11 +302,38 @@ PAYMENT_MODEL = 'order.Payment'
 PAYMENT_VARIANTS = {
     'default': ('payments.dummy.DummyProvider', {})}
 
-SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
-SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
-
 CHECKOUT_PAYMENT_CHOICES = [
     ('default', 'Dummy provider')]
+
+PAYMENT_VARIANTS['paypal'] = ('payments.paypal.PaypalProvider', {
+    'client_id': os.environ.get('PAYPAL_CLIENT_ID'),
+    'secret': os.environ.get('PAYPAL_SECRET'),
+    'endpoint': os.environ.get(
+        'PAYPAL_ENDPOINT', 'https://api.sandbox.paypal.com'),
+    'capture': ast.literal_eval(os.environ.get('PAYPAL_CAPTURE', 'True'))
+})
+CHECKOUT_PAYMENT_CHOICES.append(('paypal', 'Paypal'))
+
+PAYMENT_VARIANTS['stripe'] = ('payments.stripe.StripeProvider', {
+    'public_key': os.environ.get('STRIPE_PUBLIC_KEY'),
+    'secret_key': os.environ.get('STRIPE_SECRET_KEY'),
+    'image': os.environ.get('STORE_IMAGE', ''),
+    'name': os.environ.get('STORE_NAME', ''),
+})
+CHECKOUT_PAYMENT_CHOICES.append(('stripe', 'Stripe'))
+
+
+PAYMENT_VARIANTS['dotpay'] = ('payments.dotpay.DotpayProvider', {
+    'seller_id': os.environ.get('DOTPAY_SELLER_ID'),
+    'channel': '1',
+    'lang': 'en',
+    'pin': os.environ.get('DOTPAY_PIN'),
+    'lock': True,
+    'endpoint': 'https://ssl.dotpay.pl/test_payment/'})
+CHECKOUT_PAYMENT_CHOICES.append(('dotpay', 'DotPay'))
+
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
 
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'}
