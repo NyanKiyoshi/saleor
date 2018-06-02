@@ -28,8 +28,8 @@
 {% block menu_homepage_blocks_class %}active{% endblock %}
 
 {% block content %}
-  <div class="row sortable-items-container"
-       data-post-parameter="ordered_block_items"
+  <div class="row sortable-items"
+       data-post-name="ordered_block_items"
        data-post-url="{% url 'dashboard:homepage-blocks-reorder' %}">
     {% if blocks %}
       {% for block_item in blocks %}
