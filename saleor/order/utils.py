@@ -1,15 +1,15 @@
 from functools import wraps
 
-from django.conf import settings
-from django.db.models import F
 from django.shortcuts import get_object_or_404, redirect
-from prices import Money
 
-from saleor.order.models import OrderLine
 from ..account.utils import store_user_address
+from ..checkout import AddressType
 from ..core.exceptions import InsufficientStock
+from ..core.utils.taxes import (
+    ZERO_MONEY, get_tax_rate_by_name, get_taxes_for_address)
 from ..dashboard.order.utils import get_voucher_discount_for_order
 from ..order import FulfillmentStatus, OrderStatus
+from ..order.models import OrderLine
 from ..product.utils import allocate_stock, deallocate_stock, increase_stock
 
 
@@ -43,8 +43,7 @@ def update_voucher_discount(func):
         if kwargs.pop('update_voucher_discount', True):
             order = args[0]
             order.discount_amount = (
-                get_voucher_discount_for_order(order) or
-                Money(0, settings.DEFAULT_CURRENCY))
+                get_voucher_discount_for_order(order) or ZERO_MONEY)
         return func(*args, **kwargs)
 
     return decorator
@@ -70,6 +69,24 @@ def recalculate_order(order, **kwargs):
         total -= order.discount_amount
     order.total = total
     order.save()
+
+
+def update_order_prices(order, discounts):
+    """Update prices in order with given discounts and proper taxes."""
+    taxes = get_taxes_for_address(order.shipping_address)
+
+    for line in order:
+        if line.variant:
+            line.unit_price = line.variant.get_price(discounts, taxes)
+            line.tax_rate = get_tax_rate_by_name(
+                line.variant.product.tax_rate, taxes)
+            line.save()
+
+    if order.shipping_method:
+        order.shipping_price = order.shipping_method.get_total_price(taxes)
+        order.save()
+
+    recalculate_order(order)
 
 
 def cancel_order(order, restock):
@@ -120,104 +137,43 @@ def cancel_fulfillment(fulfillment, restock):
 
 
 def attach_order_to_user(order, user):
-    """Associates existing order with user account."""
+    """Associate existing order with user account."""
     order.user = user
-    store_user_address(user, order.billing_address, billing=True)
+    store_user_address(user, order.billing_address, AddressType.BILLING)
     if order.shipping_address:
-        store_user_address(user, order.shipping_address, shipping=True)
+        store_user_address(user, order.shipping_address, AddressType.SHIPPING)
     order.save(update_fields=['user'])
 
 
-def add_variant_to_order(
-        order, variant, total_quantity, discounts=None, add_to_existing=True):
+def add_variant_to_order(order, variant, quantity, discounts=None, taxes=None):
     """Add total_quantity of variant to order.
 
     Raises InsufficientStock exception if quantity could not be fulfilled.
-
-    By default, first adds variant to existing lines with same variant.
-    It can be disabled with setting add_to_existing to False.
-
-    Order lines are created by increasing quantity of lines,
-    as long as total_quantity of variant will be added.
     """
-    quantity_left = add_variant_to_existing_lines(
-        order, variant, total_quantity) if add_to_existing else total_quantity
-    price = variant.get_price_per_item(discounts)
-    while quantity_left > 0:
-        stock = variant.select_stockrecord()
-        if not stock:
-            raise InsufficientStock(variant)
-        quantity = (
-            stock.quantity_available
-            if quantity_left > stock.quantity_available
-            else quantity_left
-        )
+    if quantity > variant.quantity_available:
+        raise InsufficientStock(variant)
+
+    try:
+        line = order.lines.get(variant=variant)
+        line.quantity += quantity
+        line.save(update_fields=['quantity'])
+    except OrderLine.DoesNotExist:
         order.lines.create(
-            product=variant.product,
             product_name=variant.display_product(),
             product_sku=variant.sku,
-            is_shipping_required=(
-                variant.product.product_type.is_shipping_required),
+            is_shipping_required=variant.is_shipping_required(),
             quantity=quantity,
-            unit_price=price,
-            stock=stock,
-            stock_location=stock.location.name)
-        allocate_stock(stock, quantity)
-        # refresh stock for accessing quantity_allocated
-        stock.refresh_from_db()
-        quantity_left -= quantity
+            variant=variant,
+            unit_price=variant.get_price(discounts, taxes),
+            tax_rate=get_tax_rate_by_name(variant.product.tax_rate, taxes))
 
-
-def add_variant_to_existing_lines(order, variant, total_quantity):
-    """Add variant to existing lines with same variant.
-
-    Variant is added by increasing quantity of lines with same variant,
-    as long as total_quantity of variant will be added
-    or there is no more lines with same variant.
-
-    Returns quantity that could not be fulfilled with existing lines.
-    """
-    # order descending by lines' stock available quantity
-    lines = order.lines.filter(
-        product=variant.product, product_sku=variant.sku,
-        stock__isnull=False).order_by(
-            F('stock__quantity_allocated') - F('stock__quantity'))
-
-    quantity_left = total_quantity
-    for line in lines:
-        quantity = (
-            line.stock.quantity_available
-            if quantity_left > line.stock.quantity_available
-            else quantity_left)
-        line.quantity += quantity
-        line.save()
-        allocate_stock(line.stock, quantity)
-        quantity_left -= quantity
-        if quantity_left == 0:
-            break
-    return quantity_left
-
-
-def merge_duplicates_into_order_line(line):
-    """Merge duplicated lines in order into one (given) line.
-
-    If there are no duplicates, nothing will happen.
-    """
-    lines = line.order.lines.filter(
-        product=line.product, product_name=line.product_name,
-        product_sku=line.product_sku, stock=line.stock,
-        is_shipping_required=line.is_shipping_required)
-    if lines.count() > 1:
-        line.quantity = sum([line.quantity for line in lines])
-        line.save(update_fields=['quantity'])
-        lines.exclude(pk=line.pk).delete()
+    allocate_stock(variant, quantity)
 
 
 def change_order_line_quantity(line, new_quantity):
     """Change the quantity of ordered items in a order line."""
-    line.quantity = new_quantity
-
-    if line.quantity:
+    if new_quantity:
+        line.quantity = new_quantity
         line.save()
     else:
         line.delete()
@@ -226,19 +182,18 @@ def change_order_line_quantity(line, new_quantity):
 def restock_order_lines(order):
     """Return ordered products to corresponding stocks."""
     for line in order:
-        if line.stock:
+        if line.variant:
             if line.quantity_unfulfilled > 0:
-                deallocate_stock(line.stock, line.quantity_unfulfilled)
+                deallocate_stock(line.variant, line.quantity_unfulfilled)
             if line.quantity_fulfilled > 0:
-                increase_stock(line.stock, line.quantity_fulfilled)
+                increase_stock(line.variant, line.quantity_fulfilled)
                 line.quantity_fulfilled = 0
                 line.save(update_fields=['quantity_fulfilled'])
 
 
-def restock_fulfillment_lines(fulfillment, allocate=True):
+def restock_fulfillment_lines(fulfillment):
     """Return fulfilled products to corresponding stocks."""
     for line in fulfillment:
-        order_line = line.order_line
-        if order_line.stock:
+        if line.order_line.variant:
             increase_stock(
-                line.order_line.stock, line.quantity, allocate=allocate)
+                line.order_line.variant, line.quantity, allocate=True)

@@ -13,8 +13,6 @@ MODELS_PERMISSIONS = [
     'product.edit_product',
     'product.view_properties',
     'product.edit_properties',
-    'product.view_stock_location',
-    'product.edit_stock_location',
     'sale.view_sale',
     'sale.edit_sale',
     'shipping.view_shipping',
@@ -37,5 +35,5 @@ MODELS_PERMISSIONS = [
 
 def get_permissions():
     codenames = [permission.split('.')[1] for permission in MODELS_PERMISSIONS]
-    return Permission.objects.filter(codename__in=codenames)\
-        .prefetch_related('content_type')
+    return Permission.objects.filter(codename__in=codenames).prefetch_related(
+        'content_type').order_by('codename')

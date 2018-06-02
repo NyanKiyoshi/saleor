@@ -4,11 +4,13 @@ from unittest.mock import Mock, patch
 
 import pytest
 from django.http import HttpResponse
+from django.conf import settings
 from django.shortcuts import reverse
 from django.test import RequestFactory
 from prices import Money
 
 from saleor.account.models import Address, User
+from saleor.core.storages import S3MediaStorage
 from saleor.core.decorators import methods_required, requires_post_method
 from saleor.core.utils import (
     Country, create_superuser, create_thumbnails, format_money,
@@ -225,6 +227,27 @@ def test_create_thumbnails(product_with_image, settings):
             assert product_image.image.crop[size].name in log_deleted_images
         elif method == 'thumbnail':
             assert product_image.image.thumbnail[size].name in log_deleted_images  # noqa
+
+
+@patch('storages.backends.s3boto3.S3Boto3Storage')
+@patch.object(settings, 'AWS_MEDIA_BUCKET_NAME', 'media-bucket')
+@patch.object(settings, 'AWS_MEDIA_CUSTOM_DOMAIN', 'media-bucket.example.org')
+def test_storages_set_s3_bucket_domain(*_patches):
+    assert settings.AWS_MEDIA_BUCKET_NAME == 'media-bucket'
+    assert settings.AWS_MEDIA_CUSTOM_DOMAIN == 'media-bucket.example.org'
+    storage = S3MediaStorage()
+    assert storage.bucket_name == 'media-bucket'
+    assert storage.custom_domain == 'media-bucket.example.org'
+
+
+@patch('storages.backends.s3boto3.S3Boto3Storage')
+@patch.object(settings, 'AWS_MEDIA_BUCKET_NAME', 'media-bucket')
+def test_storages_not_setting_s3_bucket_domain(*_patches):
+    assert settings.AWS_MEDIA_BUCKET_NAME == 'media-bucket'
+    assert settings.AWS_MEDIA_CUSTOM_DOMAIN is None
+    storage = S3MediaStorage()
+    assert storage.bucket_name == 'media-bucket'
+    assert storage.custom_domain is None
 
 
 def test_decorators_methods_required_empty():

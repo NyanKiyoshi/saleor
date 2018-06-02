@@ -8,14 +8,16 @@ from impersonate.views import impersonate as orig_impersonate
 from ..account.models import User
 from ..dashboard.views import staff_member_required
 from ..homepage.models import HomePageItem
-from ..product.utils import products_for_homepage, products_with_availability
+from ..product.utils import products_for_homepage
+from ..product.utils.availability import products_with_availability
 from ..seo.schema.webpage import get_webpage_schema
 
 
 def home(request):
     products = products_for_homepage()[:8]
     products = products_with_availability(
-        products, discounts=request.discounts, local_currency=request.currency)
+        products, discounts=request.discounts, taxes=request.taxes,
+        local_currency=request.currency)
     blocks = HomePageItem.objects.all()
     webpage_schema = get_webpage_schema(request)
     return TemplateResponse(

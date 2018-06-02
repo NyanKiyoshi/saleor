@@ -1,16 +1,12 @@
-import json
 from datetime import date, timedelta
 from unittest.mock import Mock
 
 import pytest
-from django.urls import reverse
-from freezegun import freeze_time
 from prices import Money, TaxedMoney
 
-from saleor.checkout.utils import get_voucher_discount_for_checkout
+from saleor.checkout.utils import get_voucher_discount_for_cart
 from saleor.discount import (
     DiscountValueType, VoucherApplyToProduct, VoucherType)
-from saleor.discount.forms import CheckoutDiscountForm
 from saleor.discount.models import NotApplicable, Sale, Voucher
 from saleor.discount.utils import (
     decrease_voucher_usage, get_product_discount_on_sale,
@@ -32,33 +28,33 @@ def test_valid_voucher_limit(settings, limit, value):
 
 @pytest.mark.integration
 @pytest.mark.django_db(transaction=True)
-def test_variant_discounts(product_in_stock):
-    variant = product_in_stock.variants.get()
+def test_variant_discounts(product):
+    variant = product.variants.get()
     low_discount = Sale.objects.create(
         type=DiscountValueType.FIXED,
         value=5)
-    low_discount.products.add(product_in_stock)
+    low_discount.products.add(product)
     discount = Sale.objects.create(
         type=DiscountValueType.FIXED,
         value=8)
-    discount.products.add(product_in_stock)
+    discount.products.add(product)
     high_discount = Sale.objects.create(
         type=DiscountValueType.FIXED,
         value=50)
-    high_discount.products.add(product_in_stock)
-    final_price = variant.get_price_per_item(discounts=Sale.objects.all())
+    high_discount.products.add(product)
+    final_price = variant.get_price(discounts=Sale.objects.all())
     assert final_price.gross == Money(0, 'USD')
 
 
 @pytest.mark.integration
 @pytest.mark.django_db(transaction=True)
-def test_percentage_discounts(product_in_stock):
-    variant = product_in_stock.variants.get()
+def test_percentage_discounts(product):
+    variant = product.variants.get()
     discount = Sale.objects.create(
         type=DiscountValueType.PERCENTAGE,
         value=50)
-    discount.products.add(product_in_stock)
-    final_price = variant.get_price_per_item(discounts=[discount])
+    discount.products.add(product)
+    final_price = variant.get_price(discounts=[discount])
     assert final_price.gross == Money(5, 'USD')
 
 
@@ -68,66 +64,6 @@ def test_voucher_queryset_active(voucher):
     active_vouchers = Voucher.objects.active(
         date=date.today() - timedelta(days=1))
     assert len(active_vouchers) == 0
-
-
-def test_checkout_discount_form_invalid_voucher_code(monkeypatch):
-    checkout = Mock(cart=Mock())
-    form = CheckoutDiscountForm({'voucher': 'invalid'}, checkout=checkout)
-    assert not form.is_valid()
-    assert 'voucher' in form.errors
-
-
-def test_checkout_discount_form_not_applicable_voucher(monkeypatch, voucher):
-    checkout = Mock(cart=Mock())
-    form = CheckoutDiscountForm({'voucher': voucher.code}, checkout=checkout)
-    monkeypatch.setattr(
-        'saleor.discount.forms.get_voucher_discount_for_checkout',
-        Mock(side_effect=NotApplicable('Not applicable')))
-    assert not form.is_valid()
-    assert 'voucher' in form.errors
-
-
-def test_checkout_discount_form_active_queryset_voucher_not_active(voucher):
-    assert len(Voucher.objects.all()) == 1
-    checkout = Mock(cart=Mock())
-    voucher.start_date = date.today() + timedelta(days=1)
-    voucher.save()
-    form = CheckoutDiscountForm({'voucher': voucher.code}, checkout=checkout)
-    qs = form.fields['voucher'].queryset
-    assert len(qs) == 0
-
-
-def test_checkout_discount_form_active_queryset_voucher_active(voucher):
-    assert len(Voucher.objects.all()) == 1
-    checkout = Mock(cart=Mock())
-    voucher.start_date = date.today()
-    voucher.save()
-    form = CheckoutDiscountForm({'voucher': voucher.code}, checkout=checkout)
-    qs = form.fields['voucher'].queryset
-    assert len(qs) == 1
-
-
-def test_checkout_discount_form_active_queryset_after_some_time(voucher):
-    assert len(Voucher.objects.all()) == 1
-    checkout = Mock(cart=Mock())
-    voucher.start_date = date(year=2016, month=6, day=1)
-    voucher.end_date = date(year=2016, month=6, day=2)
-    voucher.save()
-
-    with freeze_time('2016-05-31'):
-        form = CheckoutDiscountForm(
-            {'voucher': voucher.code}, checkout=checkout)
-        assert len(form.fields['voucher'].queryset) == 0
-
-    with freeze_time('2016-06-01'):
-        form = CheckoutDiscountForm(
-            {'voucher': voucher.code}, checkout=checkout)
-        assert len(form.fields['voucher'].queryset) == 1
-
-    with freeze_time('2016-06-03'):
-        form = CheckoutDiscountForm(
-            {'voucher': voucher.code}, checkout=checkout)
-        assert len(form.fields['voucher'].queryset) == 0
 
 
 @pytest.mark.parametrize(
@@ -172,11 +108,10 @@ def test_products_voucher_checkout_discount_not(
         discount_value=discount_value,
         apply_to=apply_to)
     checkout = Mock(cart=Mock())
-    discount = get_voucher_discount_for_checkout(voucher, checkout)
+    discount = get_voucher_discount_for_cart(voucher, checkout)
     assert discount == Money(expected_value, 'USD')
 
 
-@pytest.mark.django_db
 def test_sale_applies_to_correct_products(product_type, default_category):
     product = Product.objects.create(
         name='Test Product', price=Money(10, 'USD'), description='',
@@ -282,16 +217,3 @@ def test_get_product_or_category_voucher_discount_all_products(
 
     discount = get_product_or_category_voucher_discount(voucher, prices)
     assert discount == Money(expected_value, 'USD')
-
-
-def test_ajax_voucher_list(admin_client, voucher):
-    voucher.name = 'Summer sale'
-    voucher.save()
-    vouchers_list = [{'id': voucher.pk, 'text': str(voucher)}]
-    url = reverse('dashboard:ajax-vouchers')
-
-    response = admin_client.get(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-    resp_decoded = json.loads(response.content.decode('utf-8'))
-
-    assert response.status_code == 200
-    assert resp_decoded == {'results': vouchers_list}

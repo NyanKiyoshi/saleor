@@ -6,6 +6,7 @@ import dj_email_url
 import django_cache_url
 from django.contrib.messages import constants as messages
 from django.utils.translation import gettext_lazy as _
+from django_prices.templatetags.prices_i18n import get_currency_fraction
 
 
 def get_list(text):
@@ -29,12 +30,11 @@ MANAGERS = ADMINS
 
 INTERNAL_IPS = get_list(os.environ.get('INTERNAL_IPS', '127.0.0.1'))
 
+# Some cloud providers like Heroku export REDIS_URL variable instead of CACHE_URL
+REDIS_URL = os.environ.get('REDIS_URL')
+if REDIS_URL:
+    CACHE_URL = os.environ.setdefault('CACHE_URL', REDIS_URL)
 CACHES = {'default': django_cache_url.config()}
-
-if os.environ.get('REDIS_URL'):
-    CACHES['default'] = {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': os.environ.get('REDIS_URL')}
 
 DATABASES = {
     'default': dj_database_url.config(
@@ -93,6 +93,9 @@ EMAIL_USE_SSL = email_config['EMAIL_USE_SSL']
 ENABLE_SSL = ast.literal_eval(
     os.environ.get('ENABLE_SSL', 'False'))
 
+if ENABLE_SSL:
+    SECURE_SSL_REDIRECT = not DEBUG
+
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
 ORDER_FROM_EMAIL = os.getenv('ORDER_FROM_EMAIL', DEFAULT_FROM_EMAIL)
 
@@ -120,7 +123,7 @@ context_processors = [
     'django.contrib.messages.context_processors.messages',
     'django.template.context_processors.request',
     'saleor.core.context_processors.default_currency',
-    'saleor.cart.context_processors.cart_counter',
+    'saleor.checkout.context_processors.cart_counter',
     'saleor.core.context_processors.navigation',
     'saleor.core.context_processors.search_enabled',
     'saleor.site.context_processors.site',
@@ -148,6 +151,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -160,6 +164,7 @@ MIDDLEWARE = [
     'saleor.core.middleware.country',
     'saleor.core.middleware.currency',
     'saleor.core.middleware.site',
+    'saleor.core.middleware.taxes',
     'social_django.middleware.SocialAuthExceptionMiddleware',
     'impersonate.middleware.ImpersonateMiddleware']
 
@@ -182,7 +187,6 @@ INSTALLED_APPS = [
     'saleor.account',
     'saleor.discount',
     'saleor.product',
-    'saleor.cart',
     'saleor.checkout',
     'saleor.core',
     'saleor.graphql',
@@ -203,6 +207,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'django_prices',
     'django_prices_openexchangerates',
+    'django_prices_vatlayer',
     'graphene_django',
     'mptt',
     'payments',
@@ -269,9 +274,14 @@ LOGIN_URL = '/account/login/'
 
 DEFAULT_COUNTRY = 'US'
 DEFAULT_CURRENCY = 'USD'
+DEFAULT_DECIMAL_PLACES = get_currency_fraction(DEFAULT_CURRENCY)
 AVAILABLE_CURRENCIES = [DEFAULT_CURRENCY]
 
 OPENEXCHANGERATES_API_KEY = os.environ.get('OPENEXCHANGERATES_API_KEY')
+
+# VAT configuration
+# Enabling vat requires valid vatlayer access key.
+VATLAYER_ACCESS_KEY = os.environ.get('VATLAYER_ACCESS_KEY')
 
 ACCOUNT_ACTIVATION_DAYS = 3
 
@@ -322,10 +332,12 @@ ALLOWED_HOSTS = get_list(os.environ.get('ALLOWED_HOSTS', 'localhost'))
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Amazon S3 configuration
+AWS_S3_CUSTOM_DOMAIN = os.environ.get('AWS_STATIC_CUSTOM_DOMAIN')
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 AWS_MEDIA_BUCKET_NAME = os.environ.get('AWS_MEDIA_BUCKET_NAME')
+AWS_MEDIA_CUSTOM_DOMAIN = os.environ.get('AWS_MEDIA_CUSTOM_DOMAIN')
 AWS_QUERYSTRING_AUTH = ast.literal_eval(
     os.environ.get('AWS_QUERYSTRING_AUTH', 'False'))
 
@@ -420,9 +432,11 @@ SOCIAL_AUTH_USER_MODEL = AUTH_USER_MODEL
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
     'fields': 'id, email'}
+# As per March 2018, Facebook requires all traffic to go through HTTPS only
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
 
 # CELERY SETTINGS
-CELERY_BROKER_URL = os.environ.get('REDIS_BROKER_URL') or ''
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL') or ''
 CELERY_TASK_ALWAYS_EAGER = False if CELERY_BROKER_URL else True
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
@@ -460,5 +474,7 @@ ALLOWED_ATTRIBUTES = {
 ALLOWED_STYLES = ['text-align']
 
 
-# slugs for menus used in storefront's base template, created by default
-DEFAULT_MENUS = ['navbar', 'footer']
+# Slugs for menus precreated in Django migrations
+DEFAULT_MENUS = {
+    'top_menu_name': 'navbar',
+    'bottom_menu_name': 'footer'}

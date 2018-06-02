@@ -1,3 +1,4 @@
+import json
 from datetime import date
 from decimal import Decimal
 from unittest.mock import Mock
@@ -24,7 +25,7 @@ def test_vouchers_list(admin_client, voucher):
 
 
 def test_voucher_shipping_add(admin_client):
-    assert len(Voucher.objects.all()) == 0
+    assert Voucher.objects.count() == 0
     url = reverse('dashboard:voucher-add')
     data = {
         'code': 'TESTVOUCHER', 'name': 'Test Voucher',
@@ -34,7 +35,7 @@ def test_voucher_shipping_add(admin_client):
         'shipping-limit': '59.99'}
     response = admin_client.post(url, data, follow=True)
     assert response.status_code == 200
-    assert len(Voucher.objects.all()) == 1
+    assert Voucher.objects.count() == 1
 
     voucher = Voucher.objects.all()[0]
     assert voucher.type == VoucherType.SHIPPING
@@ -65,7 +66,7 @@ def test_view_sale_add(admin_client, default_category):
 
 
 def test_view_sale_add_requires_product_or_category(
-        admin_client, default_category, product_in_stock):
+        admin_client, default_category, product):
     url = reverse('dashboard:sale-add')
     data = {
         'name': 'Free products',
@@ -86,7 +87,7 @@ def test_view_sale_add_requires_product_or_category(
     assert Sale.objects.count() == 1
 
     data_with_product = data.copy()
-    data_with_product.update({'products': [product_in_stock.id]})
+    data_with_product.update({'products': [product.id]})
 
     response = admin_client.post(url, data_with_product)
 
@@ -185,3 +186,16 @@ def test_category_voucher_checkout_discount_not_applicable(monkeypatch):
     order = Mock(voucher=voucher)
     discount = get_voucher_discount_for_order(order)
     assert discount == Money(0, 'USD')
+
+
+def test_ajax_voucher_list(admin_client, voucher):
+    voucher.name = 'Summer sale'
+    voucher.save()
+    vouchers_list = [{'id': voucher.pk, 'text': str(voucher)}]
+    url = reverse('dashboard:ajax-vouchers')
+
+    response = admin_client.get(url, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+    resp_decoded = json.loads(response.content.decode('utf-8'))
+
+    assert response.status_code == 200
+    assert resp_decoded == {'results': vouchers_list}
