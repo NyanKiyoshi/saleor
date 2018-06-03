@@ -273,16 +273,21 @@ class ProductVariantForm(forms.ModelForm, AttributesMixin):
 
     class Meta:
         model = ProductVariant
-        fields = ['sku', 'price_override', 'quantity', 'cost_price']
+        fields = [
+            'sku', 'price_override', 'manage_stock', 'quantity', 'cost_price']
         labels = {
             'sku': pgettext_lazy('SKU', 'SKU'),
             'price_override': pgettext_lazy(
                 'Override price', 'Selling price override'),
             'quantity': pgettext_lazy('Integer number', 'Number in stock'),
-            'cost_price': pgettext_lazy('Currency amount', 'Cost price')}
+            'cost_price': pgettext_lazy('Currency amount', 'Cost price'),
+            'manage_stock': pgettext_lazy(
+                'Manage stock field', 'Automatically manage the stock')}
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, manage_stock_by_default=True, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.initial['manage_stock'] = manage_stock_by_default
 
         if self.instance.product.pk:
             self.fields['price_override'].widget.attrs[
@@ -307,6 +312,7 @@ class ProductVariantForm(forms.ModelForm, AttributesMixin):
         attributes = self.get_saved_attributes()
         self.instance.attributes = attributes
         self.instance.name = get_name_from_attributes(self.instance)
+        print(self.instance.manage_stock)
         return super().save(commit=commit)
 
 

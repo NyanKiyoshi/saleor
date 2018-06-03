@@ -185,6 +185,11 @@ class ProductVariant(models.Model):
         Product, related_name='variants', on_delete=models.CASCADE)
     attributes = HStoreField(default={}, blank=True)
     images = models.ManyToManyField('ProductImage', through='VariantImage')
+    manage_stock = models.BooleanField(
+        default=True,
+        help_text=pgettext_lazy(
+            'product variant manage stock field help text',
+            'Allow or not to automatically manage stock units from orders'))
     quantity = models.IntegerField(
         validators=[MinValueValidator(0)], default=Decimal(1))
     quantity_allocated = models.IntegerField(
