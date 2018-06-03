@@ -22,11 +22,11 @@ class SiteSettings(models.Model):
     include_taxes_in_prices = models.BooleanField(default=True)
     display_gross_prices = models.BooleanField(default=True)
     charge_taxes_on_shipping = models.BooleanField(default=True)
-    manage_stock_by_default = models.BooleanField(
+    handle_stock_by_default = models.BooleanField(
         default=True,
         help_text=pgettext_lazy(
-            'manage stock by default settings field help',
-            'This will set the default value of stock management '
+            'handle stock by default settings field help text',
+            'This will set the default value of stock handling '
             'on product and variant creation'))
 
     class Meta:
