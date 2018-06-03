@@ -209,7 +209,10 @@ class ProductVariant(models.Model):
         return max(self.quantity - self.quantity_allocated, 0)
 
     def check_quantity(self, quantity):
-        if quantity > self.quantity_available:
+        """ Check if there is at least the given quantity in stock
+        if stock handling is enabled.
+        """
+        if self.handle_stock and quantity > self.quantity_available:
             raise InsufficientStock(self)
 
     @property
