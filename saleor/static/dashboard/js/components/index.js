@@ -6,6 +6,7 @@ import './filters';
 import './google-preview';
 import './image-gallery';
 import './load-action';
+import './image-file-input';
 import './messages';
 import './misc';
 import './modal';

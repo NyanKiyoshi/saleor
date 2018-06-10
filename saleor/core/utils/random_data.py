@@ -7,6 +7,7 @@ from django.conf import settings
 from django.contrib.auth.models import Group, Permission
 from django.contrib.sites.models import Site
 from django.core.files import File
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.template.defaultfilters import slugify
 from django_countries.fields import Country
 from faker import Factory
@@ -21,6 +22,8 @@ from ...core.utils.taxes import get_tax_rate_by_name, get_taxes_for_country
 from ...core.utils.text import strip_html_and_truncate
 from ...discount import DiscountValueType, VoucherType
 from ...discount.models import Sale, Voucher
+from ...homepage.models import HomePageItem
+from ...homepage.thumbnails import create_homepage_block_thumbnails
 from ...menu.models import Menu
 from ...order.models import Fulfillment, Order, Payment
 from ...order.utils import update_order_status
@@ -40,6 +43,8 @@ PRODUCTS_LIST_DIR = 'products-list/'
 
 GROCERIES_CATEGORY = {'name': 'Groceries', 'image_name': 'groceries.jpg'}
 
+PRODUCTS_LIST_DIR = 'products-list'
+HOMEPAGE_BLOCKS_LIST_DIR = 'homepage-blocks'
 DEFAULT_SCHEMA = {
     'T-Shirt': {
         'category': {
@@ -117,6 +122,24 @@ COLLECTIONS_SCHEMA = [
     {
         'name': 'Winter sale',
         'image_name': 'sale.jpg'}]
+HOMEPAGE_BLOCKS_SCHEMA = [
+    {
+        '_cover_name': 'block1.jpg',
+        'html_classes': 'col-sm-12',
+        'title': 'Promo & Sale',
+        'subtitle': 'from the North Pole',
+        'primary_button_text': 'View Offers'
+    },
+    {
+        '_cover_name': 'block2.jpg',
+        'html_classes': 'col-sm-12 col-md-6',
+        'title': 'Size & Colours'
+    },
+    {
+        '_cover_name': 'block3.jpg',
+        'html_classes': 'col-sm-12 col-md-6',
+        'title': 'Digital Downloads'
+    }]
 
 
 def create_attributes_and_values(attribute_data):
@@ -647,6 +670,44 @@ def create_menus():
     site_settings.top_menu = top_menu
     site_settings.bottom_menu = bottom_menu
     site_settings.save()
+
+
+def create_homepage_block(data: dict, placeholder_path=None) -> HomePageItem:
+    cover_filename = data.pop('_cover_name', None)
+
+    if cover_filename and placeholder_path:
+        cover_path = os.path.join(placeholder_path, cover_filename)
+        with open(cover_path, 'rb') as cover_fp:
+            image = SimpleUploadedFile(
+                cover_filename, cover_fp.read(), 'image/jpeg')
+        data['cover'] = image
+
+    instance = HomePageItem.objects.create(**data)
+    if instance.cover:
+        create_homepage_block_thumbnails.delay(instance.pk)
+
+    return instance
+
+
+def create_homepage_blocks_by_schema(
+        placeholder_dir,
+        schema=HOMEPAGE_BLOCKS_SCHEMA, allow_duplicates=False):
+    existing_blocks = HomePageItem.objects.all()
+    entry = None
+    placeholder_path = os.path.join(placeholder_dir, HOMEPAGE_BLOCKS_LIST_DIR)
+
+    def _homepage_block_exists() -> bool:
+        return existing_blocks.filter(title=entry['title']).exists()
+
+    for entry in schema:
+        if not allow_duplicates and _homepage_block_exists():
+            continue
+
+        kwargs = entry.copy()
+        instance = create_homepage_block(kwargs, placeholder_path)
+
+        yield 'Created a new homepage block item with title: %s' % \
+              instance.title
 
 
 def get_product_list_images_dir(placeholder_dir):
