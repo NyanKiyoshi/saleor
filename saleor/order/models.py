@@ -3,6 +3,8 @@ from operator import attrgetter
 from uuid import uuid4
 
 from django.conf import settings
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.db.models import F, Max, Sum
@@ -258,6 +260,16 @@ class FulfillmentLine(models.Model):
         Fulfillment, related_name='lines', on_delete=models.CASCADE)
     quantity = models.IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(999)])
+
+
+# must be sortable
+class CheckoutPaymentMethod(models.Model):
+    payment_provider_type = models.ForeignKey(
+        ContentType, on_delete=models.SET_NULL, null=True)
+    payment_provider_id = models.PositiveIntegerField(null=True)
+
+    provider = GenericForeignKey(
+        'payment_provider_type', 'payment_provider_id')
 
 
 class Payment(BasePayment):

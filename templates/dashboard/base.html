@@ -241,6 +241,11 @@
                       {% trans "Taxes" context "Dashboard taxes" %}
                     </a>
                   </li>
+                  <li class="{% block payment_methods_class %}{% endblock %}">
+                    <a href="{% url 'dashboard:payment-methods' %}">
+                      {% trans "Payment Methods" context "Dashboard payments" %}
+                    </a>
+                  </li>
                   {% if perms.page.view_page %}
                     <li class="{% block menu_pages_class %}{% endblock %}">
                       <a href="{% url 'dashboard:page-list' %}">

@@ -12,6 +12,7 @@ from django_countries.fields import Country
 from faker import Factory
 from faker.providers import BaseProvider
 from payments import PaymentStatus
+from payments.dummy.models import DummyProvider
 from prices import Money
 
 from ...account.models import Address, User
@@ -372,7 +373,7 @@ def create_fake_user():
     return user
 
 
-def create_payment(order):
+def create_payment(order, payment_provider):
     status = random.choice(
         [
             PaymentStatus.WAITING,
@@ -381,7 +382,7 @@ def create_payment(order):
     payment = Payment.objects.create(
         order=order,
         status=status,
-        variant='default',
+        provider=payment_provider,
         transaction_id=str(fake.random_int(1, 100000)),
         currency=settings.DEFAULT_CURRENCY,
         total=order.total.gross.amount,
@@ -467,7 +468,10 @@ def create_fake_order(discounts, taxes):
 
     create_fulfillments(order)
 
-    create_payment(order)
+    payment_provider = DummyProvider()
+    payment_provider.save()
+
+    create_payment(order, payment_provider)
     return order
 
 

@@ -1,0 +1,45 @@
+{% extends "dashboard/base.html" %}
+{% load materializecss %}
+{% load i18n %}
+{% load staticfiles %}
+
+{% block payment_methods_class %}active{% endblock %}
+
+{% block page_title %}
+  {% if menu.pk %}
+    {{ menu }}
+  {% else %}
+    {% trans "Add new payment method" context "Payment method form page title" %}
+  {% endif %}
+{% endblock %}
+
+{% block breadcrumbs %}
+{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col m12 l9">
+      <form class="card" method="post" enctype="multipart/form-data" novalidate>
+        <div class="card-content">
+          <span class="card-title">
+              {% trans 'New Checkout Payment Method' context 'Checkout payment creation header' %}
+            </span>
+          <div class="data">
+            {% csrf_token %}
+            <div class="row">
+              {{ form|materializecss }}
+            </div>
+          </div>
+        </div>
+        <div class="card-action right-align">
+          <a href="{% url 'dashboard:menu-list' %}" class="btn btn-flat">
+            {% trans "Cancel" context "Dashboard cancel action" %}
+          </a>
+          <button type="submit" class="btn waves-effect">
+            {% trans "Create" context "Dashboard create action" %}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

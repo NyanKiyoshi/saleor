@@ -209,7 +209,21 @@ INSTALLED_APPS = [
     'django_prices_vatlayer',
     'graphene_django',
     'mptt',
+
+    # payment core and providers
     'payments',
+    'payments.authorizenet',
+    'payments.braintree',
+    'payments.coinbase',
+    'payments.cybersource',
+    'payments.dummy',
+    'payments.dotpay',
+    'payments.paypal',
+    'payments.sagepay',
+    'payments.sofort',
+    'payments.stripe',
+    'payments.wallet',
+
     'webpack_loader',
     'social_django',
     'django_countries',
@@ -297,9 +311,6 @@ def get_host():
 PAYMENT_HOST = get_host
 
 PAYMENT_MODEL = 'order.Payment'
-
-PAYMENT_VARIANTS = {
-    'default': ('payments.dummy.DummyProvider', {})}
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
 SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'
