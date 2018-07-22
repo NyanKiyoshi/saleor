@@ -572,7 +572,7 @@ def create_page():
     <h2 align="center">AN OPENSOURCE STOREFRONT PLATFORM FOR PERFECTIONISTS</h2>
     <h3 align="center">WRITTEN IN PYTHON, BEST SERVED AS A BESPOKE, HIGH-PERFORMANCE E-COMMERCE SOLUTION</h3>
     <p><br></p>
-    <p><img src="http://getsaleor.com/images/main-pic.svg"></p>
+    <p style="text-align: center;"><img src="http://getsaleor.com/images/main-pic.svg"></p>
     <p style="text-align: center;">
         <a href="https://github.com/mirumee/saleor/">Get Saleor</a> today!
     </p>
