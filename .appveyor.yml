@@ -1,0 +1,47 @@
+environment:
+  node_version: '10'
+  matrix:
+    # Python 3.7
+    - PYTHON: C:\Python37-x64
+      DJANGO: 1.11
+    - PYTHON: C:\Python37-x64
+      DJANGO: 2.1
+    - PYTHON: C:\Python37-x64
+      DJANGO: master
+
+    # Python 3.6
+    - PYTHON: C:\Python36-x64
+      DJANGO: 1.11
+    - PYTHON: C:\Python36-x64
+      DJANGO: 2.1
+    - PYTHON: C:\Python36-x64
+      DJANGO: master
+
+    # Python 3.5
+    - PYTHON: C:\Python35-x64
+      DJANGO: 1.11
+    - PYTHON: C:\Python35-x64
+      DJANGO: 2.1
+    - PYTHON: C:\Python35-x64
+      DJANGO: master
+init:
+  - SET PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
+
+install:
+  - ps: Install-Product node $env:node_version
+  - python -m pip install setuptools wheel tox
+  - npm i
+  - npm run build-assets --production
+  - npm run build-emails
+
+build: false
+
+test_script:
+  - node -v
+  - python -V
+  - echo Django %DJANGO%
+  - npm run test
+  - tox
+
+cache:
+  - '%LOCALAPPDATA%\pip\Cache'
