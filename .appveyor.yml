@@ -1,3 +1,5 @@
+services:
+  - postgresql101
 environment:
   node_version: '10'
   matrix:
@@ -26,6 +28,8 @@ environment:
       DJANGO: master
 init:
   - SET PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
+  - SET DJANGO_SETTINGS_MODULE=tests.settings
+  - SET DATABASE_URL=postgres://postgres:Password12!@localhost:5432/saleor
 
 install:
   - ps: Install-Product node $env:node_version
