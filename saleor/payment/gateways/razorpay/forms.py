@@ -63,8 +63,5 @@ class RazorPaymentForm(PaymentForm):
     def process_payment(self):
         data = super(RazorPaymentForm, self).clean()
         transaction_id = data['razorpay_payment_id']
-        self.payment.authorize(transaction_id)
-        self.payment.charge_status = ChargeStatus.CHARGED
-        self.payment.captured_amount += self.payment.total
-        self.payment.save(update_fields=['charge_status', 'captured_amount'])
+        self.payment.charge(transaction_id)
         return self.payment

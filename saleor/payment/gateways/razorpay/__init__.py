@@ -22,15 +22,15 @@ def get_client_token(**connection_params):
     return str(uuid.uuid4())
 
 
-def authorize(
+def charge(
         payment: Payment,
-        transaction_token: str,
+        payment_token: str,
         **connection_params: Dict) -> Tuple[Transaction, str]:
 
     razorpay_client = get_client(**connection_params)
 
     response = razorpay_client.payment.capture(
-        transaction_token, int(payment.total * 100))
+        payment_token, int(payment.total * 100))
 
     transaction = create_transaction(
         payment=payment,
