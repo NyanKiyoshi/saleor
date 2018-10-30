@@ -48,18 +48,19 @@ def get_client_token(**_):
 def charge(
         payment: Payment,
         payment_token: str,
+        amount: Decimal=None,
         **connection_params: Dict) -> Tuple[Transaction, str]:
 
     razorpay_client = get_client(**connection_params)
 
     response = razorpay_client.payment.capture(
-        payment_token, int(payment.total * 100))
+        payment_token, int((amount or payment.total) * 100))
     transaction = _generate_transaction(
         payment=payment, kind=TransactionKind.CHARGE, **response)
     return transaction, ''
 
 
-def refund(payment, amount, **connection_params):
+def refund(payment, amount: Decimal, **connection_params):
     error = ''
     capture_txn = payment.transactions.filter(
         kind=TransactionKind.CHARGE, is_success=True).first()
