@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 import razorpay
 import uuid
 from typing import Dict, Tuple
@@ -9,6 +11,23 @@ from saleor.payment.models import Payment, Transaction
 from .forms import RazorPaymentForm
 
 
+def _generate_transaction(payment, kind: str, amount=None, *, id, **data):
+    if type(amount) is int:
+        amount = Decimal(amount) / 100
+    elif amount is None:
+        amount = payment.total
+
+    transaction = create_transaction(
+        payment=payment,
+        kind=kind,
+        amount=amount,
+        currency=data.pop('currency', payment.currency),
+        gateway_response=data,
+        token=id,
+        is_success=True)
+    return transaction
+
+
 def get_form_class():
     return RazorPaymentForm
 
@@ -18,7 +37,7 @@ def get_client(public_key, secret_key, **_):
     return razorpay_client
 
 
-def get_client_token(**connection_params):
+def get_client_token(**_):
     return str(uuid.uuid4())
 
 
@@ -31,28 +50,24 @@ def charge(
 
     response = razorpay_client.payment.capture(
         payment_token, int(payment.total * 100))
-
-    transaction = create_transaction(
-        payment=payment,
-        kind=TransactionKind.AUTH,
-        amount=payment.total,
-        currency=response.pop('currency', payment.currency),
-        gateway_response=response,
-        token=response['id'],
-        is_success=True)
+    transaction = _generate_transaction(
+        payment=payment, kind=TransactionKind.CHARGE, **response)
     return transaction, ''
 
 
-def refund(self, payment, amount=None):
-    raise NotImplementedError
+def refund(payment, amount, **connection_params):
+    capture_txn = payment.transactions.filter(
+        kind=TransactionKind.CHARGE, is_success=True).get()
+    razorpay_client = get_client(**connection_params)
+    response = razorpay_client.payment.refund(
+        capture_txn.token, int(amount * 100))
+    txn = _generate_transaction(
+        payment=payment, kind=TransactionKind.REFUND, **response)
+    return txn, ''
 
 
 def void(payment, **params):
-    txn = create_transaction(
-        payment=payment,
-        kind=TransactionKind.VOID,
-        amount=payment.total,
-        currency=payment.currency,
-        token=get_client_token(**params),
-        is_success=True)
+    txn = _generate_transaction(
+        payment=payment, kind=TransactionKind.VOID,
+        id=get_client_token(**params))
     return txn, ''
