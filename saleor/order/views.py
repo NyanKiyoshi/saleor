@@ -124,7 +124,8 @@ def start_payment(request, order, gateway):
     ctx = {
         'form': form, 'payment': payment,
         'client_token': client_token, 'order': order}
-    return TemplateResponse(request, template, ctx)
+    return TemplateResponse(
+        request, [template, 'order/payment/default.html'], ctx)
 
 
 @check_order_status
