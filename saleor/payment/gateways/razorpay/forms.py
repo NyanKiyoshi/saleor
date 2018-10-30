@@ -6,7 +6,6 @@ from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _
 
 from ...forms import PaymentForm
-from ... import ChargeStatus
 
 CHECKOUT_SCRIPT_URL = 'https://checkout.razorpay.com/v1/checkout.js'
 

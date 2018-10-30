@@ -11,7 +11,10 @@ from saleor.payment.models import Payment, Transaction
 from .forms import RazorPaymentForm
 
 
-def _generate_transaction(payment, kind: str, amount=None, *, id, **data):
+def _generate_transaction(
+        payment, kind: str, amount=None,
+        *, id='', is_success=True, **data):
+
     if type(amount) is int:
         amount = Decimal(amount) / 100
     elif amount is None:
@@ -24,7 +27,8 @@ def _generate_transaction(payment, kind: str, amount=None, *, id, **data):
         currency=data.pop('currency', payment.currency),
         gateway_response=data,
         token=id,
-        is_success=True)
+        is_success=is_success)
+
     return transaction
 
 
@@ -56,14 +60,21 @@ def charge(
 
 
 def refund(payment, amount, **connection_params):
+    error = ''
     capture_txn = payment.transactions.filter(
-        kind=TransactionKind.CHARGE, is_success=True).get()
-    razorpay_client = get_client(**connection_params)
-    response = razorpay_client.payment.refund(
-        capture_txn.token, int(amount * 100))
+        kind=TransactionKind.CHARGE, is_success=True).first()
+
+    if capture_txn is not None:
+        razorpay_client = get_client(**connection_params)
+        response = razorpay_client.payment.refund(
+            capture_txn.token, int(amount * 100))
+    else:
+        response = {'is_success': False}
+        error = 'Order was not charged.'
+
     txn = _generate_transaction(
         payment=payment, kind=TransactionKind.REFUND, **response)
-    return txn, ''
+    return txn, error
 
 
 def void(payment, **params):
