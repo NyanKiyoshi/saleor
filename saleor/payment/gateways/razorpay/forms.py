@@ -1,6 +1,7 @@
 from django import forms
 from django.forms.utils import flatatt
 from django.forms.widgets import HiddenInput
+from django.templatetags.static import static
 from django.utils.html import format_html
 from django.utils.translation import pgettext_lazy
 
@@ -27,7 +28,7 @@ class RazorPayCheckoutWidget(HiddenInput):
             **additional_parameters):
         override_attrs = additional_parameters.get('attrs', None)
         base_attrs = additional_parameters['attrs'] = {
-            'src': CHECKOUT_SCRIPT_URL,
+            'src': static("assets/razorpay-checkout.js"),
             'data-key': public_key,
             'data-buttontext': PRIMARY_BTN_TEXT,
             'data-image': store_image,
@@ -42,7 +43,8 @@ class RazorPayCheckoutWidget(HiddenInput):
                 payment.billing_first_name)
             base_attrs.update({
                 'data-prefill.name': customer_name,
-                'data-prefill.email': payment.billing_email})
+                'data-prefill.email': payment.billing_email,
+                'data-prefill.contact': '+3300000000'})
 
         if override_attrs:
             base_attrs.update(override_attrs)

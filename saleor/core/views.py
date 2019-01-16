@@ -48,3 +48,10 @@ def handle_404(request, exception=None):
 def manifest(request):
     return TemplateResponse(
         request, 'manifest.json', content_type='application/json')
+
+
+def csrf_failure(request, reason=""):
+    """
+    View used when request fails CSRF protection.
+    """
+    return TemplateResponse(request, '403_csrf.html', status=403)
