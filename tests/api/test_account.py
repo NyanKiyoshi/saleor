@@ -1970,7 +1970,7 @@ def test_query_customers_with_filter_placed_orders__(
 @pytest.mark.parametrize(
     "customer_filter, count",
     [
-        ({"search": "example.com"}, 2),
+        ({"search": "@example.com"}, 2),
         ({"search": "Alice"}, 1),
         ({"search": "Kowalski"}, 1),
         ({"search": "John"}, 1),  # default_shipping_address__first_name
@@ -1979,7 +1979,7 @@ def test_query_customers_with_filter_placed_orders__(
         ({"search": "pl"}, 2),  # default_shipping_address__country, email
     ],
 )
-def test_query_customer_memebers_with_filter_search(
+def test_query_customer_members_with_filter_search(
     customer_filter,
     count,
     query_customer_with_filter,
@@ -2057,7 +2057,7 @@ def test_query_staff_memebers_with_filter_status(
         ({"search": "pl"}, 3),  # default_shipping_address__country, email
     ],
 )
-def test_query_staff_memebers_with_filter_search(
+def test_query_staff_members_with_filter_search(
     staff_member_filter,
     count,
     query_staff_users_with_filter,

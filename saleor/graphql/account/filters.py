@@ -65,7 +65,7 @@ def filter_search(qs, _, value):
         "default_shipping_address__country",
     )
     if value:
-        qs = filter_by_query_param(qs, value, search_fields)
+        qs = filter_by_query_param(qs, value, search_fields, method="search")
     return qs
 
 

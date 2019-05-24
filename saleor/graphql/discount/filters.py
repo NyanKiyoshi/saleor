@@ -72,14 +72,14 @@ def filter_sale_type(qs, _, value):
 def filter_sale_search(qs, _, value):
     search_fields = ("name", "value", "type")
     if value:
-        qs = filter_by_query_param(qs, value, search_fields)
+        qs = filter_by_query_param(qs, value, search_fields, method="search")
     return qs
 
 
 def filter_voucher_search(qs, _, value):
     search_fields = ("name", "code")
     if value:
-        qs = filter_by_query_param(qs, value, search_fields)
+        qs = filter_by_query_param(qs, value, search_fields, method="search")
     return qs
 
 

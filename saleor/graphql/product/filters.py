@@ -143,7 +143,7 @@ def filter_collection_publish(qs, _, value):
 def filter_collection_search(qs, _, value):
     search_fields = ("name", "slug")
     if value:
-        qs = filter_by_query_param(qs, value, search_fields)
+        qs = filter_by_query_param(qs, value, search_fields, method="search")
     return qs
 
 
