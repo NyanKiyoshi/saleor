@@ -7,3 +7,4 @@ from ...core.models import SortableModel
 class MoveOperation:
     node: SortableModel
     sort_order: int
+    moving_down: bool = False

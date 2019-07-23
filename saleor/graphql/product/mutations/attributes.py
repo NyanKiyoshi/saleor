@@ -599,5 +599,6 @@ class ProductTypeReorderAttributes(BaseMutation):
 
             operations.append(MoveOperation(node=node, sort_order=move_info.sort_order))
 
-        perform_reordering(operations)
+        with transaction.atomic():
+            perform_reordering(attributes_m2m, operations)
         return ProductTypeReorderAttributes(product_type=product_type)

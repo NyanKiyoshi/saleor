@@ -228,6 +228,7 @@ class CollectionReorderProducts(BaseMutation):
             info, collection_id, field="collection_id", only_type=Collection
         )
         operations = []
+        m2m_model = models.CollectionProduct
 
         for move_info in moves:
             product_id = from_global_id_strict_type(
@@ -235,7 +236,7 @@ class CollectionReorderProducts(BaseMutation):
             )
 
             try:
-                node = models.CollectionProduct.objects.get(
+                node = m2m_model.objects.get(
                     product_id=product_id, collection_id=collection.id
                 )
             except models.CollectionProduct.DoesNotExist:
@@ -245,7 +246,8 @@ class CollectionReorderProducts(BaseMutation):
 
             operations.append(MoveOperation(node=node, sort_order=move_info.sort_order))
 
-        perform_reordering(operations)
+        with transaction.atomic():
+            perform_reordering(m2m_model.objects, operations)
         return CollectionReorderProducts(collection=collection)
 
 

@@ -1,8 +1,11 @@
+from collections import OrderedDict
 from typing import List
 
 import graphene
 import graphene_django_optimizer as gql_optimizer
 from django.core.exceptions import ValidationError
+from django.db import transaction
+from django.db.models import F, QuerySet
 
 from .interfaces import MoveOperation
 
@@ -49,31 +52,46 @@ def get_node_optimized(qs, lookup, info):
     return qs[0] if qs else None
 
 
-def _prepare_reordering_operations(moves: List[MoveOperation]):
+def _prepare_reordering_operations(qs: QuerySet, moves: List[MoveOperation]):
     """Updates the 'moves' relative sort orders to an absolute sorting."""
 
-    current_rel_pos = None
+    # FIXME: we never update those values, which is incorrect.
+    #        This should be refactored.
+    nodes_map = OrderedDict(
+        qs.select_for_update().values_list("pk", "sort_order").order_by("sort_order")
+    )
+    nodes_pks = list(nodes_map.keys())
 
     for move in moves:
-        node = move.node
+        if move.sort_order == 0:
+            move.sort_order = None
+            continue
 
-        if current_rel_pos is None:
-            # This case happens when products created using a bulk_creation
-            # e.g., bulk_create or collections.add
-            if node.sort_order is None:
-                current_rel_pos = (
-                    node.get_max_sort_order(node.get_ordering_queryset()) or 0
-                )
-            else:
-                current_rel_pos = node.sort_order
-        else:
-            current_rel_pos += 1
+        # Flag as moving down if the shift is positive
+        move.moving_down = move.sort_order > 0
 
-        new_position = max(0, current_rel_pos + move.sort_order)
-        move.sort_order = new_position
+        # Retrieve the position of the node to move
+        try:
+            node_pos = nodes_pks.index(move.node.pk)
+        except ValueError:
+            # If the target node was deleted, skip it
+            move.sort_order = None
+            continue
+
+        # Set the target position from the current position
+        # of the node + the relative position to move from
+        target_pos = node_pos + move.sort_order
+
+        # Make sure we are not getting out of bounds
+        target_pos = max(0, target_pos)
+        target_pos = min(len(nodes_pks) - 1, target_pos)
+
+        # Retrieve the target node and its sort order
+        target_pk = nodes_pks[target_pos]
+        move.sort_order = nodes_map[target_pk]
 
 
-def perform_reordering(moves: List[MoveOperation], field: str = "sort_order"):
+def perform_reordering(qs: QuerySet, moves: List[MoveOperation]):
     """This utility takes a set of operations containing a node
     and a relative sort order. It then converts the relative sorting
     to an absolute sorting.
@@ -98,11 +116,35 @@ def perform_reordering(moves: List[MoveOperation], field: str = "sort_order"):
     ...         for op in operations
     ...     ]
     ...
-    ...     perform_reordering(moves)
+    ...     perform_reordering(qs, moves)
     ...
+
+    :raises RuntimeError: If the bulk operation is not run inside an atomic transaction.
+    :raises ValueError: If a move is invalid.
     """
-    _prepare_reordering_operations(moves)
+
+    if not transaction.get_connection().in_atomic_block:
+        raise RuntimeError("Needs to be run inside an atomic transaction")
+
+    _prepare_reordering_operations(qs, moves)
 
     for move in moves:
-        move.node.sort_order = move.sort_order
-        move.node.save(update_fields=[field])
+        old_sort_order = move.node.sort_order
+        new_sort_order = move.sort_order
+
+        # Skip if noting to do
+        if new_sort_order is None:
+            continue
+
+        # Shift the sort orders within the moving range
+        if move.moving_down:
+            qs.filter(sort_order__range=(old_sort_order, new_sort_order)).update(
+                sort_order=F("sort_order") - 1
+            )
+        else:
+            qs.filter(sort_order__range=(new_sort_order, old_sort_order)).update(
+                sort_order=F("sort_order") + 1
+            )
+
+        move.node.sort_order = new_sort_order
+        move.node.save(update_fields=["sort_order"])

@@ -39,7 +39,9 @@ from ...payment.utils import (
 )
 from ...product.models import (
     Attribute,
+    AttributeProduct,
     AttributeValue,
+    AttributeVariant,
     Category,
     Collection,
     Product,
@@ -169,11 +171,19 @@ def create_attributes(attributes_data):
         product_variant_type_id = defaults.pop("product_variant_type")
         attr, _ = Attribute.objects.update_or_create(pk=pk, defaults=defaults)
 
+        # FIXME: handle conflicts
+
         if product_type_id:
-            attr.product_types.add(product_type_id)
+            product_type = ProductType.objects.get(pk=product_type_id)
+            AttributeProduct.objects.create(
+                attribute_id=attr.id, product_type=product_type
+            )
 
         if product_variant_type_id:
-            attr.product_variant_types.add(product_variant_type_id)
+            product_type = ProductType.objects.get(pk=product_variant_type_id)
+            AttributeVariant.objects.create(
+                attribute_id=attr.id, product_type=product_type
+            )
 
 
 def create_attributes_values(values_data):
