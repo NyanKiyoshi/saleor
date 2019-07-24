@@ -7,9 +7,9 @@ from django.db.models import Q
 from django.template.defaultfilters import slugify
 
 from ....product import AttributeInputType, models
-from ...core.interfaces import MoveOperation
 from ...core.mutations import BaseMutation, ModelDeleteMutation, ModelMutation
-from ...core.utils import from_global_id_strict_type, perform_reordering
+from ...core.utils import from_global_id_strict_type
+from ...core.utils.reordering import perform_reordering
 from ...product.types import ProductType
 from ..descriptions import AttributeDescriptions, AttributeValueDescriptions
 from ..enums import AttributeInputTypeEnum, AttributeTypeEnum
@@ -583,22 +583,25 @@ class ProductTypeReorderAttributes(BaseMutation):
         )
 
         attributes_m2m = getattr(product_type, m2m_field)
-        operations = []
+        operations = {}
 
+        # Resolve the attributes
         for move_info in moves:
-            attribute_id = from_global_id_strict_type(
+            attribute_pk = from_global_id_strict_type(
                 info, move_info.id, only_type=Attribute, field="moves"
             )
 
+            attribute_pk = int(attribute_pk)
             try:
-                node = attributes_m2m.get(attribute_id=attribute_id)
+                m2m_info = attributes_m2m.get(attribute_id=attribute_pk)
             except ObjectDoesNotExist:
                 raise ValidationError(
                     {"moves": "Couldn't resolve to an attribute: %s" % move_info.id}
                 )
-
-            operations.append(MoveOperation(node=node, sort_order=move_info.sort_order))
+            operations[m2m_info.pk] = move_info.sort_order
 
         with transaction.atomic():
-            perform_reordering(attributes_m2m, operations)
+            perform_reordering(
+                attributes_m2m, operations, model_name=Attribute.__name__
+            )
         return ProductTypeReorderAttributes(product_type=product_type)

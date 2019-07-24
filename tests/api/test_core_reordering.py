@@ -1,7 +1,6 @@
 import pytest
 
-from saleor.graphql.core.interfaces import MoveOperation
-from saleor.graphql.core.utils import perform_reordering
+from saleor.graphql.core.utils.reordering import perform_reordering
 from saleor.product import models
 
 SortedModel = models.AttributeValue
@@ -53,7 +52,7 @@ def test_reordering_sequential(sorted_entries_seq):
     qs = SortedModel.objects
     nodes = sorted_entries_seq
 
-    operations = [MoveOperation(nodes[5], -1), MoveOperation(nodes[2], +3)]
+    operations = {nodes[5].pk: -1, nodes[2].pk: +3}
 
     expected = _sorted_by_order(
         [
@@ -80,7 +79,7 @@ def test_reordering_non_sequential(sorted_entries_gaps):
     qs = SortedModel.objects
     nodes = sorted_entries_gaps
 
-    operations = [MoveOperation(nodes[5], -1), MoveOperation(nodes[2], +3)]
+    operations = {nodes[5].pk: -1, nodes[2].pk: +3}
 
     expected = _sorted_by_order(
         [
@@ -112,7 +111,7 @@ def test_inserting_at_the_edges(sorted_entries_seq, operation, expected_operatio
 
     target_node_pos, new_rel_sort_order = operation
 
-    operations = [MoveOperation(nodes[target_node_pos], new_rel_sort_order)]
+    operations = {nodes[target_node_pos].pk: new_rel_sort_order}
 
     expected = _sorted_by_order(
         [
@@ -136,7 +135,7 @@ def test_reordering_out_of_bound(sorted_entries_seq):
     qs = SortedModel.objects
     nodes = sorted_entries_seq
 
-    operations = [MoveOperation(nodes[5], -100), MoveOperation(nodes[0], +100)]
+    operations = {nodes[5].pk: -100, nodes[0].pk: +100}
 
     expected = _sorted_by_order(
         [

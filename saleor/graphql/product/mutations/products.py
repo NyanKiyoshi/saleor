@@ -1,7 +1,7 @@
 from typing import Dict, List
 
 import graphene
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.db import transaction
 from django.template.defaultfilters import slugify
 from graphene.types import InputObjectType
@@ -17,16 +17,15 @@ from ....product.thumbnails import (
 )
 from ....product.utils.attributes import get_name_from_attributes
 from ...core.enums import TaxRateType
-from ...core.interfaces import MoveOperation
 from ...core.mutations import BaseMutation, ModelDeleteMutation, ModelMutation
 from ...core.scalars import Decimal, WeightScalar
 from ...core.types import SeoInput, Upload
 from ...core.utils import (
     clean_seo_fields,
     from_global_id_strict_type,
-    perform_reordering,
     validate_image_file,
 )
+from ...core.utils.reordering import perform_reordering
 from ..types import (
     Attribute,
     Category,
@@ -224,30 +223,38 @@ class CollectionReorderProducts(BaseMutation):
 
     @classmethod
     def perform_mutation(cls, _root, info, collection_id, moves):
-        collection = cls.get_node_or_error(
-            info, collection_id, field="collection_id", only_type=Collection
+        collection_id = from_global_id_strict_type(
+            info, collection_id, only_type=Collection, field="collection_id"
         )
-        operations = []
-        m2m_model = models.CollectionProduct
 
+        collection = models.ProductType.objects.prefetch_related(
+            "collectionproduct"
+        ).get(pk=collection_id)
+
+        m2m_related_field = collection.collectionproduct
+
+        operations = {}
+
+        # Resolve the products
         for move_info in moves:
             product_id = from_global_id_strict_type(
                 info, move_info.product_id, only_type=Product, field="moves"
             )
 
-            try:
-                node = m2m_model.objects.get(
-                    product_id=product_id, collection_id=collection.id
-                )
-            except models.CollectionProduct.DoesNotExist:
-                raise ValidationError(
-                    {"moves": "Couldn't resolve to a product: %s" % product_id}
-                )
+            product_id = int(product_id)
 
-            operations.append(MoveOperation(node=node, sort_order=move_info.sort_order))
+            try:
+                m2m_info = m2m_related_field.get(product_id=product_id)
+            except ObjectDoesNotExist:
+                raise ValidationError(
+                    {"moves": "Couldn't resolve to an attribute: %s" % move_info.id}
+                )
+            operations[m2m_info.pk] = move_info.sort_order
 
         with transaction.atomic():
-            perform_reordering(m2m_model.objects, operations)
+            perform_reordering(
+                m2m_related_field, operations, model_name=Product.__name__
+            )
         return CollectionReorderProducts(collection=collection)
 
 
