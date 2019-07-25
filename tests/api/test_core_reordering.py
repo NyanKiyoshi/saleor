@@ -17,8 +17,13 @@ def _get_sorted_map():
 
 
 @pytest.fixture
-def sorted_entries_seq():
-    attribute = models.Attribute.objects.create(name="Dummy")
+def dummy_attribute():
+    return models.Attribute.objects.create(name="Dummy")
+
+
+@pytest.fixture
+def sorted_entries_seq(dummy_attribute):
+    attribute = dummy_attribute
     values = SortedModel.objects.bulk_create(
         [
             SortedModel(
@@ -31,8 +36,8 @@ def sorted_entries_seq():
 
 
 @pytest.fixture
-def sorted_entries_gaps():
-    attribute = models.Attribute.objects.create(name="Dummy")
+def sorted_entries_gaps(dummy_attribute):
+    attribute = dummy_attribute
     values = SortedModel.objects.bulk_create(
         [
             SortedModel(
@@ -85,7 +90,7 @@ def test_reordering_non_sequential(sorted_entries_gaps):
         [
             (nodes[0].pk, 0),
             (nodes[1].pk, 2),
-            (nodes[2].pk, 4 + (3 * 2)),
+            (nodes[2].pk, 4 + (3 * 2) - 1),
             (nodes[3].pk, 6 - 1),
             (nodes[4].pk, 8 + 1 - 1),
             (nodes[5].pk, 10 - (1 * 2) - 1),
@@ -154,21 +159,162 @@ def test_reordering_out_of_bound(sorted_entries_seq):
     assert actual == expected
 
 
-def test_reordering_nothing():
+def test_reordering_null_sort_orders(dummy_attribute):
     """
-    Ensures giving operations that does nothing, are skipped.
+    Ensures null sort orders values are getting properly ordered (by ID sorting).
     """
+    attribute = dummy_attribute
+    qs = SortedModel.objects
+
+    non_null_sorted_entries = list(
+        qs.bulk_create(
+            [
+                SortedModel(
+                    pk=1, attribute=attribute, slug="1", name="1", sort_order=1
+                ),
+                SortedModel(
+                    pk=2, attribute=attribute, slug="2", name="2", sort_order=0
+                ),
+            ]
+        )
+    )
+
+    null_sorted_entries = list(
+        qs.bulk_create(
+            [
+                SortedModel(
+                    pk=5, attribute=attribute, slug="5", name="5", sort_order=None
+                ),
+                SortedModel(
+                    pk=4, attribute=attribute, slug="4", name="4", sort_order=None
+                ),
+                SortedModel(
+                    pk=3, attribute=attribute, slug="3", name="3", sort_order=None
+                ),
+            ]
+        )
+    )
+
+    operations = {null_sorted_entries[0].pk: -2}
+
+    expected = [
+        (non_null_sorted_entries[1].pk, 0),
+        (non_null_sorted_entries[0].pk, 1),
+        (null_sorted_entries[0].pk, 2),
+        (null_sorted_entries[2].pk, 3),
+        (null_sorted_entries[1].pk, 4),
+    ]
+
+    perform_reordering(qs, operations)
+
+    actual = _get_sorted_map()
+    assert actual == expected
 
 
-def test_reordering_concurrently(sorted_entries_seq):
+def test_reordering_nothing(sorted_entries_seq, django_assert_num_queries):
+    """
+    Ensures giving operations that does nothing, are skipped. Thus only one query should
+    have been made: fetching the nodes.
+    """
+    qs = SortedModel.objects
+    operations = {sorted_entries_seq[0].pk: 0}
+
+    with django_assert_num_queries(1) as ctx:
+        perform_reordering(qs, operations)
+
+    assert ctx[0]["sql"].startswith("SELECT "), "Should only have done a SELECT"
+
+
+def test_giving_no_operation_does_no_query(
+    sorted_entries_seq, django_assert_num_queries
+):
+    """Ensures giving no operations runs no queries at all."""
+
+    qs = SortedModel.objects
+
+    with django_assert_num_queries(0):
+        perform_reordering(qs, {})
+
+
+def test_reordering_concurrently(dummy_attribute, django_assert_num_queries):
     """
     Ensures users cannot concurrently reorder, they need to wait for the other one
     to achieve.
+
+    This must be the first thing done before doing anything. For that, we ensure
+    the first SQL query is acquiring the lock.
     """
 
+    qs = SortedModel.objects
+    attribute = dummy_attribute
 
-def test_reordering_deleted_node_from_concurrent():
+    entries = list(
+        qs.bulk_create(
+            [
+                SortedModel(
+                    pk=1, attribute=attribute, slug="1", name="1", sort_order=0
+                ),
+                SortedModel(
+                    pk=2, attribute=attribute, slug="2", name="2", sort_order=1
+                ),
+            ]
+        )
+    )
+
+    operations = {entries[0].pk: +1}
+
+    with django_assert_num_queries(2) as ctx:
+        perform_reordering(qs, operations)
+
+    assert ctx[0]["sql"] == (
+        'SELECT "product_attributevalue"."id", "product_attributevalue"."sort_order" '
+        'FROM "product_attributevalue" '
+        "ORDER BY "
+        '"product_attributevalue"."sort_order" ASC NULLS LAST, '
+        '"product_attributevalue"."id" ASC FOR UPDATE'
+    )
+    assert ctx[1]["sql"] == (
+        'UPDATE "product_attributevalue" '
+        'SET "sort_order" = (CASE WHEN ("product_attributevalue"."id" = 1) '
+        'THEN 1 WHEN ("product_attributevalue"."id" = 2) '
+        "THEN 0 ELSE NULL END)::integer "
+        'WHERE "product_attributevalue"."id" IN (1, 2)'
+    )
+
+
+def test_reordering_deleted_node_from_concurrent(
+    dummy_attribute, django_assert_num_queries
+):
     """
     Ensures if a node was deleted before locking, it just skip it instead of
     raising an error.
     """
+
+    qs = SortedModel.objects
+    attribute = dummy_attribute
+
+    entries = list(
+        qs.bulk_create(
+            [
+                SortedModel(
+                    pk=1, attribute=attribute, slug="1", name="1", sort_order=0
+                ),
+                SortedModel(
+                    pk=2, attribute=attribute, slug="2", name="2", sort_order=1
+                ),
+            ]
+        )
+    )
+
+    operations = {-1: +1, entries[0].pk: +1}
+
+    with django_assert_num_queries(2) as ctx:
+        perform_reordering(qs, operations)
+
+    assert ctx[1]["sql"] == (
+        'UPDATE "product_attributevalue" '
+        'SET "sort_order" = (CASE WHEN ("product_attributevalue"."id" = 1) '
+        'THEN 1 WHEN ("product_attributevalue"."id" = 2) '
+        "THEN 0 ELSE NULL END)::integer "
+        'WHERE "product_attributevalue"."id" IN (1, 2)'
+    )

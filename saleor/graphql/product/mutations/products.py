@@ -247,7 +247,7 @@ class CollectionReorderProducts(BaseMutation):
                 m2m_info = m2m_related_field.get(product_id=product_id)
             except ObjectDoesNotExist:
                 raise ValidationError(
-                    {"moves": "Couldn't resolve to an attribute: %s" % move_info.id}
+                    {"moves": "Couldn't resolve to a product: %s" % move_info.id}
                 )
             operations[m2m_info.pk] = move_info.sort_order
 

@@ -5,7 +5,7 @@ from django.db.models import F, Max, Q
 
 
 class SortableModel(models.Model):
-    sort_order = models.IntegerField(editable=False, db_index=True, default=0)
+    sort_order = models.IntegerField(editable=False, db_index=True, null=True)
 
     class Meta:
         abstract = True
