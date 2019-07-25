@@ -514,7 +514,7 @@ class AttributeQuerySet(models.QuerySet):
             id_sort = id_field
         else:
             sort_method = sort_order_field.desc(nulls_first=True)
-            id_sort = f"-{id_field}"
+            id_sort = id_field.desc()
 
         return self.order_by(sort_method, id_sort)
 

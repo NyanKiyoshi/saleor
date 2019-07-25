@@ -6,6 +6,7 @@ from django.db.models import Q
 from django.template.defaultfilters import slugify
 from graphene.utils.str_converters import to_camel_case
 
+from saleor.graphql.core.utils import snake_to_camel_case
 from saleor.graphql.product.enums import AttributeTypeEnum, AttributeValueType
 from saleor.graphql.product.types.attributes import resolve_attribute_value_type
 from saleor.graphql.product.types.products import resolve_attribute_list
@@ -1423,6 +1424,34 @@ ATTRIBUTES_RESORT_QUERY = """
 """
 
 
+def test_sort_attributes_within_product_type_invalid_product_type(
+    staff_api_client, permission_manage_products
+):
+    """Try to reorder an invalid product type (invalid ID)."""
+
+    product_type_id = graphene.Node.to_global_id("ProductType", -1)
+    attribute_id = graphene.Node.to_global_id("Attribute", -1)
+
+    variables = {
+        "type": "VARIANT",
+        "productTypeId": product_type_id,
+        "moves": [{"id": attribute_id, "sortOrder": 1}],
+    }
+
+    content = get_graphql_content(
+        staff_api_client.post_graphql(
+            ATTRIBUTES_RESORT_QUERY, variables, permissions=[permission_manage_products]
+        )
+    )["data"]["productTypeReorderAttributes"]
+
+    assert content["errors"] == [
+        {
+            "field": "productTypeId",
+            "message": f"Couldn't resolve to a product type: {product_type_id}",
+        }
+    ]
+
+
 def test_sort_attributes_within_product_type_invalid_id(
     staff_api_client, permission_manage_products, color_attribute
 ):
@@ -1468,35 +1497,51 @@ def test_sort_variant_attributes_within_product_type(
     relation_field,
     backref_field,
 ):
+    attributes = attribute_list
+    assert len(attributes) == 3
+
     staff_api_client.user.user_permissions.add(permission_manage_products)
 
     product_type = ProductType.objects.create(name="Dummy Type")
     product_type_id = graphene.Node.to_global_id("ProductType", product_type.id)
-    getattr(product_type, relation_field).set(attribute_list)
+    m2m_attributes = getattr(product_type, relation_field)
+    m2m_attributes.set(attributes)
+
+    sort_method = getattr(m2m_attributes, f"{relation_field}_sorted_for_dashboard")
+    attributes = list(sort_method())
+
+    assert len(attributes) == 3
 
     variables = {
         "type": attribute_type,
         "productTypeId": product_type_id,
         "moves": [
-            {"id": graphene.Node.to_global_id("Attribute", attr.id), "sortOrder": 0}
-            for attr in attribute_list
+            {
+                "id": graphene.Node.to_global_id("Attribute", attributes[0].pk),
+                "sortOrder": +1,
+            },
+            {
+                "id": graphene.Node.to_global_id("Attribute", attributes[2].pk),
+                "sortOrder": -1,
+            },
         ],
     }
+
+    expected_order = [attributes[1].pk, attributes[2].pk, attributes[0].pk]
 
     content = get_graphql_content(
         staff_api_client.post_graphql(ATTRIBUTES_RESORT_QUERY, variables)
     )["data"]["productTypeReorderAttributes"]
     assert not content["errors"]
 
-    gql_attributes = content["productType"]["variantAttributes"]
-    current_sort_pos = 0
-    for gql_attr, db_attr in zip(gql_attributes, attribute_list):
-        assert getattr(db_attr, backref_field).last().sort_order == current_sort_pos
+    gql_attributes = content["productType"][snake_to_camel_case(relation_field)]
+    assert len(gql_attributes) == len(expected_order)
 
-        _, gql_attr_id = graphene.Node.from_global_id(gql_attr["id"])
-        assert gql_attr_id == str(db_attr.pk)
+    for attr, expected_pk in zip(gql_attributes, expected_order):
+        _, gql_attr_id = graphene.Node.from_global_id(attr["id"])
+        gql_attr_id = int(gql_attr_id)
 
-        current_sort_pos += 1
+        assert gql_attr_id == expected_pk
 
 
 ATTRIBUTES_FILTER_QUERY = """

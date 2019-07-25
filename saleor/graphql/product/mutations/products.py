@@ -223,13 +223,18 @@ class CollectionReorderProducts(BaseMutation):
 
     @classmethod
     def perform_mutation(cls, _root, info, collection_id, moves):
-        collection_id = from_global_id_strict_type(
+        pk = from_global_id_strict_type(
             info, collection_id, only_type=Collection, field="collection_id"
         )
 
-        collection = models.ProductType.objects.prefetch_related(
-            "collectionproduct"
-        ).get(pk=collection_id)
+        try:
+            collection = models.Collection.objects.prefetch_related(
+                "collectionproduct"
+            ).get(pk=pk)
+        except ObjectDoesNotExist:
+            raise ValidationError(
+                {"collection_id": f"Couldn't resolve to a collection: {collection_id}"}
+            )
 
         m2m_related_field = collection.collectionproduct
 
@@ -247,7 +252,7 @@ class CollectionReorderProducts(BaseMutation):
                 m2m_info = m2m_related_field.get(product_id=product_id)
             except ObjectDoesNotExist:
                 raise ValidationError(
-                    {"moves": "Couldn't resolve to a product: %s" % move_info.id}
+                    {"moves": f"Couldn't resolve to a product: {move_info.product_id}"}
                 )
             operations[m2m_info.pk] = move_info.sort_order
 

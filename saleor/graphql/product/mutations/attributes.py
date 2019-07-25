@@ -569,7 +569,7 @@ class ProductTypeReorderAttributes(BaseMutation):
 
     @classmethod
     def perform_mutation(cls, _root, info, product_type_id, type, moves):
-        product_type_id = from_global_id_strict_type(
+        pk = from_global_id_strict_type(
             info, product_type_id, only_type=ProductType, field="product_type_id"
         )
 
@@ -578,9 +578,18 @@ class ProductTypeReorderAttributes(BaseMutation):
         else:
             m2m_field = "attributevariant"
 
-        product_type = models.ProductType.objects.prefetch_related(m2m_field).get(
-            pk=product_type_id
-        )
+        try:
+            product_type = models.ProductType.objects.prefetch_related(m2m_field).get(
+                pk=pk
+            )
+        except ObjectDoesNotExist:
+            raise ValidationError(
+                {
+                    "product_type_id": (
+                        f"Couldn't resolve to a product type: {product_type_id}"
+                    )
+                }
+            )
 
         attributes_m2m = getattr(product_type, m2m_field)
         operations = {}
@@ -596,7 +605,7 @@ class ProductTypeReorderAttributes(BaseMutation):
                 m2m_info = attributes_m2m.get(attribute_id=attribute_pk)
             except ObjectDoesNotExist:
                 raise ValidationError(
-                    {"moves": "Couldn't resolve to an attribute: %s" % move_info.id}
+                    {"moves": f"Couldn't resolve to an attribute: {move_info.id}"}
                 )
             operations[m2m_info.pk] = move_info.sort_order
 
