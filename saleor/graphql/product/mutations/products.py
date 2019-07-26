@@ -242,14 +242,12 @@ class CollectionReorderProducts(BaseMutation):
 
         # Resolve the products
         for move_info in moves:
-            product_id = from_global_id_strict_type(
+            product_pk = from_global_id_strict_type(
                 info, move_info.product_id, only_type=Product, field="moves"
             )
 
-            product_id = int(product_id)
-
             try:
-                m2m_info = m2m_related_field.get(product_id=product_id)
+                m2m_info = m2m_related_field.get(product_id=int(product_pk))
             except ObjectDoesNotExist:
                 raise ValidationError(
                     {"moves": f"Couldn't resolve to a product: {move_info.product_id}"}
@@ -257,9 +255,7 @@ class CollectionReorderProducts(BaseMutation):
             operations[m2m_info.pk] = move_info.sort_order
 
         with transaction.atomic():
-            perform_reordering(
-                m2m_related_field, operations, model_name=Product.__name__
-            )
+            perform_reordering(m2m_related_field, operations)
         return CollectionReorderProducts(collection=collection)
 
 

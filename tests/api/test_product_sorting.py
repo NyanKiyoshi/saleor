@@ -19,7 +19,8 @@ query CollectionProducts($id: ID!) {
 COLLECTION_RESORT_QUERY = """
 mutation ReorderCollectionProducts($collectionId: ID!, $moves: [MoveProductInput]!) {
   collectionReorderProducts(collectionId: $collectionId, moves: $moves) {
-        collection {
+    collection {
+      id
       products(first: 10) {
         edges {
           node {
@@ -125,11 +126,12 @@ def test_sort_products_within_collection(
     )["data"]["collectionReorderProducts"]
     assert not content["errors"]
 
+    assert content["collection"]["id"] == collection_id
+
     gql_products = content["collection"]["products"]["edges"]
     assert len(gql_products) == len(expected_order)
 
     for attr, expected_pk in zip(gql_products, expected_order):
-        _, gql_attr_id = graphene.Node.from_global_id(attr["node"]["id"])
-        gql_attr_id = int(gql_attr_id)
-
-        assert gql_attr_id == expected_pk
+        gql_type, gql_attr_id = graphene.Node.from_global_id(attr["node"]["id"])
+        assert gql_type == "Product"
+        assert int(gql_attr_id) == expected_pk

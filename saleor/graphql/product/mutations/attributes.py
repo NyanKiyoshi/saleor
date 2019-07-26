@@ -13,7 +13,7 @@ from ...core.utils.reordering import perform_reordering
 from ...product.types import ProductType
 from ..descriptions import AttributeDescriptions, AttributeValueDescriptions
 from ..enums import AttributeInputTypeEnum, AttributeTypeEnum
-from ..types import Attribute
+from ..types import Attribute, AttributeValue
 
 
 class AttributeValueCreateInput(graphene.InputObjectType):
@@ -90,12 +90,11 @@ class AttributeAssignInput(graphene.InputObjectType):
     )
 
 
-class AttributeReorderInput(graphene.InputObjectType):
-    id = graphene.ID(required=True, description="The ID of the attribute to move")
+class ReorderInput(graphene.InputObjectType):
+    id = graphene.ID(required=True, description="The ID of the item to move")
     sort_order = graphene.Int(
         description=(
-            "The relative sorting position of the attribute (from -inf to +inf) "
-            "starting from the first given attribute's actual position."
+            "The new relative sorting position of the item (from -inf to +inf)"
         )
     )
 
@@ -562,7 +561,7 @@ class ProductTypeReorderAttributes(BaseMutation):
             required=True, description="The attribute type to reorder."
         )
         moves = graphene.List(
-            AttributeReorderInput,
+            ReorderInput,
             required=True,
             description="The list of attribute reordering operations.",
         )
@@ -600,9 +599,8 @@ class ProductTypeReorderAttributes(BaseMutation):
                 info, move_info.id, only_type=Attribute, field="moves"
             )
 
-            attribute_pk = int(attribute_pk)
             try:
-                m2m_info = attributes_m2m.get(attribute_id=attribute_pk)
+                m2m_info = attributes_m2m.get(attribute_id=int(attribute_pk))
             except ObjectDoesNotExist:
                 raise ValidationError(
                     {"moves": f"Couldn't resolve to an attribute: {move_info.id}"}
@@ -610,7 +608,60 @@ class ProductTypeReorderAttributes(BaseMutation):
             operations[m2m_info.pk] = move_info.sort_order
 
         with transaction.atomic():
-            perform_reordering(
-                attributes_m2m, operations, model_name=Attribute.__name__
-            )
+            perform_reordering(attributes_m2m, operations)
         return ProductTypeReorderAttributes(product_type=product_type)
+
+
+class AttributeReorderValues(BaseMutation):
+    attribute = graphene.Field(
+        Attribute, description="Attribute from which values are reordered."
+    )
+
+    class Meta:
+        description = "Reorder the values of an attribute"
+        permissions = ("product.manage_products",)
+
+    class Arguments:
+        attribute_id = graphene.Argument(
+            graphene.ID, required=True, description="ID of an attribute."
+        )
+        moves = graphene.List(
+            ReorderInput,
+            required=True,
+            description="The list of reordering operations for given attribute values.",
+        )
+
+    @classmethod
+    def perform_mutation(cls, _root, info, attribute_id, moves):
+        pk = from_global_id_strict_type(
+            info, attribute_id, only_type=Attribute, field="attribute_id"
+        )
+
+        try:
+            attribute = models.Attribute.objects.prefetch_related("values").get(pk=pk)
+        except ObjectDoesNotExist:
+            raise ValidationError(
+                {"attribute_id": (f"Couldn't resolve to an attribute: {attribute_id}")}
+            )
+
+        values_m2m = attribute.values
+        operations = {}
+
+        # Resolve the values
+        for move_info in moves:
+            value_pk = from_global_id_strict_type(
+                info, move_info.id, only_type=AttributeValue, field="moves"
+            )
+
+            try:
+                m2m_info = values_m2m.get(pk=int(value_pk))
+            except ObjectDoesNotExist:
+                raise ValidationError(
+                    {"moves": f"Couldn't resolve to an attribute value: {move_info.id}"}
+                )
+            operations[m2m_info.pk] = move_info.sort_order
+
+        with transaction.atomic():
+            perform_reordering(values_m2m, operations)
+        attribute.refresh_from_db(fields=["values"])
+        return AttributeReorderValues(attribute=attribute)

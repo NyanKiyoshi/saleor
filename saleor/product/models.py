@@ -142,7 +142,10 @@ class ProductsQueryset(PublishedQuerySet):
         qs = self.visible_to_user(user).prefetch_related(
             "collections__products__collectionproduct"
         )
-        qs = qs.order_by(F("collectionproduct__sort_order").asc(nulls_last=True), "id")
+        qs = qs.order_by(
+            F("collectionproduct__sort_order").asc(nulls_last=True),
+            F("collectionproduct__id"),
+        )
         return qs
 
 
@@ -610,7 +613,7 @@ class AttributeValue(SortableModel):
     translated = TranslationProxy()
 
     class Meta:
-        ordering = ("sort_order",)
+        ordering = (F("sort_order").asc(nulls_last=True), "id")
         unique_together = ("name", "attribute")
 
     def __str__(self):

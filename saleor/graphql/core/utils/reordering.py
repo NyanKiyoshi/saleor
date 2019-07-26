@@ -1,9 +1,8 @@
+import warnings
 from collections import OrderedDict
 from dataclasses import dataclass
 from typing import Dict, Tuple
 
-import graphene
-from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.db.models import F, QuerySet
 from django.utils.functional import cached_property
@@ -25,11 +24,8 @@ class NoChangeException(Exception):
 
 
 class Reordering:
-    def __init__(
-        self, qs: QuerySet, model_name: str, operations: Dict[int, int], field: str
-    ):
+    def __init__(self, qs: QuerySet, operations: Dict[int, int], field: str):
         self.qs = qs
-        self.model_name = model_name
         self.operations = operations
         self.field = field
 
@@ -64,22 +60,6 @@ class Reordering:
             ordering_map[pk] = previous_sort_order
 
         return ordering_map
-
-    def resolve_node_from_global_id(self, global_id: str) -> int:
-        internal_type, _id = graphene.Node.from_global_id(global_id)  # type: str, str
-
-        # Ensure the type is the expected one and the id is not garbage
-        if internal_type == self.model_name and _id.isnumeric():
-            pk = int(_id)
-
-            # Check if it exists
-            if pk in self.ordered_node_map:
-                return pk
-
-        # Raise a validation error if we failed to resolve the passed node
-        raise ValidationError(
-            {"moves": f"Couldn't resolve {global_id} to {self.model_name}"}
-        )
 
     def calculate_new_sort_order(self, pk, move) -> Tuple[int, int, int]:
         """Returns the proper sort order for the current operation to properly
@@ -119,6 +99,9 @@ class Reordering:
             )
         except NoChangeException:
             # Skip if noting to do
+            warnings.warn(
+                f"Ignored node's reordering, did not find: {pk} (from {self.qs.model})"
+            )
             return
 
         # Determine how we should shift for this operation
@@ -178,9 +161,7 @@ class Reordering:
         self.commit()
 
 
-def perform_reordering(
-    qs: QuerySet, operations: Dict[int, int], field: str = "moves", model_name=None
-):
+def perform_reordering(qs: QuerySet, operations: Dict[int, int], field: str = "moves"):
     """This utility takes a set of operations containing a node
     and a relative sort order. It then converts the relative sorting
     to an absolute sorting.
@@ -197,9 +178,4 @@ def perform_reordering(
     if not transaction.get_connection().in_atomic_block:
         raise RuntimeError("Needs to be run inside an atomic transaction")
 
-    if model_name is None:
-        model_name = qs.model.__name__
-    else:
-        model_name = model_name
-
-    Reordering(qs, model_name, operations, field).run()
+    Reordering(qs, operations, field).run()
