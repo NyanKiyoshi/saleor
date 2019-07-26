@@ -28,7 +28,7 @@ def reorder_collection_products(apps, schema_editor):
 
 class Migration(migrations.Migration):
 
-    dependencies = [("product", "0100_auto_20190626_0815")]
+    dependencies = [("product", "0101_remove_dups")]
 
     operations = [
         migrations.RunPython(reorder_collection_products),
