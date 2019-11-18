@@ -5,31 +5,16 @@ environment:
   matrix:
     # Python 3.7
     - PYTHON: C:\Python37-x64
-      DJANGO: 1.11
-    - PYTHON: C:\Python37-x64
-      DJANGO: 2.1
-    - PYTHON: C:\Python37-x64
-      DJANGO: master
+      DJANGO: 2.2
 
     # Python 3.6
     - PYTHON: C:\Python36-x64
-      DJANGO: 1.11
-    - PYTHON: C:\Python36-x64
-      DJANGO: 2.1
-    - PYTHON: C:\Python36-x64
-      DJANGO: master
-
-    # Python 3.5
-    - PYTHON: C:\Python35-x64
-      DJANGO: 1.11
-    - PYTHON: C:\Python35-x64
-      DJANGO: 2.1
-    - PYTHON: C:\Python35-x64
-      DJANGO: master
+      DJANGO: 2.2
 init:
   - SET PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
   - SET DJANGO_SETTINGS_MODULE=tests.settings
   - SET DATABASE_URL=postgres://postgres:Password12!@localhost:5432/saleor
+  - SET SECRET_KEY=abc
 
 install:
   - ps: Install-Product node $env:node_version
@@ -44,7 +29,6 @@ test_script:
   - node -v
   - python -V
   - echo Django %DJANGO%
-  - npm run test
   - tox
 
 cache:
