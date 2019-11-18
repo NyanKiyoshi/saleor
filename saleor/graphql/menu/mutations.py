@@ -261,7 +261,7 @@ class _MenuMoveOperation:
     menu_item: models.MenuItem
     parent_changed: bool
     new_parent: Optional[models.MenuItem]
-    sort_order: int
+    sort_order: Optional[int]
 
 
 class MenuItemMove(BaseMutation):
