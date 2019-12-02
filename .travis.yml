@@ -33,6 +33,7 @@ script:
 
 env:
   global:
+    - PGPORT=5432
     - DATABASE_URL="postgres://postgres@localhost:5432/saleor"
     - SECRET_KEY="irrelevant"
     - DIFF_RESULTS_BASE_URL="http://dhrwmpu5reeyd.cloudfront.net"
@@ -62,7 +63,7 @@ services:
   - postgresql
 
 addons:
-  postgresql: 9.4
+  postgresql: 12
 
 after_success:
   - ../queries-ci-tools/handle-event.sh
