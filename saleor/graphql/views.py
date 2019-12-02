@@ -20,6 +20,8 @@ from graphql_jwt.exceptions import PermissionDenied
 unhandled_errors_logger = logging.getLogger("saleor.graphql.errors.unhandled")
 handled_errors_logger = logging.getLogger("saleor.graphql.errors.handled")
 
+queries = logging.getLogger("saleor.performances.queries")
+
 
 class GraphQLView(View):
     # This class is our implementation of `graphene_django.views.GraphQLView`,
@@ -84,6 +86,8 @@ class GraphQLView(View):
                 data={"errors": [self.format_error("Unable to parse query.")]},
                 status=400,
             )
+
+        queries.debug(str(data))
 
         if isinstance(data, list):
             responses = [self.get_response(request, entry) for entry in data]
