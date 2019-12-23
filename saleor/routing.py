@@ -50,19 +50,12 @@ def get_site():
     return Site.objects.get_current()
 
 
-def get_extensions(get_response):
+def get_extensions():
     """Assign extensions manager."""
     from saleor.extensions.manager import get_extensions_manager
     from django.conf import settings
 
-    def _get_manager():
-        return get_extensions_manager(plugins=settings.PLUGINS)
-
-    def _extensions_middleware(request):
-        request.extensions = SimpleLazyObject(lambda: _get_manager())
-        return get_response(request)
-
-    return _extensions_middleware
+    return get_extensions_manager(plugins=settings.PLUGINS)
 
 
 class SaleorMiddleware(BaseMiddleware):

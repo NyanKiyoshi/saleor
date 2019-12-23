@@ -320,15 +320,15 @@ class ProductVariant(CountableDjangoObjectType, MetadataObjectType):
 
     @staticmethod
     async def resolve_pricing(root: models.ProductVariant, info):
-        context = info.context["request"]
-        discount_loader = DiscountsLoader.for_context(context)
+        request = info.context["request"]
+        discount_loader = DiscountsLoader.for_context(info.context)
         discounts = await discount_loader.load(date.today())
         availability = get_variant_availability(
             root,
             discounts,
-            context["country"],
-            context["currency"],
-            extensions=context.extensions,
+            request["country"],
+            request["currency"],
+            extensions=request["extensions"],
         )
         return VariantPricingInfo(**asdict(availability))
 
@@ -518,15 +518,15 @@ class Product(CountableDjangoObjectType, MetadataObjectType):
 
     @staticmethod
     async def resolve_pricing(root: models.Product, info):
-        context = info.context["request"]
-        discount_loader = DiscountsLoader.for_context(context)
+        request = info.context["request"]
+        discount_loader = DiscountsLoader.for_context(info.context)
         discounts = await discount_loader.load(date.today())
         availability = get_product_availability(
             root,
             discounts,
-            context["country"],
-            context["currency"],
-            context["extensions"],
+            request["country"],
+            request["currency"],
+            request["extensions"],
         )
         return ProductPricingInfo(**asdict(availability))
 
