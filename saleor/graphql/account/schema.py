@@ -157,7 +157,7 @@ class AccountQueries(graphene.ObjectType):
 
     @login_required
     def resolve_me(self, info):
-        return info.context.user
+        return info.context["request"].user
 
     @permission_required(AccountPermissions.MANAGE_STAFF)
     def resolve_staff_users(self, info, query=None, **kwargs):

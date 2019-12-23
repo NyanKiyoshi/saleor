@@ -219,7 +219,7 @@ class CheckoutCreate(ModelMutation, I18nMixin):
     @classmethod
     def clean_input(cls, info, instance: models.Checkout, data):
         cleaned_input = super().clean_input(info, instance, data)
-        user = info.context.user
+        user = info.context["request"].user
 
         # Resolve and process the lines, retrieving the variants and quantities
         lines = data.pop("lines", None)
@@ -283,7 +283,7 @@ class CheckoutCreate(ModelMutation, I18nMixin):
 
     @classmethod
     def perform_mutation(cls, _root, info, **data):
-        user = info.context.user
+        user = info.context["request"].user
 
         # `perform_mutation` is overridden to properly get or create a checkout
         # instance here and abort mutation if needed.
@@ -349,8 +349,8 @@ class CheckoutLinesAdd(BaseMutation):
                         f"Insufficient product stock: {exc.item}", code=exc.code
                     )
 
-        update_checkout_shipping_method_if_invalid(checkout, info.context.discounts)
-        recalculate_checkout_discount(checkout, info.context.discounts)
+        update_checkout_shipping_method_if_invalid(checkout, info.context["request"]["discounts"])
+        recalculate_checkout_discount(checkout, info.context["request"]["discounts"])
 
         return CheckoutLinesAdd(checkout=checkout)
 
@@ -392,8 +392,8 @@ class CheckoutLineDelete(BaseMutation):
         if line and line in checkout.lines.all():
             line.delete()
 
-        update_checkout_shipping_method_if_invalid(checkout, info.context.discounts)
-        recalculate_checkout_discount(checkout, info.context.discounts)
+        update_checkout_shipping_method_if_invalid(checkout, info.context["request"]["discounts"])
+        recalculate_checkout_discount(checkout, info.context["request"]["discounts"])
 
         return CheckoutLineDelete(checkout=checkout)
 
@@ -491,12 +491,12 @@ class CheckoutShippingAddressUpdate(BaseMutation, I18nMixin):
             shipping_address, instance=checkout.shipping_address
         )
 
-        update_checkout_shipping_method_if_invalid(checkout, info.context.discounts)
+        update_checkout_shipping_method_if_invalid(checkout, info.context["request"]["discounts"])
 
         with transaction.atomic():
             shipping_address.save()
             change_shipping_address_in_checkout(checkout, shipping_address)
-        recalculate_checkout_discount(checkout, info.context.discounts)
+        recalculate_checkout_discount(checkout, info.context["request"]["discounts"])
 
         return CheckoutShippingAddressUpdate(checkout=checkout)
 
@@ -605,7 +605,7 @@ class CheckoutShippingMethodUpdate(BaseMutation):
         )
 
         shipping_method_is_valid = clean_shipping_method(
-            checkout=checkout, method=shipping_method, discounts=info.context.discounts
+            checkout=checkout, method=shipping_method, discounts=info.context["request"]["discounts"]
         )
 
         if not shipping_method_is_valid:
@@ -620,7 +620,7 @@ class CheckoutShippingMethodUpdate(BaseMutation):
 
         checkout.shipping_method = shipping_method
         checkout.save(update_fields=["shipping_method"])
-        recalculate_checkout_discount(checkout, info.context.discounts)
+        recalculate_checkout_discount(checkout, info.context["request"]["discounts"])
 
         return CheckoutShippingMethodUpdate(checkout=checkout)
 
@@ -672,8 +672,8 @@ class CheckoutComplete(BaseMutation):
             ).select_related("shipping_method", "shipping_method__shipping_zone"),
         )
 
-        discounts = info.context.discounts
-        user = info.context.user
+        discounts = info.context["request"]["discounts"]
+        user = info.context["request"].user
         clean_checkout(checkout, discounts)
 
         payment = checkout.get_last_active_payment()
@@ -824,7 +824,7 @@ class CheckoutAddPromoCode(BaseMutation):
         checkout = cls.get_node_or_error(
             info, checkout_id, only_type=Checkout, field="checkout_id"
         )
-        add_promo_code_to_checkout(checkout, promo_code, info.context.discounts)
+        add_promo_code_to_checkout(checkout, promo_code, info.context["request"]["discounts"])
         return CheckoutAddPromoCode(checkout=checkout)
 
 

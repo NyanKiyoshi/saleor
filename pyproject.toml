@@ -62,6 +62,9 @@ tqdm = "^4.36"
 uwsgi = {version = "^2.0.8", platform = "!=win32"}
 weasyprint = ">=48"
 oauthlib = "^3.0"
+aiodataloader-next = "0.1.4"
+channels = "^2.4.0"
+starlette = "^0.13.0"
 
 [tool.poetry.dev-dependencies]
 black = "19.10b0"

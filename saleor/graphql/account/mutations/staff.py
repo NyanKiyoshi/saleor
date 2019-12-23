@@ -89,7 +89,7 @@ class CustomerUpdate(CustomerCreate):
         cls, info, old_instance: models.User, new_instance: models.User
     ):
         # Retrieve the event base data
-        staff_user = info.context.user
+        staff_user = info.context["request"].user
         new_email = new_instance.email
         new_fullname = new_instance.get_full_name()
 
@@ -261,7 +261,7 @@ class StaffUpdate(StaffCreate):
         cleaned_input = super().clean_input(info, instance, data)
         is_active = cleaned_input.get("is_active")
         if is_active is not None:
-            cls.clean_is_active(is_active, instance, info.context.user)
+            cls.clean_is_active(is_active, instance, info.context["request"].user)
         return cleaned_input
 
 
@@ -319,7 +319,7 @@ class AddressCreate(ModelMutation):
         user = cls.get_node_or_error(info, user_id, field="user_id", only_type=User)
         response = super().perform_mutation(root, info, **data)
         if not response.errors:
-            address = info.context.extensions.change_user_address(
+            address = info.context["request"]["extensions"].change_user_address(
                 response.address, None, user
             )
             user.addresses.add(address)
@@ -408,8 +408,8 @@ class UserAvatarUpdate(BaseMutation):
     @classmethod
     @staff_member_required
     def perform_mutation(cls, _root, info, image):
-        user = info.context.user
-        image_data = info.context.FILES.get(image)
+        user = info.context["request"].user
+        image_data = info.context["request"]["FILES"].get(image)
         validate_image_file(image_data, "image")
 
         if user.avatar:
@@ -433,7 +433,7 @@ class UserAvatarDelete(BaseMutation):
     @classmethod
     @staff_member_required
     def perform_mutation(cls, _root, info):
-        user = info.context.user
+        user = info.context["request"].user
         user.avatar.delete_sized_images()
         user.avatar.delete()
         return UserAvatarDelete(user=user)

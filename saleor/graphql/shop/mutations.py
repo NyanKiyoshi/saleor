@@ -89,7 +89,7 @@ class ShopSettingsUpdate(BaseMutation):
 
     @classmethod
     def perform_mutation(cls, _root, info, **data):
-        instance = info.context.site.settings
+        instance = info.context["request"]["site"].settings
         data = data.get("input")
         cleaned_input = cls.clean_input(info, instance, data)
         instance = cls.construct_instance(instance, cleaned_input)
@@ -115,7 +115,7 @@ class ShopAddressUpdate(BaseMutation, I18nMixin):
 
     @classmethod
     def perform_mutation(cls, _root, info, **data):
-        site_settings = info.context.site.settings
+        site_settings = info.context["request"]["site"].settings
         data = data.get("input")
 
         if data:
@@ -147,7 +147,7 @@ class ShopDomainUpdate(BaseMutation):
 
     @classmethod
     def perform_mutation(cls, _root, info, **data):
-        site = info.context.site
+        site = info.context["request"]["site"]
         data = data.get("input")
         domain = data.get("domain")
         name = data.get("name")
@@ -198,7 +198,7 @@ class HomepageCollectionUpdate(BaseMutation):
         new_collection = cls.get_node_or_error(
             info, collection, field="collection", only_type=Collection
         )
-        site_settings = info.context.site.settings
+        site_settings = info.context["request"]["site"].settings
         site_settings.homepage_collection = new_collection
         cls.clean_instance(site_settings)
         site_settings.save(update_fields=["homepage_collection"])
@@ -244,7 +244,7 @@ class AuthorizationKeyAdd(BaseMutation):
                 }
             )
 
-        site_settings = info.context.site.settings
+        site_settings = info.context["request"]["site"].settings
         instance = site_models.AuthorizationKey(
             name=key_type, site_settings=site_settings, **data.get("input")
         )
@@ -273,7 +273,7 @@ class AuthorizationKeyDelete(BaseMutation):
     @classmethod
     def perform_mutation(cls, _root, info, key_type):
         try:
-            site_settings = info.context.site.settings
+            site_settings = info.context["request"]["site"].settings
             instance = site_models.AuthorizationKey.objects.get(
                 name=key_type, site_settings=site_settings
             )

@@ -199,6 +199,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.auth",
     "django.contrib.postgres",
+    "django.contrib.sessions",
     # Local apps
     "saleor.extensions",
     "saleor.account",
@@ -230,8 +231,10 @@ INSTALLED_APPS = [
     "django_countries",
     "django_filters",
     "phonenumber_field",
+    "channels",
 ]
 
+ASGI_APPLICATION = "saleor.routing.application"
 
 ENABLE_DEBUG_TOOLBAR = get_bool_from_env("ENABLE_DEBUG_TOOLBAR", False)
 if ENABLE_DEBUG_TOOLBAR:

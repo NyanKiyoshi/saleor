@@ -250,7 +250,7 @@ class OrderLine(CountableDjangoObjectType):
         if image:
             url = get_product_image_thumbnail(image, size, method="thumbnail")
             alt = image.alt
-            return Image(alt=alt, url=info.context.build_absolute_uri(url))
+            return Image(alt=alt, url=url)
         return None
 
     @staticmethod
@@ -419,7 +419,7 @@ class Order(MetadataObjectType, CountableDjangoObjectType):
 
     @staticmethod
     def resolve_fulfillments(root: models.Order, info):
-        user = info.context.user
+        user = info.context["request"].user
         if user.is_staff:
             qs = root.fulfillments.all()
         else:

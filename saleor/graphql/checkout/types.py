@@ -56,8 +56,8 @@ class CheckoutLine(CountableDjangoObjectType):
 
     @staticmethod
     def resolve_total_price(self, info):
-        return info.context.extensions.calculate_checkout_line_total(
-            checkout_line=self, discounts=info.context.discounts
+        return info.context["request"]["extensions"].calculate_checkout_line_total(
+            checkout_line=self, discounts=info.context["request"]["discounts"]
         )
 
     @staticmethod
@@ -147,7 +147,7 @@ class Checkout(MetadataObjectType, CountableDjangoObjectType):
     @staticmethod
     def resolve_total_price(root: models.Checkout, info):
         taxed_total = (
-            calculations.checkout_total(checkout=root, discounts=info.context.discounts)
+            calculations.checkout_total(checkout=root, discounts=info.context["request"]["discounts"])
             - root.get_total_gift_cards_balance()
         )
         return max(taxed_total, zero_taxed_money())
@@ -155,13 +155,13 @@ class Checkout(MetadataObjectType, CountableDjangoObjectType):
     @staticmethod
     def resolve_subtotal_price(root: models.Checkout, info):
         return calculations.checkout_subtotal(
-            checkout=root, discounts=info.context.discounts
+            checkout=root, discounts=info.context["request"]["discounts"]
         )
 
     @staticmethod
     def resolve_shipping_price(root: models.Checkout, info):
         return calculations.checkout_shipping_price(
-            checkout=root, discounts=info.context.discounts
+            checkout=root, discounts=info.context["request"]["discounts"]
         )
 
     @staticmethod
@@ -171,7 +171,7 @@ class Checkout(MetadataObjectType, CountableDjangoObjectType):
     @staticmethod
     def resolve_available_shipping_methods(root: models.Checkout, info):
         available = get_valid_shipping_methods_for_checkout(
-            root, info.context.discounts
+            root, info.context["request"]["discounts"]
         )
         if available is None:
             return []

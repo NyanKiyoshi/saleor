@@ -54,7 +54,7 @@ def resolve_staff_users(info, query, sort_by=None, **_kwargs):
 
 
 def resolve_user(info, id):
-    requester = info.context.user or info.context.service_account
+    requester = info.context["request"].user or info.context["request"]["service_account"]
     if requester:
         _model, user_pk = graphene.Node.from_global_id(id)
         if requester.has_perms(

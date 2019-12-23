@@ -102,7 +102,7 @@ class CategoryCreate(ModelMutation):
             )
             cleaned_input["parent"] = parent
         if data.get("background_image"):
-            image_data = info.context.FILES.get(data["background_image"])
+            image_data = info.context["request"]["FILES"].get(data["background_image"])
             validate_image_file(image_data, "background_image")
         clean_seo_fields(cleaned_input)
         return cleaned_input
@@ -206,7 +206,7 @@ class CollectionCreate(ModelMutation):
         if "slug" not in cleaned_input and "name" in cleaned_input:
             cleaned_input["slug"] = slugify(cleaned_input["name"])
         if data.get("background_image"):
-            image_data = info.context.FILES.get(data["background_image"])
+            image_data = info.context["request"]["FILES"].get(data["background_image"])
             validate_image_file(image_data, "background_image")
         clean_seo_fields(cleaned_input)
         return cleaned_input
@@ -798,11 +798,11 @@ class ProductCreate(ModelMutation):
         # FIXME  tax_rate logic should be dropped after we remove tax_rate from input
         tax_rate = cleaned_input.pop("tax_rate", "")
         if tax_rate:
-            info.context.extensions.assign_tax_code_to_object_meta(instance, tax_rate)
+            info.context["request"]["extensions"].assign_tax_code_to_object_meta(instance, tax_rate)
 
         tax_code = cleaned_input.pop("tax_code", "")
         if tax_code:
-            info.context.extensions.assign_tax_code_to_object_meta(instance, tax_code)
+            info.context["request"]["extensions"].assign_tax_code_to_object_meta(instance, tax_code)
 
         if attributes and product_type:
             try:
@@ -879,9 +879,9 @@ class ProductCreate(ModelMutation):
     @transaction.atomic
     def save(cls, info, instance, cleaned_input):
         instance.save()
-        info.context.extensions.product_created(instance)
+        info.context["request"]["extensions"].product_created(instance)
         if not instance.product_type.has_variants:
-            site_settings = info.context.site.settings
+            site_settings = info.context["request"]["site"].settings
             track_inventory = cleaned_input.get(
                 "track_inventory", site_settings.track_inventory_by_default
             )
@@ -1315,11 +1315,11 @@ class ProductTypeCreate(ModelMutation):
                 "code": tax_rate,
                 "description": tax_rate,
             }
-            info.context.extensions.assign_tax_code_to_object_meta(instance, tax_rate)
+            info.context["request"]["extensions"].assign_tax_code_to_object_meta(instance, tax_rate)
 
         tax_code = cleaned_input.pop("tax_code", "")
         if tax_code:
-            info.context.extensions.assign_tax_code_to_object_meta(instance, tax_code)
+            info.context["request"]["extensions"].assign_tax_code_to_object_meta(instance, tax_code)
 
         return cleaned_input
 
@@ -1443,7 +1443,7 @@ class ProductImageCreate(BaseMutation):
         product = cls.get_node_or_error(
             info, data["product"], field="product", only_type=Product
         )
-        image_data = info.context.FILES.get(data["image"])
+        image_data = info.context["request"]["FILES"].get(data["image"])
         validate_image_file(image_data, "image")
 
         image = product.images.create(image=image_data, alt=data.get("alt", ""))

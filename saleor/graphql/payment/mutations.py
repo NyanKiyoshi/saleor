@@ -86,8 +86,8 @@ class CheckoutPaymentCreate(BaseMutation, I18nMixin):
             )
 
         checkout_total = (
-            info.context.extensions.calculate_checkout_total(
-                checkout, discounts=info.context.discounts
+            info.context["request"]["extensions"].calculate_checkout_total(
+                checkout, discounts=info.context["request"]["discounts"]
             )
             - checkout.get_total_gift_cards_balance()
         )
@@ -104,7 +104,7 @@ class CheckoutPaymentCreate(BaseMutation, I18nMixin):
                 }
             )
 
-        extra_data = {"customer_user_agent": info.context.META.get("HTTP_USER_AGENT")}
+        extra_data = {"customer_user_agent": info.context["request"]["META"].get("HTTP_USER_AGENT")}
 
         payment = create_payment(
             gateway=data["gateway"],

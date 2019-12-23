@@ -16,7 +16,7 @@ def resolve_wishlist_from_user(user: "User") -> Wishlist:
 
 def resolve_wishlist_from_info(info: "ResolveInfo") -> Wishlist:
     """Return wishlist of the logged in user."""
-    user = info.context.user
+    user = info.context["request"].user
     return resolve_wishlist_from_user(user)
 
 

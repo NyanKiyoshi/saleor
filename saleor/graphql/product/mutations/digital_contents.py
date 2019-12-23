@@ -99,7 +99,7 @@ class DigitalContentCreate(BaseMutation):
 
         clean_input = cls.clean_input(info, data.get("input"), variant)
 
-        content_data = info.context.FILES.get(clean_input["content_file"])
+        content_data = info.context["request"]["FILES"].get(clean_input["content_file"])
         digital_content = models.DigitalContent(content_file=content_data)
         digital_content.use_default_settings = clean_input.get(
             "use_default_settings", False

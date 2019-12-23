@@ -327,7 +327,7 @@ class User(MetadataObjectType, CountableDjangoObjectType):
 
     @staticmethod
     def resolve_orders(root: models.User, info, **_kwargs):
-        viewer = info.context.user
+        viewer = info.context["request"].user
         if viewer.has_perm(OrderPermissions.MANAGE_ORDERS):
             return root.orders.all()
         return root.orders.confirmed()

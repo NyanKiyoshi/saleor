@@ -48,7 +48,7 @@ class AccountRegister(ModelMutation):
         user.set_password(password)
         user.save()
         account_events.customer_account_created_event(user=user)
-        info.context.extensions.customer_created(customer=user)
+        info.context["request"]["extensions"].customer_created(customer=user)
 
 
 class AccountInput(graphene.InputObjectType):
@@ -82,7 +82,7 @@ class AccountUpdate(BaseCustomerCreate):
 
     @classmethod
     def perform_mutation(cls, root, info, **data):
-        user = info.context.user
+        user = info.context["request"].user
         data["id"] = graphene.Node.to_global_id("User", user.id)
         return super().perform_mutation(root, info, **data)
 
@@ -110,7 +110,7 @@ class AccountRequestDeletion(BaseMutation):
 
     @classmethod
     def perform_mutation(cls, root, info, **data):
-        user = info.context.user
+        user = info.context["request"].user
         redirect_url = data["redirect_url"]
         try:
             validate_storefront_url(redirect_url)
@@ -153,7 +153,7 @@ class AccountDelete(ModelDeleteMutation):
 
     @classmethod
     def perform_mutation(cls, _root, info, **data):
-        user = info.context.user
+        user = info.context["request"].user
         cls.clean_instance(info, user)
 
         token = data.pop("token")
@@ -203,7 +203,7 @@ class AccountAddressCreate(ModelMutation):
     def perform_mutation(cls, root, info, **data):
         success_response = super().perform_mutation(root, info, **data)
         address_type = data.get("type", None)
-        user = info.context.user
+        user = info.context["request"].user
         success_response.user = user
         if address_type:
             instance = success_response.address
@@ -213,7 +213,7 @@ class AccountAddressCreate(ModelMutation):
     @classmethod
     def save(cls, info, instance, cleaned_input):
         super().save(info, instance, cleaned_input)
-        user = info.context.user
+        user = info.context["request"].user
         instance.user_addresses.add(user)
 
 
@@ -254,7 +254,7 @@ class AccountSetDefaultAddress(BaseMutation):
     @classmethod
     def perform_mutation(cls, _root, info, **data):
         address = cls.get_node_or_error(info, data.get("id"), Address)
-        user = info.context.user
+        user = info.context["request"].user
 
         if not user.addresses.filter(pk=address.pk).exists():
             raise ValidationError(
@@ -295,4 +295,4 @@ class AccountUpdateMeta(UpdateMetaBaseMutation):
 
     @classmethod
     def get_instance(cls, info, **data):
-        return info.context.user
+        return info.context["request"].user

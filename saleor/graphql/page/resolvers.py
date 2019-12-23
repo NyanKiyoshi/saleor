@@ -9,7 +9,7 @@ PAGE_SEARCH_FIELDS = ("content", "slug", "title")
 
 def resolve_page(info, global_page_id=None, slug=None):
     assert global_page_id or slug, "No page ID or slug provided."
-    user = info.context.user
+    user = info.context["request"].user
 
     if slug is not None:
         page = models.Page.objects.visible_to_user(user).filter(slug=slug).first()
@@ -20,7 +20,7 @@ def resolve_page(info, global_page_id=None, slug=None):
 
 
 def resolve_pages(info, query, sort_by=None, **_kwargs):
-    user = info.context.user
+    user = info.context["request"].user
     qs = models.Page.objects.visible_to_user(user)
     qs = sort_queryset(qs, sort_by, PageSortField)
     return filter_by_query_param(qs, query, PAGE_SEARCH_FIELDS)

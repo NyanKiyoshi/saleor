@@ -5,10 +5,12 @@ import graphene
 import graphene_django_optimizer as gql_optimizer
 from django.conf import settings
 from django.db.models import Prefetch
+from django.utils.datetime_safe import date
 from graphene import relay
 from graphene_federation import key
 from graphql.error import GraphQLError
 
+from saleor.graphql.product.dataloaders import ProductImageLoader, DiscountsLoader
 from ....core.permissions import OrderPermissions, ProductPermissions
 from ....product import models
 from ....product.templatetags.product_images import (
@@ -57,7 +59,7 @@ def prefetch_products(info, *_args, **_kwargs):
     requesting user, to restrict access to unpublished products from non-staff
     users.
     """
-    user = info.context.user
+    user = info.context["request"].user
     qs = models.Product.objects.visible_to_user(user)
     return Prefetch(
         "products",
@@ -67,7 +69,7 @@ def prefetch_products(info, *_args, **_kwargs):
 
 
 def prefetch_products_collection_sorted(info, *_args, **_kwargs):
-    user = info.context.user
+    user = info.context["request"].user
     qs = models.Product.objects.collection_sorted(user)
     return Prefetch(
         "products",
@@ -256,11 +258,8 @@ class ProductVariant(CountableDjangoObjectType, MetadataObjectType):
             "optimizations suitable for such calculations."
         ),
     )
-    images = gql_optimizer.field(
-        graphene.List(
-            lambda: ProductImage, description="List of images for the product variant."
-        ),
-        model_field="images",
+    images = graphene.List(
+        lambda: ProductImage, description="List of images for the product variant."
     )
     translation = TranslationField(
         ProductVariantTranslation, type_name="product variant"
@@ -303,7 +302,7 @@ class ProductVariant(CountableDjangoObjectType, MetadataObjectType):
         prefetch_related=["attributes__values", "attributes__assignment__attribute"]
     )
     def resolve_attributes(root: models.ProductVariant, info):
-        return resolve_attribute_list(root, user=info.context.user)
+        return resolve_attribute_list(root, user=info.context["request"].user)
 
     @staticmethod
     @permission_required(ProductPermissions.MANAGE_PRODUCTS)
@@ -320,16 +319,15 @@ class ProductVariant(CountableDjangoObjectType, MetadataObjectType):
         return root.base_price
 
     @staticmethod
-    @gql_optimizer.resolver_hints(
-        prefetch_related=("product",), only=["price_override_amount", "currency"]
-    )
-    def resolve_pricing(root: models.ProductVariant, info):
-        context = info.context
+    async def resolve_pricing(root: models.ProductVariant, info):
+        context = info.context["request"]
+        discount_loader = DiscountsLoader.for_context(context)
+        discounts = await discount_loader.load(date.today())
         availability = get_variant_availability(
             root,
-            context.discounts,
-            context.country,
-            context.currency,
+            discounts,
+            context["country"],
+            context["currency"],
             extensions=context.extensions,
         )
         return VariantPricingInfo(**asdict(availability))
@@ -380,7 +378,7 @@ class ProductVariant(CountableDjangoObjectType, MetadataObjectType):
 
     @classmethod
     def get_node(cls, info, id):
-        user = info.context.user
+        user = info.context["request"].user
         visible_products = models.Product.objects.visible_to_user(user).values_list(
             "pk", flat=True
         )
@@ -500,17 +498,18 @@ class Product(CountableDjangoObjectType, MetadataObjectType):
 
     @staticmethod
     def resolve_tax_type(root: models.Product, info):
-        tax_data = info.context.extensions.get_tax_code_from_object_meta(root)
+        tax_data = info.context["request"]["extensions"].get_tax_code_from_object_meta(root)
         return TaxType(tax_code=tax_data.code, description=tax_data.description)
 
     @staticmethod
-    @gql_optimizer.resolver_hints(prefetch_related="images")
-    def resolve_thumbnail(root: models.Product, info, *, size=255):
-        image = root.get_first_image()
-        if image:
+    async def resolve_thumbnail(root: models.Product, info, *, size=255):
+        loader = ProductImageLoader.for_context(info.context)
+        images = await loader.load(root.id)
+        image = images[0] if images else None
+        if image is not None:
             url = get_product_image_thumbnail(image, size, method="thumbnail")
             alt = image.alt
-            return Image(alt=alt, url=info.context.build_absolute_uri(url))
+            return Image(alt=alt, url=url)
         return None
 
     @staticmethod
@@ -518,18 +517,16 @@ class Product(CountableDjangoObjectType, MetadataObjectType):
         return root.get_absolute_url()
 
     @staticmethod
-    @gql_optimizer.resolver_hints(
-        prefetch_related=("variants", "collections"),
-        only=["publication_date", "charge_taxes", "price_amount", "currency", "meta"],
-    )
-    def resolve_pricing(root: models.Product, info):
-        context = info.context
+    async def resolve_pricing(root: models.Product, info):
+        context = info.context["request"]
+        discount_loader = DiscountsLoader.for_context(context)
+        discounts = await discount_loader.load(date.today())
         availability = get_product_availability(
             root,
-            context.discounts,
-            context.country,
-            context.currency,
-            context.extensions,
+            discounts,
+            context["country"],
+            context["currency"],
+            context["extensions"],
         )
         return ProductPricingInfo(**asdict(availability))
 
@@ -551,9 +548,9 @@ class Product(CountableDjangoObjectType, MetadataObjectType):
         only=["publication_date", "charge_taxes", "price_amount", "currency", "meta"],
     )
     def resolve_price(root: models.Product, info):
-        price_range = root.get_price_range(info.context.discounts)
-        price = info.context.extensions.apply_taxes_to_product(
-            root, price_range.start, info.context.country
+        price_range = root.get_price_range(info.context["request"]["discounts"])
+        price = info.context["request"]["extensions"].apply_taxes_to_product(
+            root, price_range.start, info.context["request"]["country"]
         )
         return price.net
 
@@ -570,7 +567,7 @@ class Product(CountableDjangoObjectType, MetadataObjectType):
         ]
     )
     def resolve_attributes(root: models.Product, info):
-        return resolve_attribute_list(root, user=info.context.user)
+        return resolve_attribute_list(root, user=info.context["request"].user)
 
     @staticmethod
     @permission_required(ProductPermissions.MANAGE_PRODUCTS)
@@ -594,8 +591,9 @@ class Product(CountableDjangoObjectType, MetadataObjectType):
 
     @staticmethod
     @gql_optimizer.resolver_hints(model_field="images")
-    def resolve_images(root: models.Product, *_args, **_kwargs):
-        return root.images.all()
+    async def resolve_images(root: models.Product, info, **_kwargs):
+        loader = ProductImageLoader.for_context(info.context)
+        return await loader.load(root.id)
 
     @staticmethod
     def resolve_variants(root: models.Product, *_args, **_kwargs):
@@ -608,7 +606,7 @@ class Product(CountableDjangoObjectType, MetadataObjectType):
     @classmethod
     def get_node(cls, info, pk):
         if info.context:
-            qs = cls._meta.model.objects.visible_to_user(info.context.user)
+            qs = cls._meta.model.objects.visible_to_user(info.context["request"].user)
             return cls.maybe_optimize(info, qs, pk)
         return None
 
@@ -671,7 +669,7 @@ class ProductType(CountableDjangoObjectType, MetadataObjectType):
 
     @staticmethod
     def resolve_tax_type(root: models.ProductType, info):
-        tax_data = info.context.extensions.get_tax_code_from_object_meta(root)
+        tax_data = info.context["request"]["extensions"].get_tax_code_from_object_meta(root)
         return TaxType(tax_code=tax_data.code, description=tax_data.description)
 
     @staticmethod
@@ -700,7 +698,7 @@ class ProductType(CountableDjangoObjectType, MetadataObjectType):
     def resolve_products(root: models.ProductType, info, **_kwargs):
         if hasattr(root, "prefetched_products"):
             return root.prefetched_products
-        qs = root.products.visible_to_user(info.context.user)
+        qs = root.products.visible_to_user(info.context["request"].user)
         return gql_optimizer.query(qs, info)
 
     @staticmethod
@@ -767,13 +765,13 @@ class Collection(CountableDjangoObjectType, MetadataObjectType):
     def resolve_products(root: models.Collection, info, **_kwargs):
         if hasattr(root, "prefetched_products"):
             return root.prefetched_products
-        qs = root.products.collection_sorted(info.context.user)
+        qs = root.products.collection_sorted(info.context["request"].user)
         return gql_optimizer.query(qs, info)
 
     @classmethod
     def get_node(cls, info, id):
         if info.context:
-            user = info.context.user
+            user = info.context["request"].user
             qs = cls._meta.model.objects.visible_to_user(user)
             return cls.maybe_optimize(info, qs, id)
         return None
@@ -907,7 +905,7 @@ class ProductImage(CountableDjangoObjectType):
             url = get_thumbnail(root.image, size, method="thumbnail")
         else:
             url = root.image.url
-        return info.context.build_absolute_uri(url)
+        return url
 
     @staticmethod
     def __resolve_reference(root, _info, **_kwargs):

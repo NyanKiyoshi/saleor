@@ -72,7 +72,7 @@ class WebhookCreate(ModelMutation):
     @classmethod
     def get_instance(cls, info, **data):
         instance = super().get_instance(info, **data)
-        service_account = info.context.service_account
+        service_account = info.context["request"]["service_account"]
         instance.service_account = service_account
         return instance
 
@@ -170,7 +170,7 @@ class WebhookDelete(ModelDeleteMutation):
         node_id = data["id"]
         _, object_id = graphene.Node.from_global_id(node_id)
 
-        service_account = info.context.service_account
+        service_account = info.context["request"]["service_account"]
         if service_account:
             if not service_account.is_active:
                 raise ValidationError(

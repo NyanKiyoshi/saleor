@@ -48,7 +48,7 @@ def resolve_attributes(
     sort_by=None,
     **_kwargs,
 ):
-    qs = qs or models.Attribute.objects.get_visible_to_user(info.context.user)
+    qs = qs or models.Attribute.objects.get_visible_to_user(info.context["request"].user)
     qs = filter_by_query_param(qs, query, ATTRIBUTES_SEARCH_FIELDS)
 
     if in_category:
@@ -77,7 +77,7 @@ def resolve_categories(info, query, level=None, sort_by=None, **_kwargs):
 
 
 def resolve_collections(info, query, sort_by=None, **_kwargs):
-    user = info.context.user
+    user = info.context["request"].user
     qs = models.Collection.objects.visible_to_user(user)
     qs = filter_by_query_param(qs, query, COLLECTION_SEARCH_FIELDS)
     qs = sort_queryset(qs, sort_by, CollectionSortField)
@@ -141,7 +141,7 @@ def resolve_products(
     **_kwargs,
 ):
 
-    user = info.context.user
+    user = info.context["request"].user
     qs = models.Product.objects.visible_to_user(user)
     qs = sort_products(qs, sort_by)
 
@@ -181,7 +181,7 @@ def resolve_product_types(info, query, sort_by=None, **_kwargs):
 
 
 def resolve_product_variants(info, ids=None):
-    user = info.context.user
+    user = info.context["request"].user
     visible_products = models.Product.objects.visible_to_user(user).values_list(
         "pk", flat=True
     )

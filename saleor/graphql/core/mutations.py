@@ -394,7 +394,7 @@ class ModelMutation(BaseMutation):
 
                 # handle uploaded files
                 elif value is not None and is_upload_field(field_item):
-                    value = info.context.FILES.get(value)
+                    value = info.context["request"]["FILES"].get(value)
                     cleaned_input[field_name] = value
 
                 # handle other fields
@@ -598,7 +598,7 @@ class CreateToken(ObtainJSONWebToken):
 
     @classmethod
     def resolve(cls, root, info, **kwargs):
-        return cls(user=info.context.user, errors=[])
+        return cls(user=info.context["request"].user, errors=[])
 
 
 class VerifyToken(Verify):

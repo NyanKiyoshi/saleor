@@ -46,7 +46,7 @@ class GiftCard(CountableDjangoObjectType):
 
     @staticmethod
     def resolve_code(root: models.GiftCard, info, **_kwargs):
-        viewer = info.context.user
+        viewer = info.context["request"].user
         # Staff user has access to show gift card code only for gift card without user.
         if viewer.has_perm(GiftcardPermissions.MANAGE_GIFT_CARD) and not root.user:
             return root.code
