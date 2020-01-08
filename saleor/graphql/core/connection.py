@@ -1,7 +1,7 @@
-from typing import Any, Dict, NamedTuple
+from typing import Any, Dict
 
-from django.db.models.query import QuerySet
 import graphene
+from django.db.models.query import QuerySet
 from graphene import Field, List, NonNull, ObjectType, String
 from graphene.relay.connection import Connection
 from graphene_django_optimizer.types import OptimizedDjangoObjectType
