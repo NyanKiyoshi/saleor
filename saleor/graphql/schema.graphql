@@ -3823,13 +3823,13 @@ input SeoInput {
 
 type ServiceAccount implements Node {
   id: ID!
+  name: String
   created: DateTime
   isActive: Boolean
+  permissions: [PermissionDisplay]
   tokens: [ServiceAccountToken]
   privateMeta: [MetaStore]!
   meta: [MetaStore]!
-  permissions: [PermissionDisplay]
-  name: String
 }
 
 type ServiceAccountClearPrivateMeta {
