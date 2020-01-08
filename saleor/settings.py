@@ -192,8 +192,6 @@ MIDDLEWARE = [
     "saleor.core.middleware.currency",
     "saleor.core.middleware.site",
     "saleor.core.middleware.extensions",
-    "saleor.graphql.middleware.jwt_middleware",
-    "saleor.graphql.middleware.service_account_middleware",
 ]
 
 INSTALLED_APPS = [
@@ -382,8 +380,6 @@ PAYMENT_HOST = get_host
 
 PAYMENT_MODEL = "order.Payment"
 
-SESSION_SERIALIZER = "django.contrib.sessions.serializers.JSONSerializer"
-
 MESSAGE_TAGS = {messages.ERROR: "danger"}
 
 LOW_STOCK_THRESHOLD = 10
@@ -507,15 +503,6 @@ ALLOWED_STYLES = ["text-align"]
 # Slugs for menus precreated in Django migrations
 DEFAULT_MENUS = {"top_menu_name": "navbar", "bottom_menu_name": "footer"}
 
-# This enable the new 'No Captcha reCaptcha' version (the simple checkbox)
-# instead of the old (deprecated) one. For more information see:
-#   https://github.com/praekelt/django-recaptcha/blob/34af16ba1e/README.rst
-NOCAPTCHA = True
-
-# Set Google's reCaptcha keys
-RECAPTCHA_PUBLIC_KEY = os.environ.get("RECAPTCHA_PUBLIC_KEY")
-RECAPTCHA_PRIVATE_KEY = os.environ.get("RECAPTCHA_PRIVATE_KEY")
-
 
 #  Sentry
 SENTRY_DSN = os.environ.get("SENTRY_DSN")
@@ -526,6 +513,10 @@ GRAPHENE = {
     "MIDDLEWARE": ("saleor.graphql.middleware.OpentracingGrapheneMiddleware",),
     "RELAY_CONNECTION_ENFORCE_FIRST_OR_LAST": True,
     "RELAY_CONNECTION_MAX_LIMIT": 100,
+    "MIDDLEWARE": [
+        "saleor.graphql.middleware.JWTMiddleware",
+        "saleor.graphql.middleware.service_account_middleware",
+    ],
 }
 
 EXTENSIONS_MANAGER = "saleor.extensions.manager.ExtensionsManager"

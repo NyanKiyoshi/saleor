@@ -4,36 +4,19 @@ import opentracing
 from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
 from django.utils.functional import SimpleLazyObject
-from graphene_django.settings import graphene_settings
 from graphql_jwt.middleware import JSONWebTokenMiddleware
 
 from ..account.models import ServiceAccount
 from .views import API_PATH, GraphQLView
 
 
-def jwt_middleware(get_response):
-    """Authenticate a user using JWT and ignore the session-based authentication.
+class JWTMiddleware(JSONWebTokenMiddleware):
+    def resolve(self, next, root, info, **kwargs):
+        request = info.context
 
-    This middleware resets authentication made by any previous middlewares
-    and authenticates the user
-    with graphql_jwt.middleware.JSONWebTokenMiddleware.
-    """
-    # Disable warnings for django-graphene-jwt
-    graphene_settings.MIDDLEWARE.append(JSONWebTokenMiddleware)
-    jwt_middleware_inst = JSONWebTokenMiddleware(get_response=get_response)
-    graphene_settings.MIDDLEWARE.remove(JSONWebTokenMiddleware)
-
-    def _jwt_middleware(request):
-        if request.path == API_PATH:
-            # clear user authenticated by AuthenticationMiddleware
-            request._cached_user = AnonymousUser()
+        if not hasattr(request, "user"):
             request.user = AnonymousUser()
-
-            # authenticate using JWT middleware
-            jwt_middleware_inst.process_request(request)
-        return get_response(request)
-
-    return _jwt_middleware
+        return super().resolve(next, root, info, **kwargs)
 
 
 def should_trace(info):
@@ -60,13 +43,14 @@ def get_service_account(auth_token) -> Optional[ServiceAccount]:
     return qs.first()
 
 
-def service_account_middleware(get_response):
+def service_account_middleware(next, root, info, **kwargs):
 
     service_account_auth_header = "HTTP_AUTHORIZATION"
     prefix = "bearer"
+    request = info.context
 
-    def _service_account_middleware(request):
-        if request.path == API_PATH:
+    if request.path == API_PATH:
+        if not hasattr(request, "service_account"):
             request.service_account = None
             auth = request.META.get(service_account_auth_header, "").split()
             if len(auth) == 2:
@@ -75,9 +59,7 @@ def service_account_middleware(get_response):
                     request.service_account = SimpleLazyObject(
                         lambda: get_service_account(auth_token)
                     )
-        return get_response(request)
-
-    return _service_account_middleware
+    return next(root, info, **kwargs)
 
 
 def process_view(self, request, view_func, *args):
