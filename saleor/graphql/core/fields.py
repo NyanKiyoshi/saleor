@@ -1,15 +1,14 @@
 from functools import partial
 
 import graphene
-from django.db.models.query import QuerySet
 from django_measurement.models import MeasurementField
 from django_prices.models import MoneyField, TaxedMoneyField
 from graphene.relay import PageInfo
 from graphene_django.converter import convert_django_field
 from graphene_django.fields import DjangoConnectionField
-from graphql_relay.connection.arrayconnection import connection_from_list_slice
 from promise import Promise
 
+from .connection import connection_from_queryset_slice
 from .types.common import Weight
 from .types.money import Money, TaxedMoney
 
@@ -98,23 +97,14 @@ class PrefetchingConnectionField(BaseDjangoConnectionField):
         if iterable is None:
             iterable = default_manager
 
-        if isinstance(iterable, QuerySet):
-            _len = iterable.count()
-        else:
-            _len = len(iterable)
-
-        connection = connection_from_list_slice(
+        connection = connection_from_queryset_slice(
             iterable,
             args,
-            slice_start=0,
-            list_length=_len,
-            list_slice_length=_len,
             connection_type=connection,
             edge_type=connection.Edge,
-            pageinfo_type=PageInfo,
+            page_info_type=PageInfo,
         )
         connection.iterable = iterable
-        connection.length = _len
         return connection
 
 
