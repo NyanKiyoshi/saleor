@@ -67,6 +67,7 @@ class PrefetchingConnectionField(BaseDjangoConnectionField):
         resolver,
         connection,
         default_manager,
+        queryset_resolver,
         max_limit,
         enforce_first_or_last,
         root,
@@ -85,6 +86,7 @@ class PrefetchingConnectionField(BaseDjangoConnectionField):
             resolver,
             connection,
             default_manager,
+            queryset_resolver,
             max_limit,
             enforce_first_or_last,
             root,
@@ -93,10 +95,7 @@ class PrefetchingConnectionField(BaseDjangoConnectionField):
         )
 
     @classmethod
-    def resolve_connection(cls, connection, default_manager, args, iterable):
-        if iterable is None:
-            iterable = default_manager
-
+    def resolve_connection(cls, connection, args, iterable):
         connection = connection_from_queryset_slice(
             iterable,
             args,
@@ -123,6 +122,7 @@ class FilterInputConnectionField(BaseDjangoConnectionField):
         resolver,
         connection,
         default_manager,
+        queryset_resolver,
         max_limit,
         enforce_first_or_last,
         filterset_class,
@@ -164,8 +164,12 @@ class FilterInputConnectionField(BaseDjangoConnectionField):
                 args["last"] = min(last, max_limit)
 
         iterable = resolver(root, info, **args)
-
-        on_resolve = partial(cls.resolve_connection, connection, default_manager, args)
+        if iterable is None:
+            iterable = default_manager
+        # thus the iterable gets refiltered by resolve_queryset
+        # but iterable might be promise
+        iterable = queryset_resolver(connection, iterable, info, args)
+        on_resolve = partial(cls.resolve_connection, connection, args)
 
         filter_input = args.get(filters_name)
 
