@@ -2185,7 +2185,7 @@ def test_account_reset_password(
     url_validator(url)
 
 
-def test_account_confirmation(user_api_client, customer_user):
+def test_account_confirmation(api_client, customer_user):
     customer_user.is_active = False
     customer_user.save()
 
@@ -2193,7 +2193,7 @@ def test_account_confirmation(user_api_client, customer_user):
         "email": customer_user.email,
         "token": default_token_generator.make_token(customer_user),
     }
-    user_api_client.post_graphql(CONFIRM_ACCOUNT_MUTATION, variables)
+    api_client.post_graphql(CONFIRM_ACCOUNT_MUTATION, variables)
 
     customer_user.refresh_from_db()
     assert customer_user.is_active is True
@@ -2765,7 +2765,7 @@ QUERY_CUSTOMERS_WITH_SORT = """
         ({"field": "EMAIL", "direction": "ASC"}, ["John", "Leslie", "Joe"]),
         ({"field": "EMAIL", "direction": "DESC"}, ["Joe", "Leslie", "John"]),
         ({"field": "ORDER_COUNT", "direction": "ASC"}, ["John", "Leslie", "Joe"]),
-        ({"field": "ORDER_COUNT", "direction": "DESC"}, ["Joe", "John", "Leslie"]),
+        ({"field": "ORDER_COUNT", "direction": "DESC"}, ["Joe", "Leslie", "John"]),
     ],
 )
 def test_query_customers_with_sort(
@@ -2966,7 +2966,7 @@ QUERY_STAFF_USERS_WITH_SORT = """
         ({"field": "EMAIL", "direction": "ASC"}, ["John", "Leslie", "", "Joe"]),
         ({"field": "EMAIL", "direction": "DESC"}, ["Joe", "", "Leslie", "John"]),
         ({"field": "ORDER_COUNT", "direction": "ASC"}, ["John", "Leslie", "", "Joe"]),
-        ({"field": "ORDER_COUNT", "direction": "DESC"}, ["Joe", "John", "Leslie", ""]),
+        ({"field": "ORDER_COUNT", "direction": "DESC"}, ["Joe", "", "Leslie", "John"]),
     ],
 )
 def test_query_staff_members_with_sort(

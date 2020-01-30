@@ -531,12 +531,13 @@ description = "JSON Web Token for Django GraphQL"
 name = "django-graphql-jwt"
 optional = false
 python-versions = "*"
-version = "0.2.1"
+version = "0.3.0"
 
 [package.dependencies]
 Django = ">=1.11"
 PyJWT = ">=1.5.0"
 graphene-django = ">=2.0.0"
+graphql-core = ">=2.1,<3"
 
 [[package]]
 category = "main"
@@ -958,7 +959,7 @@ description = "Graphene Django integration"
 name = "graphene-django"
 optional = false
 python-versions = "*"
-version = "2.6.0"
+version = "2.8.0"
 
 [package.dependencies]
 Django = ">=1.11"
@@ -2171,7 +2172,7 @@ idna = ">=2.0"
 multidict = ">=4.0"
 
 [metadata]
-content-hash = "b299c179b495c66a381d13c944b579c8080066ef4515940bd014c7b2095dbef3"
+content-hash = "33dc271ee96ba6a67d5b05f8bf1dc6f433006982dc54aa2129cc1b29d1ebb6e2"
 python-versions = "~3.8"
 
 [metadata.files]
@@ -2406,7 +2407,8 @@ django-graphiql-debug-toolbar = [
     {file = "django-graphiql-debug-toolbar-0.1.4.tar.gz", hash = "sha256:946fba21418b3fd57e7e357d4cd110fb7881e08d3b7a0a8a00400fa2e75965f5"},
 ]
 django-graphql-jwt = [
-    {file = "django-graphql-jwt-0.2.1.tar.gz", hash = "sha256:6dcf9dd4990098e289d76ab4220edbf436a2e26dc6af1d4a526ac699ad93bf14"},
+    {file = "django-graphql-jwt-0.3.0.tar.gz", hash = "sha256:c9c611d98510b57146c21484478eae793249553af3766a593e8f25ce73d3255a"},
+    {file = "django_graphql_jwt-0.3.0-py2.py3-none-any.whl", hash = "sha256:bcf0882a492e2148cba7cba3c39cf57834f736a2c289b66852239faf9b59b61e"},
 ]
 django-js-asset = [
     {file = "django-js-asset-1.2.2.tar.gz", hash = "sha256:c163ae80d2e0b22d8fb598047cd0dcef31f81830e127cfecae278ad574167260"},
@@ -2524,8 +2526,8 @@ graphene = [
     {file = "graphene-2.1.8.tar.gz", hash = "sha256:2cbe6d4ef15cfc7b7805e0760a0e5b80747161ce1b0f990dfdc0d2cf497c12f9"},
 ]
 graphene-django = [
-    {file = "graphene-django-2.6.0.tar.gz", hash = "sha256:0d1404ab1ba7873a8e848d87d138f615391d100ed0c046482c164429cfb992ef"},
-    {file = "graphene_django-2.6.0-py2.py3-none-any.whl", hash = "sha256:fa9e815f63e3c972773adc96c3f3c81e537dba0edcd0f1be92c799bc0b6ed0a8"},
+    {file = "graphene-django-2.8.0.tar.gz", hash = "sha256:85376ed02941f579849033c027cd8b1e31be72765b504a08706ccb9234ecdc26"},
+    {file = "graphene_django-2.8.0-py2.py3-none-any.whl", hash = "sha256:a290fc41a58ee61b43ff4b4885e866ef48bb8d66b0e7088fd8dc2bd677856e6a"},
 ]
 graphene-django-optimizer = [
     {file = "graphene-django-optimizer-0.6.1.tar.gz", hash = "sha256:2c3902cfc739ae7f9953c9130fa4030d4f1bd9e81c820713c4270137e63f89cb"},

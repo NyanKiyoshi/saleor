@@ -2999,8 +2999,8 @@ QUERY_COLLECTIONS_WITH_SORT = """
         ({"field": "NAME", "direction": "ASC"}, ["Coll1", "Coll2", "Coll3"]),
         ({"field": "NAME", "direction": "DESC"}, ["Coll3", "Coll2", "Coll1"]),
         ({"field": "AVAILABILITY", "direction": "ASC"}, ["Coll2", "Coll1", "Coll3"]),
-        ({"field": "AVAILABILITY", "direction": "DESC"}, ["Coll1", "Coll3", "Coll2"]),
-        ({"field": "PRODUCT_COUNT", "direction": "ASC"}, ["Coll3", "Coll1", "Coll2"]),
+        ({"field": "AVAILABILITY", "direction": "DESC"}, ["Coll3", "Coll1", "Coll2"]),
+        ({"field": "PRODUCT_COUNT", "direction": "ASC"}, ["Coll1", "Coll3", "Coll2"]),
         ({"field": "PRODUCT_COUNT", "direction": "DESC"}, ["Coll2", "Coll3", "Coll1"]),
     ],
 )
@@ -3095,7 +3095,7 @@ QUERY_CATEGORIES_WITH_SORT = """
         ),
         (
             {"field": "SUBCATEGORY_COUNT", "direction": "DESC"},
-            ["Cat1", "SubCat", "Cat2", "SubSubCat"],
+            ["SubCat", "Cat1", "SubSubCat", "Cat2"],
         ),
         (
             {"field": "PRODUCT_COUNT", "direction": "ASC"},
@@ -3103,7 +3103,7 @@ QUERY_CATEGORIES_WITH_SORT = """
         ),
         (
             {"field": "PRODUCT_COUNT", "direction": "DESC"},
-            ["Cat1", "SubCat", "SubSubCat", "Cat2"],
+            ["Cat1", "SubSubCat", "SubCat", "Cat2"],
         ),
     ],
 )
@@ -3238,7 +3238,7 @@ QUERY_PRODUCT_TYPE_WITH_SORT = """
         # is_digital
         (
             {"field": "DIGITAL", "direction": "ASC"},
-            ["Tools", "Subscription", "Digital"],
+            ["Subscription", "Tools", "Digital"],
         ),
         (
             {"field": "DIGITAL", "direction": "DESC"},
@@ -3251,7 +3251,7 @@ QUERY_PRODUCT_TYPE_WITH_SORT = """
         ),
         (
             {"field": "SHIPPING_REQUIRED", "direction": "DESC"},
-            ["Tools", "Digital", "Subscription"],
+            ["Tools", "Subscription", "Digital"],
         ),
     ],
 )
