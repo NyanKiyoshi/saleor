@@ -10,6 +10,15 @@ from tests.api.utils import get_graphql_content
 
 @pytest.mark.django_db
 @pytest.mark.count_queries(autouse=False)
+def test_making_a_query(
+    product_variant_list, api_client, count_queries, warehouse
+):
+    for i in range(5):
+        ProductVariant.objects.count()
+
+
+@pytest.mark.django_db
+@pytest.mark.count_queries(autouse=False)
 def test_retrieve_variant_list(
     product_variant_list, api_client, count_queries, warehouse
 ):
