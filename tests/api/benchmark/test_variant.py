@@ -13,7 +13,7 @@ from tests.api.utils import get_graphql_content
 def test_making_a_query(
     product_variant_list, api_client, count_queries, warehouse
 ):
-    for i in range(5):
+    for i in range(1):
         ProductVariant.objects.count()
 
 
