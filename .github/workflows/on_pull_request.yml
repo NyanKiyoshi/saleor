@@ -24,9 +24,12 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Dummy Dump
+      run: echo "hello world" > ${QUERIES_RESULTS_PATH}
+
     - uses: NyanKiyoshi/pytest-django-queries-ci-tools@github-action-test
       with:
-        query_raw_dump_path: ${QUERIES_RESULTS_PATH} 
+        query_raw_dump_path: ${{ env.QUERIES_RESULTS_PATH }}
         diff_endpoint: "https://example.com/diff"
         diff_results_base_url: "https://example.com/diffs"
         upload_endpoint: ${{ secrets.UPLOAD_ENDPOINT }}
