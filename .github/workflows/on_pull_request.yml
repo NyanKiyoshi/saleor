@@ -2,6 +2,9 @@ name: Pytest
 
 on: [pull_request]
 
+env:
+  QUERIES_RESULTS_PATH: /tmp/queries-results.json
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -23,6 +26,7 @@ jobs:
 
     - uses: NyanKiyoshi/pytest-django-queries-ci-tools@github-action-test
       with:
+        query_raw_dump_path: ${QUERIES_RESULTS_PATH} 
         diff_endpoint: "https://example.com/diff"
         diff_results_base_url: "https://example.com/diffs"
         upload_endpoint: ${{ secrets.UPLOAD_ENDPOINT }}
