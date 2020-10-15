@@ -28,5 +28,7 @@ jobs:
         echo '***'
         command -v django-queries || echo no such command
         python -Im pytest_django_queries.cli || echo no such package
+        command -v pip
+        pip freeze
 
     - uses: NyanKiyoshi/pytest-django-queries-ci-tools@composite-action
