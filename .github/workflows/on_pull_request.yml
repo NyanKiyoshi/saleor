@@ -26,6 +26,7 @@ jobs:
         command -v python
         pip install pytest-django-queries
         echo '***'
-        command -v
+        command -v django-queries || echo no such command
+        python -Im pytest_django_queries.cli || echo no such package
 
     - uses: NyanKiyoshi/pytest-django-queries-ci-tools@composite-action
