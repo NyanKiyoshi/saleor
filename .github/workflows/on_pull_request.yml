@@ -3,7 +3,7 @@ name: Pytest
 on: [pull_request]
 
 env:
-  QUERIES_RESULTS_PATH: /tmp/queries-results.json
+  QUERIES_RESULTS_PATH: ./queries-results.json
 
 jobs:
   build:
