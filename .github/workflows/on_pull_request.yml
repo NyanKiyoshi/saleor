@@ -25,5 +25,7 @@ jobs:
         echo '***'
         command -v python
         pip install pytest-django-queries
+        echo '***'
+        command -v
 
     - uses: NyanKiyoshi/pytest-django-queries-ci-tools@composite-action
