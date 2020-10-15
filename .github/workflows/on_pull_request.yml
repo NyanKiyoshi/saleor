@@ -24,3 +24,5 @@ jobs:
         env
         echo '***'
         command -v python
+
+    - uses: NyanKiyoshi/pytest-django-queries-ci-tools@composite-action
