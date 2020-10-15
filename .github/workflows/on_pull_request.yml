@@ -24,7 +24,7 @@ jobs:
         env
         echo '***'
         command -v python
-        pip install pytest-django-queries
+        python -Im pip install pytest-django-queries
         echo '***'
         command -v django-queries || echo no such command
         python -Im pytest_django_queries.cli || echo no such package
