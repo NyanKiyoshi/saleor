@@ -23,3 +23,9 @@ jobs:
         python -Im pip install pytest-django-queries
 
     - uses: NyanKiyoshi/pytest-django-queries-ci-tools@github-action-test
+      with:
+        query_raw_dump_path: ${{ env.QUERIES_RESULTS_PATH }}
+        diff_endpoint: "https://rn4nfofmgc.execute-api.us-east-1.amazonaws.com/default/saleor-db-queries-bot-diff"
+        diff_results_base_url: "https://dtab784j47g1o.cloudfront.net"
+        upload_endpoint: ${{ secrets.UPLOAD_ENDPOINT }}
+        upload_secret_key: ${{ secrets.SECRET_UPLOAD_KEY }}
