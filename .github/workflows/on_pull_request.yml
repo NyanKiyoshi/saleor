@@ -3,7 +3,7 @@ name: Pytest
 on: [pull_request]
 
 env:
-  QUERIES_RESULTS_PATH: /tmp/queries-results.json
+  QUERIES_RESULTS_PATH: ./queries-results.json
 
 jobs:
   build:
@@ -21,6 +21,12 @@ jobs:
     - name: Test
       run: |
         python -Im pip install pytest-django-queries
+        cat > ./queries-results.json <<EOF
+        {"saleor.graphql.account.tests.benchmark.test_account": {"test_staff_create": {
+            "query-count": 1,
+            "duplicates": 0
+        }}}
+        EOF
 
     - uses: NyanKiyoshi/pytest-django-queries-ci-tools@github-action-test
       with:
