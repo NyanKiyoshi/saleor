@@ -20,16 +20,6 @@ jobs:
 
     - name: Test
       run: |
-        set -x
-        env
-        command -v python
         python -Im pip install pytest-django-queries
-        command -v django-queries || echo no such command
-        python -Im pytest_django_queries.cli || echo no such package
-        command -v pip
-        pip freeze || echo None
-        pip install setuptools
-        pip freeze || echo None
-        python -Im pip freeze || echo None
 
-    - uses: NyanKiyoshi/pytest-django-queries-ci-tools@composite-action
+    - uses: NyanKiyoshi/pytest-django-queries-ci-tools@github-action-test
